@@ -33,29 +33,33 @@ function placeholder(category, name) {
   return `https://placehold.co/900x620/080b12/${color}?text=${label}`;
 }
 
+// Product image strategy:
+ // imageUrl currently uses stable placeholder images to avoid broken hotlinks.
+ // For final production, upload official/allowed product images to /assets/products/
+ // and change imageUrl to local paths like "/assets/products/geprc-cl35-v2.webp".
 const components = [
   {
     id:1, category:"frame", brand:"GEPRC", name:"GEP-CL35 3.5 inch Frame", price:39, weight:75,
     imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=GEPRC+CL35+Frame",
-    officialUrl:"https://geprc.com",
+    officialUrl:"https://geprc.com/product/gep-cl35-v2-frame/",
     specs:{frame:3.5,mount:["20x20"],size:"3.5"}, tags:["3.5","freestyle","20x20"]
   },
   {
     id:2, category:"frame", brand:"AOS", name:"AOS 3.5 V5 Frame", price:54, weight:82,
     imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=AOS+3.5+Frame",
-    officialUrl:"https://aos-rc.com",
+    officialUrl:"https://www.aos-rc.com/designs/aos-3.5-v5",
     specs:{frame:3.5,mount:["20x20"],size:"3.5"}, tags:["3.5","premium","freestyle"]
   },
   {
     id:3, category:"frame", brand:"FlyFishRC", name:"Volador VX3.5 Frame", price:45, weight:92,
     imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=Volador+VX3.5",
-    officialUrl:"https://flyfish-rc.com",
+    officialUrl:"https://www.flyfishrc.com/en/Volador-VX3-O3-Freestyle-Frame-Kit",
     specs:{frame:3.5,mount:["20x20","25.5x25.5"],size:"3.5"}, tags:["3.5","strong"]
   },
   {
     id:4, category:"frame", brand:"TBS", name:"Source One V5 5 inch Frame", price:33, weight:125,
     imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=TBS+Source+One",
-    officialUrl:"https://www.team-blacksheep.com",
+    officialUrl:"https://www.team-blacksheep.com/products/prod:source_one_v5",
     specs:{frame:5,mount:["30x30","20x20"],size:"5"}, tags:["5","cheap","freestyle"]
   },
   {
@@ -67,13 +71,13 @@ const components = [
   {
     id:6, category:"frame", brand:"iFlight", name:"Chimera7 Pro Frame", price:89, weight:220,
     imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=iFlight+Chimera7",
-    officialUrl:"https://shop.iflight.com",
+    officialUrl:"https://shop.iflight.com/chimera7-pro-frame-kit-pro2004",
     specs:{frame:7,mount:["30x30","20x20"],size:"7"}, tags:["7","longrange","cinematic"]
   },
   {
     id:7, category:"frame", brand:"Happymodel", name:"Mobula6 Whoop Frame", price:6, weight:4,
     imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=Mobula6+Frame",
-    officialUrl:"https://www.happymodel.cn",
+    officialUrl:"https://www.happymodel.cn/index.php/2024/01/02/mobula6-2024-1s-65mm-ultra-light-micro-fpv-whoop-bnf/",
     specs:{frame:1.2,mount:["25.5x25.5"],size:"whoop"}, tags:["tinywhoop","65mm","indoor"]
   },
 
@@ -129,7 +133,7 @@ const components = [
   {
     id:16, category:"stack", brand:"SpeedyBee", name:"F405 Mini 35A 20x20 Stack", price:70, weight:14,
     imageUrl:"https://placehold.co/900x620/080b12/31d07f?text=SpeedyBee+F405+Mini",
-    officialUrl:"https://www.speedybee.com",
+    officialUrl:"https://www.speedybee.com/speedybee-f405-mini-bls-35a-20x20-stack/",
     specs:{mount:"20x20",esc:35,voltage:["3s","4s","6s"]}, tags:["20x20","35A","3.5","4s"]
   },
   {
@@ -141,7 +145,7 @@ const components = [
   {
     id:18, category:"stack", brand:"SpeedyBee", name:"F405 V4 55A 30x30 Stack", price:82, weight:24,
     imageUrl:"https://placehold.co/900x620/080b12/31d07f?text=SpeedyBee+F405+V4",
-    officialUrl:"https://www.speedybee.com",
+    officialUrl:"https://www.speedybee.com/speedybee-f405-v4-bls-55a-30x30-fc-esc-stack/",
     specs:{mount:"30x30",esc:55,voltage:["3s","4s","6s"]}, tags:["30x30","55A","5","6s"]
   },
   {
@@ -246,7 +250,7 @@ const components = [
   {
     id:35, category:"vtx", brand:"DJI", name:"DJI O3 Air Unit", price:229, weight:39,
     imageUrl:"https://placehold.co/900x620/080b12/00b7ff?text=DJI+O3+Air+Unit",
-    officialUrl:"https://www.dji.com",
+    officialUrl:"https://store.dji.com/product/dji-o3-air-unit",
     specs:{system:"dji"}, tags:["digital","5","cinematic"]
   },
   {
@@ -259,13 +263,13 @@ const components = [
   {
     id:37, category:"rx", brand:"RadioMaster", name:"RP1 ELRS 2.4GHz Receiver", price:16, weight:1,
     imageUrl:"https://placehold.co/900x620/080b12/bdf9ff?text=RadioMaster+RP1",
-    officialUrl:"https://www.radiomasterrc.com",
+    officialUrl:"https://www.radiomasterrc.com/products/rp1-expresslrs-2-4ghz-nano-receiver",
     specs:{protocol:"ELRS"}, tags:["ELRS","2.4","small"]
   },
   {
     id:38, category:"rx", brand:"RadioMaster", name:"RP2 ELRS 2.4GHz Receiver", price:17, weight:1,
     imageUrl:"https://placehold.co/900x620/080b12/bdf9ff?text=RadioMaster+RP2",
-    officialUrl:"https://www.radiomasterrc.com",
+    officialUrl:"https://www.radiomasterrc.com/products/rp2-expresslrs-2-4ghz-nano-receiver",
     specs:{protocol:"ELRS"}, tags:["ELRS","ceramic","small"]
   },
   {
@@ -303,7 +307,7 @@ const components = [
   {
     id:44, category:"extras", brand:"VIFLY", name:"Finder 2 Buzzer", price:15, weight:5,
     imageUrl:"https://placehold.co/900x620/080b12/9aa7bb?text=VIFLY+Finder+2",
-    officialUrl:"https://viflydrone.com",
+    officialUrl:"https://viflydrone.com/products/vifly-finder-2-drone-buzzer",
     specs:{}, tags:["safety","recommended"]
   },
   {

@@ -1,15 +1,13 @@
-Upload/replace these files in GitHub root:
+Upload/replace this file in GitHub root:
 - server.js
-- index.html
-- package.json is not needed for this update
 
-After commit:
-- Render should redeploy automatically
-- If not, Render → Manual Deploy → Deploy latest commit
+Then:
+1. Commit changes.
+2. Render will redeploy automatically.
+3. If not: Render → Manual Deploy → Deploy latest commit.
 
 What changed:
-- Every component now has imageUrl and officialUrl fields.
-- Component cards show images.
-- Current build list shows thumbnails.
-- Cards include an Official product button.
-- Some links are brand official websites or placeholders. Later we should replace them with exact verified product pages and real product photos.
+- Official links now point to specific product pages when possible, not just manufacturer homepages.
+- Component schema still supports imageUrl for each part.
+- For copyright/reliability reasons, images are kept as stable placeholders until we upload local allowed product images.
+- Best next step: create /assets/products/ and upload product images manually, then set imageUrl to local paths.
