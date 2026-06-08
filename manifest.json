@@ -1,0 +1,9 @@
+{
+  "name": "FPV Drone Builder",
+  "short_name": "FPV Builder",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090b10",
+  "theme_color": "#090b10",
+  "description": "Build and check FPV drone components."
+}
