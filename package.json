@@ -2,9 +2,9 @@
   "name": "fpv-drone-builder-production",
   "version": "1.0.0",
   "description": "Production-ready FPV Drone Builder website with backend API",
-  "main": "src/server.js",
+  """"main": "server.js",
   "scripts": {
-    "start": "node src/server.js",
+  "start": "node server.js",
     "dev": "nodemon src/server.js"
   },
   "engines": {
