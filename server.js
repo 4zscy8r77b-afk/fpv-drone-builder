@@ -6,7 +6,7 @@ const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const SITE_URL = process.env.SITE_URL || "https://fpv-drone-builder.onrender.com";
+const SITE_URL = process.env.SITE_URL || "https://buildyourownfpv.com";
 
 app.use(helmet({ contentSecurityPolicy: false }));
 app.use(compression());
@@ -16,62 +16,314 @@ app.use(express.static(__dirname, { maxAge: "1h" }));
 
 let savedBuilds = [];
 
+function placeholder(category, name) {
+  const label = encodeURIComponent(name.split(" ").slice(0, 3).join(" "));
+  const color = {
+    frame: "00e7ff",
+    motor: "7c5cff",
+    stack: "31d07f",
+    props: "f6c445",
+    battery: "ff4d6d",
+    vtx: "00b7ff",
+    rx: "bdf9ff",
+    antenna: "ff8a00",
+    extras: "9aa7bb"
+  }[category] || "00e7ff";
+
+  return `https://placehold.co/900x620/080b12/${color}?text=${label}`;
+}
+
 const components = [
-  {id:1,category:"frame",brand:"GEPRC",name:"GEP-CL35 3.5 inch Frame",price:39,weight:75,specs:{frame:3.5,mount:["20x20"],size:"3.5"},tags:["3.5","freestyle","20x20"]},
-  {id:2,category:"frame",brand:"AOS",name:"AOS 3.5 V5 Frame",price:54,weight:82,specs:{frame:3.5,mount:["20x20"],size:"3.5"},tags:["3.5","premium","freestyle"]},
-  {id:3,category:"frame",brand:"FlyFishRC",name:"Volador VX3.5 Frame",price:45,weight:92,specs:{frame:3.5,mount:["20x20","25.5x25.5"],size:"3.5"},tags:["3.5","strong"]},
-  {id:4,category:"frame",brand:"TBS",name:"Source One V5 5 inch Frame",price:33,weight:125,specs:{frame:5,mount:["30x30","20x20"],size:"5"},tags:["5","cheap","freestyle"]},
-  {id:5,category:"frame",brand:"ImpulseRC",name:"ApexDC 5 inch Frame",price:99,weight:135,specs:{frame:5,mount:["30x30","20x20"],size:"5"},tags:["5","premium","freestyle"]},
-  {id:6,category:"frame",brand:"iFlight",name:"Chimera7 Pro Frame",price:89,weight:220,specs:{frame:7,mount:["30x30","20x20"],size:"7"},tags:["7","longrange","cinematic"]},
-  {id:7,category:"frame",brand:"Happymodel",name:"Mobula6 Whoop Frame",price:6,weight:4,specs:{frame:1.2,mount:["25.5x25.5"],size:"whoop"},tags:["tinywhoop","65mm","indoor"]},
+  {
+    id:1, category:"frame", brand:"GEPRC", name:"GEP-CL35 3.5 inch Frame", price:39, weight:75,
+    imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=GEPRC+CL35+Frame",
+    officialUrl:"https://geprc.com",
+    specs:{frame:3.5,mount:["20x20"],size:"3.5"}, tags:["3.5","freestyle","20x20"]
+  },
+  {
+    id:2, category:"frame", brand:"AOS", name:"AOS 3.5 V5 Frame", price:54, weight:82,
+    imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=AOS+3.5+Frame",
+    officialUrl:"https://aos-rc.com",
+    specs:{frame:3.5,mount:["20x20"],size:"3.5"}, tags:["3.5","premium","freestyle"]
+  },
+  {
+    id:3, category:"frame", brand:"FlyFishRC", name:"Volador VX3.5 Frame", price:45, weight:92,
+    imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=Volador+VX3.5",
+    officialUrl:"https://flyfish-rc.com",
+    specs:{frame:3.5,mount:["20x20","25.5x25.5"],size:"3.5"}, tags:["3.5","strong"]
+  },
+  {
+    id:4, category:"frame", brand:"TBS", name:"Source One V5 5 inch Frame", price:33, weight:125,
+    imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=TBS+Source+One",
+    officialUrl:"https://www.team-blacksheep.com",
+    specs:{frame:5,mount:["30x30","20x20"],size:"5"}, tags:["5","cheap","freestyle"]
+  },
+  {
+    id:5, category:"frame", brand:"ImpulseRC", name:"ApexDC 5 inch Frame", price:99, weight:135,
+    imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=ImpulseRC+Apex",
+    officialUrl:"https://impulserc.com",
+    specs:{frame:5,mount:["30x30","20x20"],size:"5"}, tags:["5","premium","freestyle"]
+  },
+  {
+    id:6, category:"frame", brand:"iFlight", name:"Chimera7 Pro Frame", price:89, weight:220,
+    imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=iFlight+Chimera7",
+    officialUrl:"https://shop.iflight.com",
+    specs:{frame:7,mount:["30x30","20x20"],size:"7"}, tags:["7","longrange","cinematic"]
+  },
+  {
+    id:7, category:"frame", brand:"Happymodel", name:"Mobula6 Whoop Frame", price:6, weight:4,
+    imageUrl:"https://placehold.co/900x620/080b12/00e7ff?text=Mobula6+Frame",
+    officialUrl:"https://www.happymodel.cn",
+    specs:{frame:1.2,mount:["25.5x25.5"],size:"whoop"}, tags:["tinywhoop","65mm","indoor"]
+  },
 
-  {id:8,category:"motor",brand:"iFlight",name:"XING 1404 4600KV",price:15,weight:9,specs:{kv:4600,amp:14,thrust:360,ideal:["2.5"],qty:4},tags:["2.5","3s","4s"]},
-  {id:9,category:"motor",brand:"T-Motor",name:"F1604 3800KV",price:21,weight:12,specs:{kv:3800,amp:19,thrust:560,ideal:["3.5"],qty:4},tags:["3.5","4s","premium"]},
-  {id:10,category:"motor",brand:"iFlight",name:"XING2 1804 2450KV",price:22,weight:16,specs:{kv:2450,amp:24,thrust:720,ideal:["3.5"],qty:4},tags:["3.5","4s"]},
-  {id:11,category:"motor",brand:"Emax",name:"ECO II 2004 3000KV",price:16,weight:18,specs:{kv:3000,amp:28,thrust:820,ideal:["3.5","4"],qty:4},tags:["3.5","4s","budget"]},
-  {id:12,category:"motor",brand:"iFlight",name:"XING2 2207 1750KV",price:24,weight:32,specs:{kv:1750,amp:40,thrust:1550,ideal:["5"],qty:4},tags:["5","6s","freestyle"]},
-  {id:13,category:"motor",brand:"T-Motor",name:"F60 Pro V 2207 1950KV",price:29,weight:33,specs:{kv:1950,amp:45,thrust:1650,ideal:["5"],qty:4},tags:["5","6s","premium"]},
-  {id:14,category:"motor",brand:"iFlight",name:"XING2 2806.5 1300KV",price:32,weight:50,specs:{kv:1300,amp:50,thrust:2200,ideal:["7"],qty:4},tags:["7","6s","longrange"]},
-  {id:15,category:"motor",brand:"Happymodel",name:"EX0802 19000KV",price:12,weight:2,specs:{kv:19000,amp:5,thrust:35,ideal:["whoop"],qty:4},tags:["tinywhoop","1s"]},
+  {
+    id:8, category:"motor", brand:"iFlight", name:"XING 1404 4600KV", price:15, weight:9,
+    imageUrl:"https://placehold.co/900x620/080b12/7c5cff?text=XING+1404",
+    officialUrl:"https://shop.iflight.com",
+    specs:{kv:4600,amp:14,thrust:360,ideal:["2.5"],qty:4}, tags:["2.5","3s","4s"]
+  },
+  {
+    id:9, category:"motor", brand:"T-Motor", name:"F1604 3800KV", price:21, weight:12,
+    imageUrl:"https://placehold.co/900x620/080b12/7c5cff?text=T-Motor+F1604",
+    officialUrl:"https://store.tmotor.com",
+    specs:{kv:3800,amp:19,thrust:560,ideal:["3.5"],qty:4}, tags:["3.5","4s","premium"]
+  },
+  {
+    id:10, category:"motor", brand:"iFlight", name:"XING2 1804 2450KV", price:22, weight:16,
+    imageUrl:"https://placehold.co/900x620/080b12/7c5cff?text=XING2+1804",
+    officialUrl:"https://shop.iflight.com",
+    specs:{kv:2450,amp:24,thrust:720,ideal:["3.5"],qty:4}, tags:["3.5","4s"]
+  },
+  {
+    id:11, category:"motor", brand:"Emax", name:"ECO II 2004 3000KV", price:16, weight:18,
+    imageUrl:"https://placehold.co/900x620/080b12/7c5cff?text=Emax+ECO+II",
+    officialUrl:"https://emaxmodel.com",
+    specs:{kv:3000,amp:28,thrust:820,ideal:["3.5","4"],qty:4}, tags:["3.5","4s","budget"]
+  },
+  {
+    id:12, category:"motor", brand:"iFlight", name:"XING2 2207 1750KV", price:24, weight:32,
+    imageUrl:"https://placehold.co/900x620/080b12/7c5cff?text=XING2+2207",
+    officialUrl:"https://shop.iflight.com",
+    specs:{kv:1750,amp:40,thrust:1550,ideal:["5"],qty:4}, tags:["5","6s","freestyle"]
+  },
+  {
+    id:13, category:"motor", brand:"T-Motor", name:"F60 Pro V 2207 1950KV", price:29, weight:33,
+    imageUrl:"https://placehold.co/900x620/080b12/7c5cff?text=T-Motor+F60",
+    officialUrl:"https://store.tmotor.com",
+    specs:{kv:1950,amp:45,thrust:1650,ideal:["5"],qty:4}, tags:["5","6s","premium"]
+  },
+  {
+    id:14, category:"motor", brand:"iFlight", name:"XING2 2806.5 1300KV", price:32, weight:50,
+    imageUrl:"https://placehold.co/900x620/080b12/7c5cff?text=XING2+2806.5",
+    officialUrl:"https://shop.iflight.com",
+    specs:{kv:1300,amp:50,thrust:2200,ideal:["7"],qty:4}, tags:["7","6s","longrange"]
+  },
+  {
+    id:15, category:"motor", brand:"Happymodel", name:"EX0802 19000KV", price:12, weight:2,
+    imageUrl:"https://placehold.co/900x620/080b12/7c5cff?text=EX0802+Motor",
+    officialUrl:"https://www.happymodel.cn",
+    specs:{kv:19000,amp:5,thrust:35,ideal:["whoop"],qty:4}, tags:["tinywhoop","1s"]
+  },
 
-  {id:16,category:"stack",brand:"SpeedyBee",name:"F405 Mini 35A 20x20 Stack",price:70,weight:14,specs:{mount:"20x20",esc:35,voltage:["3s","4s","6s"]},tags:["20x20","35A","3.5","4s"]},
-  {id:17,category:"stack",brand:"GEPRC",name:"Taker F405 35A AIO",price:62,weight:9,specs:{mount:"25.5x25.5",esc:35,voltage:["2s","3s","4s","6s"]},tags:["AIO","35A","3.5","25.5x25.5"]},
-  {id:18,category:"stack",brand:"SpeedyBee",name:"F405 V4 55A 30x30 Stack",price:82,weight:24,specs:{mount:"30x30",esc:55,voltage:["3s","4s","6s"]},tags:["30x30","55A","5","6s"]},
-  {id:19,category:"stack",brand:"Foxeer",name:"F722 V4 60A 30x30 Stack",price:130,weight:25,specs:{mount:"30x30",esc:60,voltage:["4s","6s"]},tags:["30x30","60A","premium","6s"]},
-  {id:20,category:"stack",brand:"BetaFPV",name:"F4 1S 5A AIO",price:42,weight:4,specs:{mount:"25.5x25.5",esc:5,voltage:["1s"]},tags:["whoop","1s","AIO"]},
+  {
+    id:16, category:"stack", brand:"SpeedyBee", name:"F405 Mini 35A 20x20 Stack", price:70, weight:14,
+    imageUrl:"https://placehold.co/900x620/080b12/31d07f?text=SpeedyBee+F405+Mini",
+    officialUrl:"https://www.speedybee.com",
+    specs:{mount:"20x20",esc:35,voltage:["3s","4s","6s"]}, tags:["20x20","35A","3.5","4s"]
+  },
+  {
+    id:17, category:"stack", brand:"GEPRC", name:"Taker F405 35A AIO", price:62, weight:9,
+    imageUrl:"https://placehold.co/900x620/080b12/31d07f?text=GEPRC+Taker+AIO",
+    officialUrl:"https://geprc.com",
+    specs:{mount:"25.5x25.5",esc:35,voltage:["2s","3s","4s","6s"]}, tags:["AIO","35A","3.5","25.5x25.5"]
+  },
+  {
+    id:18, category:"stack", brand:"SpeedyBee", name:"F405 V4 55A 30x30 Stack", price:82, weight:24,
+    imageUrl:"https://placehold.co/900x620/080b12/31d07f?text=SpeedyBee+F405+V4",
+    officialUrl:"https://www.speedybee.com",
+    specs:{mount:"30x30",esc:55,voltage:["3s","4s","6s"]}, tags:["30x30","55A","5","6s"]
+  },
+  {
+    id:19, category:"stack", brand:"Foxeer", name:"F722 V4 60A 30x30 Stack", price:130, weight:25,
+    imageUrl:"https://placehold.co/900x620/080b12/31d07f?text=Foxeer+F722+Stack",
+    officialUrl:"https://www.foxeer.com",
+    specs:{mount:"30x30",esc:60,voltage:["4s","6s"]}, tags:["30x30","60A","premium","6s"]
+  },
+  {
+    id:20, category:"stack", brand:"BetaFPV", name:"F4 1S 5A AIO", price:42, weight:4,
+    imageUrl:"https://placehold.co/900x620/080b12/31d07f?text=BetaFPV+F4+AIO",
+    officialUrl:"https://betafpv.com",
+    specs:{mount:"25.5x25.5",esc:5,voltage:["1s"]}, tags:["whoop","1s","AIO"]
+  },
 
-  {id:21,category:"props",brand:"Gemfan",name:"Hurricane 3520 3.5 inch Props",price:4,weight:8,specs:{propSize:"3.5"},tags:["3.5"]},
-  {id:22,category:"props",brand:"HQProp",name:"T3.5x2x3 Props",price:4.5,weight:8,specs:{propSize:"3.5"},tags:["3.5","smooth"]},
-  {id:23,category:"props",brand:"Gemfan",name:"Hurricane 51466 5 inch Props",price:4,weight:16,specs:{propSize:"5"},tags:["5","freestyle"]},
-  {id:24,category:"props",brand:"HQProp",name:"DP 7x3.5x3 Props",price:7,weight:28,specs:{propSize:"7"},tags:["7","longrange"]},
-  {id:25,category:"props",brand:"Gemfan",name:"31mm 3-blade Whoop Props",price:3,weight:1,specs:{propSize:"whoop"},tags:["whoop"]},
+  {
+    id:21, category:"props", brand:"Gemfan", name:"Hurricane 3520 3.5 inch Props", price:4, weight:8,
+    imageUrl:"https://placehold.co/900x620/080b12/f6c445?text=Gemfan+3520",
+    officialUrl:"https://www.gemfanhobby.com",
+    specs:{propSize:"3.5"}, tags:["3.5"]
+  },
+  {
+    id:22, category:"props", brand:"HQProp", name:"T3.5x2x3 Props", price:4.5, weight:8,
+    imageUrl:"https://placehold.co/900x620/080b12/f6c445?text=HQProp+T3.5",
+    officialUrl:"https://www.hqprop.com",
+    specs:{propSize:"3.5"}, tags:["3.5","smooth"]
+  },
+  {
+    id:23, category:"props", brand:"Gemfan", name:"Hurricane 51466 5 inch Props", price:4, weight:16,
+    imageUrl:"https://placehold.co/900x620/080b12/f6c445?text=Gemfan+51466",
+    officialUrl:"https://www.gemfanhobby.com",
+    specs:{propSize:"5"}, tags:["5","freestyle"]
+  },
+  {
+    id:24, category:"props", brand:"HQProp", name:"DP 7x3.5x3 Props", price:7, weight:28,
+    imageUrl:"https://placehold.co/900x620/080b12/f6c445?text=HQProp+7x3.5",
+    officialUrl:"https://www.hqprop.com",
+    specs:{propSize:"7"}, tags:["7","longrange"]
+  },
+  {
+    id:25, category:"props", brand:"Gemfan", name:"31mm 3-blade Whoop Props", price:3, weight:1,
+    imageUrl:"https://placehold.co/900x620/080b12/f6c445?text=Gemfan+31mm",
+    officialUrl:"https://www.gemfanhobby.com",
+    specs:{propSize:"whoop"}, tags:["whoop"]
+  },
 
-  {id:26,category:"battery",brand:"Tattu",name:"R-Line 850mAh 4S XT30",price:24,weight:105,specs:{cells:"4s",capacity:850,connector:"XT30"},tags:["4s","3.5","XT30"]},
-  {id:27,category:"battery",brand:"CNHL",name:"Black 1100mAh 4S XT60",price:20,weight:135,specs:{cells:"4s",capacity:1100,connector:"XT60"},tags:["4s","3.5","XT60"]},
-  {id:28,category:"battery",brand:"Tattu",name:"R-Line 1300mAh 6S XT60",price:35,weight:215,specs:{cells:"6s",capacity:1300,connector:"XT60"},tags:["6s","5","XT60"]},
-  {id:29,category:"battery",brand:"CNHL",name:"Black 1500mAh 6S XT60",price:29,weight:255,specs:{cells:"6s",capacity:1500,connector:"XT60"},tags:["6s","5","budget"]},
-  {id:30,category:"battery",brand:"Auline",name:"Li-ion 6S 4000mAh Pack",price:75,weight:410,specs:{cells:"6s",capacity:4000,connector:"XT60"},tags:["6s","7","longrange"]},
-  {id:31,category:"battery",brand:"BetaFPV",name:"1S 300mAh BT2.0",price:6,weight:8,specs:{cells:"1s",capacity:300,connector:"BT2.0"},tags:["1s","whoop"]},
+  {
+    id:26, category:"battery", brand:"Tattu", name:"R-Line 850mAh 4S XT30", price:24, weight:105,
+    imageUrl:"https://placehold.co/900x620/080b12/ff4d6d?text=Tattu+850mAh+4S",
+    officialUrl:"https://genstattu.com",
+    specs:{cells:"4s",capacity:850,connector:"XT30"}, tags:["4s","3.5","XT30"]
+  },
+  {
+    id:27, category:"battery", brand:"CNHL", name:"Black 1100mAh 4S XT60", price:20, weight:135,
+    imageUrl:"https://placehold.co/900x620/080b12/ff4d6d?text=CNHL+1100mAh+4S",
+    officialUrl:"https://chinahobbyline.com",
+    specs:{cells:"4s",capacity:1100,connector:"XT60"}, tags:["4s","3.5","XT60"]
+  },
+  {
+    id:28, category:"battery", brand:"Tattu", name:"R-Line 1300mAh 6S XT60", price:35, weight:215,
+    imageUrl:"https://placehold.co/900x620/080b12/ff4d6d?text=Tattu+1300mAh+6S",
+    officialUrl:"https://genstattu.com",
+    specs:{cells:"6s",capacity:1300,connector:"XT60"}, tags:["6s","5","XT60"]
+  },
+  {
+    id:29, category:"battery", brand:"CNHL", name:"Black 1500mAh 6S XT60", price:29, weight:255,
+    imageUrl:"https://placehold.co/900x620/080b12/ff4d6d?text=CNHL+1500mAh+6S",
+    officialUrl:"https://chinahobbyline.com",
+    specs:{cells:"6s",capacity:1500,connector:"XT60"}, tags:["6s","5","budget"]
+  },
+  {
+    id:30, category:"battery", brand:"Auline", name:"Li-ion 6S 4000mAh Pack", price:75, weight:410,
+    imageUrl:"https://placehold.co/900x620/080b12/ff4d6d?text=Li-ion+6S+4000mAh",
+    officialUrl:"https://www.aulinefpv.com",
+    specs:{cells:"6s",capacity:4000,connector:"XT60"}, tags:["6s","7","longrange"]
+  },
+  {
+    id:31, category:"battery", brand:"BetaFPV", name:"1S 300mAh BT2.0", price:6, weight:8,
+    imageUrl:"https://placehold.co/900x620/080b12/ff4d6d?text=BetaFPV+1S+300",
+    officialUrl:"https://betafpv.com",
+    specs:{cells:"1s",capacity:300,connector:"BT2.0"}, tags:["1s","whoop"]
+  },
 
-  {id:32,category:"vtx",brand:"Walksnail",name:"Avatar HD Mini 1S Kit",price:90,weight:8,specs:{system:"walksnail"},tags:["digital","light","whoop","3.5"]},
-  {id:33,category:"vtx",brand:"Walksnail",name:"Avatar HD Pro Kit",price:130,weight:28,specs:{system:"walksnail"},tags:["digital","3.5","5"]},
-  {id:34,category:"vtx",brand:"Walksnail",name:"Moonlight 4K Kit",price:190,weight:45,specs:{system:"walksnail"},tags:["digital","cinematic","4k"]},
-  {id:35,category:"vtx",brand:"DJI",name:"DJI O3 Air Unit",price:229,weight:39,specs:{system:"dji"},tags:["digital","5","cinematic"]},
-  {id:36,category:"vtx",brand:"RushFPV",name:"Tank Solo Analog VTX + Cam",price:48,weight:13,specs:{system:"analog"},tags:["analog","cheap","light"]},
+  {
+    id:32, category:"vtx", brand:"Walksnail", name:"Avatar HD Mini 1S Kit", price:90, weight:8,
+    imageUrl:"https://placehold.co/900x620/080b12/00b7ff?text=Walksnail+Mini+1S",
+    officialUrl:"https://www.walksnail.com",
+    specs:{system:"walksnail"}, tags:["digital","light","whoop","3.5"]
+  },
+  {
+    id:33, category:"vtx", brand:"Walksnail", name:"Avatar HD Pro Kit", price:130, weight:28,
+    imageUrl:"https://placehold.co/900x620/080b12/00b7ff?text=Walksnail+HD+Pro",
+    officialUrl:"https://www.walksnail.com",
+    specs:{system:"walksnail"}, tags:["digital","3.5","5"]
+  },
+  {
+    id:34, category:"vtx", brand:"Walksnail", name:"Moonlight 4K Kit", price:190, weight:45,
+    imageUrl:"https://placehold.co/900x620/080b12/00b7ff?text=Walksnail+Moonlight",
+    officialUrl:"https://www.walksnail.com",
+    specs:{system:"walksnail"}, tags:["digital","cinematic","4k"]
+  },
+  {
+    id:35, category:"vtx", brand:"DJI", name:"DJI O3 Air Unit", price:229, weight:39,
+    imageUrl:"https://placehold.co/900x620/080b12/00b7ff?text=DJI+O3+Air+Unit",
+    officialUrl:"https://www.dji.com",
+    specs:{system:"dji"}, tags:["digital","5","cinematic"]
+  },
+  {
+    id:36, category:"vtx", brand:"RushFPV", name:"Tank Solo Analog VTX + Cam", price:48, weight:13,
+    imageUrl:"https://placehold.co/900x620/080b12/00b7ff?text=RushFPV+Tank+Solo",
+    officialUrl:"https://rushfpv.net",
+    specs:{system:"analog"}, tags:["analog","cheap","light"]
+  },
 
-  {id:37,category:"rx",brand:"RadioMaster",name:"RP1 ELRS 2.4GHz Receiver",price:16,weight:1,specs:{protocol:"ELRS"},tags:["ELRS","2.4","small"]},
-  {id:38,category:"rx",brand:"RadioMaster",name:"RP2 ELRS 2.4GHz Receiver",price:17,weight:1,specs:{protocol:"ELRS"},tags:["ELRS","ceramic","small"]},
-  {id:39,category:"rx",brand:"HappyModel",name:"EP1 ELRS Receiver",price:14,weight:1,specs:{protocol:"ELRS"},tags:["ELRS","budget"]},
-  {id:40,category:"rx",brand:"DJI",name:"DJI Control Link via Air Unit",price:0,weight:0,specs:{protocol:"DJI"},tags:["DJI","no receiver"]},
+  {
+    id:37, category:"rx", brand:"RadioMaster", name:"RP1 ELRS 2.4GHz Receiver", price:16, weight:1,
+    imageUrl:"https://placehold.co/900x620/080b12/bdf9ff?text=RadioMaster+RP1",
+    officialUrl:"https://www.radiomasterrc.com",
+    specs:{protocol:"ELRS"}, tags:["ELRS","2.4","small"]
+  },
+  {
+    id:38, category:"rx", brand:"RadioMaster", name:"RP2 ELRS 2.4GHz Receiver", price:17, weight:1,
+    imageUrl:"https://placehold.co/900x620/080b12/bdf9ff?text=RadioMaster+RP2",
+    officialUrl:"https://www.radiomasterrc.com",
+    specs:{protocol:"ELRS"}, tags:["ELRS","ceramic","small"]
+  },
+  {
+    id:39, category:"rx", brand:"HappyModel", name:"EP1 ELRS Receiver", price:14, weight:1,
+    imageUrl:"https://placehold.co/900x620/080b12/bdf9ff?text=HappyModel+EP1",
+    officialUrl:"https://www.happymodel.cn",
+    specs:{protocol:"ELRS"}, tags:["ELRS","budget"]
+  },
+  {
+    id:40, category:"rx", brand:"DJI", name:"DJI Control Link via Air Unit", price:0, weight:0,
+    imageUrl:"https://placehold.co/900x620/080b12/bdf9ff?text=DJI+Control+Link",
+    officialUrl:"https://www.dji.com",
+    specs:{protocol:"DJI"}, tags:["DJI","no receiver"]
+  },
 
-  {id:41,category:"antenna",brand:"TrueRC",name:"Singularity Stubby 5.8",price:20,weight:5,specs:{gain:1.9},tags:["5.8","digital","analog"]},
-  {id:42,category:"antenna",brand:"Lumenier",name:"AXII 2 Long Range",price:25,weight:8,specs:{gain:2.2},tags:["5.8","longrange"]},
-  {id:43,category:"antenna",brand:"Walksnail",name:"Avatar Mini Antenna",price:10,weight:2,specs:{gain:1.5},tags:["walksnail","light"]},
+  {
+    id:41, category:"antenna", brand:"TrueRC", name:"Singularity Stubby 5.8", price:20, weight:5,
+    imageUrl:"https://placehold.co/900x620/080b12/ff8a00?text=TrueRC+Singularity",
+    officialUrl:"https://www.truerc.ca",
+    specs:{gain:1.9}, tags:["5.8","digital","analog"]
+  },
+  {
+    id:42, category:"antenna", brand:"Lumenier", name:"AXII 2 Long Range", price:25, weight:8,
+    imageUrl:"https://placehold.co/900x620/080b12/ff8a00?text=Lumenier+AXII+2",
+    officialUrl:"https://www.lumenier.com",
+    specs:{gain:2.2}, tags:["5.8","longrange"]
+  },
+  {
+    id:43, category:"antenna", brand:"Walksnail", name:"Avatar Mini Antenna", price:10, weight:2,
+    imageUrl:"https://placehold.co/900x620/080b12/ff8a00?text=Walksnail+Antenna",
+    officialUrl:"https://www.walksnail.com",
+    specs:{gain:1.5}, tags:["walksnail","light"]
+  },
 
-  {id:44,category:"extras",brand:"VIFLY",name:"Finder 2 Buzzer",price:15,weight:5,specs:{},tags:["safety","recommended"]},
-  {id:45,category:"extras",brand:"HGLRC",name:"M100 Mini GPS",price:18,weight:6,specs:{},tags:["gps","longrange"]},
-  {id:46,category:"extras",brand:"Panasonic",name:"Low ESR Capacitor 1000uF",price:3,weight:4,specs:{},tags:["noise","recommended"]},
-  {id:47,category:"extras",brand:"GoPro",name:"GoPro Payload Simulation",price:0,weight:155,specs:{},tags:["payload","cinematic"]}
+  {
+    id:44, category:"extras", brand:"VIFLY", name:"Finder 2 Buzzer", price:15, weight:5,
+    imageUrl:"https://placehold.co/900x620/080b12/9aa7bb?text=VIFLY+Finder+2",
+    officialUrl:"https://viflydrone.com",
+    specs:{}, tags:["safety","recommended"]
+  },
+  {
+    id:45, category:"extras", brand:"HGLRC", name:"M100 Mini GPS", price:18, weight:6,
+    imageUrl:"https://placehold.co/900x620/080b12/9aa7bb?text=HGLRC+M100+GPS",
+    officialUrl:"https://www.hglrc.com",
+    specs:{}, tags:["gps","longrange"]
+  },
+  {
+    id:46, category:"extras", brand:"Panasonic", name:"Low ESR Capacitor 1000uF", price:3, weight:4,
+    imageUrl:"https://placehold.co/900x620/080b12/9aa7bb?text=Low+ESR+Capacitor",
+    officialUrl:"https://industrial.panasonic.com",
+    specs:{}, tags:["noise","recommended"]
+  },
+  {
+    id:47, category:"extras", brand:"GoPro", name:"GoPro Payload Simulation", price:0, weight:155,
+    imageUrl:"https://placehold.co/900x620/080b12/9aa7bb?text=GoPro+Payload",
+    officialUrl:"https://gopro.com",
+    specs:{}, tags:["payload","cinematic"]
+  }
 ];
 
 function analyzeParts(parts, budget = 0) {
@@ -175,9 +427,20 @@ app.get("/api/components", (req, res) => {
 });
 
 app.post("/api/components", (req, res) => {
-  const { category, brand, name, price = 0, weight = 0, specs = {}, tags = [] } = req.body;
+  const { category, brand, name, price = 0, weight = 0, specs = {}, tags = [], imageUrl, officialUrl } = req.body;
   if (!category || !brand || !name) return res.status(400).json({ error: "category, brand and name are required" });
-  const part = { id: components.length + 1, category, brand, name, price: Number(price), weight: Number(weight), specs, tags };
+  const part = {
+    id: components.length + 1,
+    category,
+    brand,
+    name,
+    price: Number(price),
+    weight: Number(weight),
+    imageUrl: imageUrl || placeholder(category, name),
+    officialUrl: officialUrl || "",
+    specs,
+    tags
+  };
   components.push(part);
   res.status(201).json(part);
 });
