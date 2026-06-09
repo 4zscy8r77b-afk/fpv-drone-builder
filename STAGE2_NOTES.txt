@@ -1,0 +1,15 @@
+STAGE 2 COMPLETE
+
+Added:
+- Three.js rotating drone preview
+- Better premium hover interactions
+- Dynamic 3D scene
+- Responsive 3D renderer container
+- Improved visual polish
+
+Next:
+- component-driven geometry
+- real frame shapes
+- ducts for cinewhoop
+- dynamic prop sizes
+- real product image database
