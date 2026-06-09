@@ -1,0 +1,1 @@
+body{font-family:Inter,sans-serif;} .btn:hover{transform:translateY(-3px);} .panel,.hero-card,.type-card{transition:.3s;} .panel:hover,.hero-card:hover,.type-card:hover{transform:translateY(-6px);} .reveal{opacity:0;transform:translateY(40px);transition:.8s;} .reveal.visible{opacity:1;transform:none;} footer{padding:50px 20px;border-top:1px solid rgba(255,255,255,.08)}
