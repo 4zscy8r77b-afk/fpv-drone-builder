@@ -1,1 +1,1 @@
-Replace index.html in GitHub and commit. Adds dynamic build showcase with image, pros/cons, skill level and use case per build type.
+Replace index.html in GitHub and commit. This adds: full hero first, choose mission, auto scroll to builder, auto build scrolls to 3D result.
