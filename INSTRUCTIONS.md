@@ -1,1 +1,1 @@
-Upload/replace index.html in GitHub. Commit changes. Render will redeploy automatically.
+Replace index.html in GitHub, commit changes, then wait for Render deploy.
