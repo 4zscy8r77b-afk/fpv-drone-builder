@@ -1,42 +1,525 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Build Your Own FPV</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=Space+Grotesk:wght@500;700&display=swap');
-:root{--ink:#071018;--muted:#667085;--line:rgba(7,16,24,.13);--good:#1faa6d;--warn:#c98a00}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,sans-serif;color:var(--ink);background:#eef3f7}
-.bg{position:fixed;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(245,248,252,.96),rgba(245,248,252,.65) 45%,rgba(245,248,252,.1)),url('https://images.unsplash.com/photo-1508614589041-895b88991e3e?auto=format&fit=crop&w=2200&q=85') center/cover no-repeat}.bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,#eef3f7 84%)}
-.nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:min(1280px,calc(100% - 28px));z-index:10;display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:rgba(255,255,255,.62);backdrop-filter:blur(20px);border:1px solid var(--line);box-shadow:0 18px 50px rgba(7,16,24,.08)}.brand{font-family:Space Grotesk,sans-serif;font-size:22px;font-weight:700}.nav a,.btn{border:1px solid var(--line);background:rgba(255,255,255,.75);border-radius:999px;padding:12px 16px;font-weight:900;color:var(--ink);text-decoration:none;cursor:pointer}.primary{background:#071018!important;color:white!important}
-.app{max-width:1320px;margin:auto;padding:22px}.hero{height:100vh;min-height:700px;display:grid;align-items:center;padding-top:90px}.kicker{text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-size:12px;font-weight:900}h1{font-family:Space Grotesk,sans-serif;font-weight:500;font-size:clamp(68px,11vw,150px);line-height:.82;letter-spacing:-.09em;margin:18px 0}.hero p{max-width:560px;font-size:20px;line-height:1.55;color:#334155}.hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-weight:900;color:#334155}
-.section{padding:72px 0}.title{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}.title h2{font-family:Space Grotesk,sans-serif;font-size:clamp(42px,6vw,82px);line-height:.88;letter-spacing:-.08em;margin:0}.title p{max-width:620px;color:var(--muted);font-size:18px;line-height:1.5}
-.grid-missions{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.mission,.panel,.part,.preview-card{background:rgba(255,255,255,.75);border:1px solid var(--line);border-radius:30px;backdrop-filter:blur(20px);box-shadow:0 18px 60px rgba(7,16,24,.08)}.mission{padding:22px;min-height:165px;cursor:pointer;transition:.25s}.mission:hover{transform:translateY(-6px)}.mission.active{box-shadow:0 0 0 2px #071018}.mission h3{font-family:Space Grotesk,sans-serif;font-size:28px;margin:0 0 8px}.mission p{color:var(--muted);line-height:1.45}.tag{display:inline-block;background:#071018;color:white;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900}
-.builder{display:grid;grid-template-columns:330px 1fr 390px;gap:16px;align-items:start}.panel{padding:18px}label{display:block;margin:14px 0 7px;font-weight:900}select,input{width:100%;padding:15px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.78);font-size:16px}.full{width:100%;margin-top:12px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}.tab{padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:white;font-weight:900;cursor:pointer}.tab.active{background:#071018;color:white}.toggle{display:flex;gap:8px;align-items:center;color:#334155;font-weight:800}.toggle input{width:auto}
-.parts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.part{padding:14px}.part.selected{box-shadow:0 0 0 2px #071018}.part img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:20px;background:#dbeafe;margin-bottom:12px}.top{display:flex;justify-content:space-between}.name{font-weight:900;font-size:20px}.brand-name{color:var(--muted)}.price{font-size:20px;font-weight:900;color:#0f766e}.chip{display:inline-block;margin:7px 4px 0 0;padding:6px 9px;border-radius:999px;background:rgba(7,16,24,.07);color:#334155;font-size:13px;font-weight:700}
-.buildItem{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}.buildItem img{width:56px;height:44px;object-fit:cover;border-radius:12px}.buildItem span{color:var(--muted);font-size:13px}.status{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900}.dot{width:14px;height:14px;border-radius:50%}.good{background:var(--good)}.warn{background:var(--warn)}.metric{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}.metric span{color:var(--muted)}.issue{padding:12px;border-radius:16px;background:rgba(7,16,24,.05);border:1px solid var(--line);margin:9px 0}
-.preview-layout{display:grid;grid-template-columns:1fr 420px;gap:18px}.preview-card{padding:18px}.drone3d{height:460px;border-radius:26px;background:radial-gradient(circle,rgba(14,165,233,.18),transparent 45%),linear-gradient(135deg,#f8fafc,#dbeafe);display:grid;place-items:center;overflow:hidden;position:relative}.drone3d svg{width:72%;filter:drop-shadow(0 30px 40px rgba(7,16,24,.25));animation:hover 3s ease-in-out infinite alternate}@keyframes hover{to{transform:translateY(-12px) rotate(1.2deg)}}.prop{transform-origin:center;animation:spin .32s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.preview-title{position:absolute;left:22px;bottom:22px;background:rgba(255,255,255,.75);padding:12px 14px;border-radius:18px;font-weight:900}
-footer{padding:54px 0;color:var(--muted);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-@media(max-width:1100px){.builder,.preview-layout{grid-template-columns:1fr}}@media(max-width:900px){.grid-missions{grid-template-columns:1fr 1fr}.parts{grid-template-columns:1fr}.nav a:not(.primary){display:none}}@media(max-width:560px){.grid-missions{grid-template-columns:1fr}footer{grid-template-columns:1fr}}
-</style></head><body><div class="bg"></div>
-<nav class="nav"><div class="brand">Build Your Own FPV</div><div><a href="#mission">Choose mission</a> <a href="#builder">Builder</a> <a class="primary" href="#preview">3D result</a></div></nav>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Build Your Own FPV — Fly everywhere. Fly anytime.</title>
+  <meta name="description" content="Build FPV drones by mission: choose a drone type, auto-build compatible parts, review price/weight, and preview the final drone.">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap');
+    :root{
+      --ink:#071018;--muted:#667085;--paper:#eef3f7;--card:rgba(255,255,255,.76);
+      --line:rgba(7,16,24,.13);--good:#1faa6d;--warn:#c98a00;--bad:#e04444;
+      --blue:#0ea5e9;--deep:#071018;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--paper);letter-spacing:-.03em}
+    .bg{
+      position:fixed;inset:0;z-index:-2;
+      background:
+        linear-gradient(90deg,rgba(245,248,252,.98),rgba(245,248,252,.72) 42%,rgba(245,248,252,.12)),
+        url("/assets/builds/longrange.jpg") center/cover no-repeat;
+    }
+    .bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,#eef3f7 84%)}
+    .nav{
+      position:fixed;top:18px;left:50%;transform:translateX(-50%);
+      width:min(1280px,calc(100% - 28px));z-index:20;
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+      padding:14px 18px;background:rgba(255,255,255,.64);backdrop-filter:blur(22px);
+      border:1px solid var(--line);box-shadow:0 18px 50px rgba(7,16,24,.08)
+    }
+    .brand{font-family:Space Grotesk,sans-serif;font-size:22px;font-weight:700;display:flex;gap:12px;align-items:center}
+    .logo{width:42px;height:42px;border-radius:16px;background:#fff;border:1px solid var(--line);position:relative}
+    .logo:before,.logo:after{content:"";position:absolute;left:8px;top:18px;width:26px;height:7px;border-radius:99px;background:#071018;transform:rotate(35deg)}
+    .logo:after{transform:rotate(-35deg)}
+    .nav a,.btn{
+      border:1px solid var(--line);background:rgba(255,255,255,.76);border-radius:999px;
+      padding:12px 16px;font-weight:900;color:var(--ink);text-decoration:none;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.25s
+    }
+    .nav a:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(7,16,24,.12)}
+    .primary{background:var(--deep)!important;color:white!important;border-color:var(--deep)!important}
+    .app{max-width:1320px;margin:auto;padding:22px}
+    .hero{height:100vh;min-height:700px;display:grid;align-items:center;padding-top:90px;position:relative}
+    .kicker{text-transform:uppercase;letter-spacing:.18em;color:var(--muted);font-size:12px;font-weight:900}
+    h1{font-family:Space Grotesk,sans-serif;font-weight:500;font-size:clamp(64px,11vw,150px);line-height:.82;letter-spacing:-.09em;margin:18px 0 24px}
+    .hero p{max-width:590px;font-size:20px;line-height:1.55;color:#334155;margin:0 0 28px}
+    .hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-weight:900;color:#334155;animation:hint 1.4s ease-in-out infinite}
+    @keyframes hint{50%{transform:translate(-50%,8px)}}
+    .section{padding:72px 0}
+    .title{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}
+    .title h2{font-family:Space Grotesk,sans-serif;font-size:clamp(42px,6vw,82px);line-height:.88;letter-spacing:-.08em;margin:0}
+    .title p{max-width:660px;color:var(--muted);font-size:18px;line-height:1.5}
+    .mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .mission,.panel,.part,.preview-card{
+      background:var(--card);border:1px solid var(--line);border-radius:30px;
+      backdrop-filter:blur(20px);box-shadow:0 18px 60px rgba(7,16,24,.08)
+    }
+    .mission{padding:22px;min-height:180px;cursor:pointer;transition:.25s;background-size:cover;background-position:center;position:relative;overflow:hidden}
+    .mission:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.92))}
+    .mission>*{position:relative;z-index:1}
+    .mission:hover{transform:translateY(-6px)}
+    .mission.active{box-shadow:0 0 0 2px #071018}
+    .mission h3{font-family:Space Grotesk,sans-serif;font-size:28px;margin:0 0 8px;letter-spacing:-.05em}
+    .mission p{color:#334155;line-height:1.45;margin:0}
+    .tag{display:inline-block;background:#071018;color:white;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;margin-top:12px}
+    .builder{display:grid;grid-template-columns:330px 1fr 390px;gap:16px;align-items:start}
+    .panel{padding:18px}
+    label{display:block;margin:14px 0 7px;font-weight:900}
+    select,input{width:100%;padding:15px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.82);font-size:16px;color:var(--ink)}
+    .full{width:100%;margin-top:12px}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+    .tab{padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:white;font-weight:900;cursor:pointer}
+    .tab.active{background:#071018;color:white}
+    .toggle{display:flex;gap:8px;align-items:center;color:#334155;font-weight:800}
+    .toggle input{width:auto}
+    .parts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .part{padding:14px;transition:.25s}
+    .part.selected{box-shadow:0 0 0 2px #071018}
+    .part:hover{transform:translateY(-4px)}
+    .part img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:20px;background:#dbeafe;margin-bottom:12px}
+    .top{display:flex;justify-content:space-between;gap:10px}
+    .name{font-weight:900;font-size:20px;line-height:1.15}
+    .brand-name{color:var(--muted);margin-top:4px}
+    .price{font-size:20px;font-weight:900;color:#0f766e}
+    .chip{display:inline-block;margin:7px 4px 0 0;padding:6px 9px;border-radius:999px;background:rgba(7,16,24,.07);color:#334155;font-size:13px;font-weight:700}
+    .pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:16px}
+    .pageBtn{border:1px solid var(--line);background:white;border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer}
+    .buildItem{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
+    .buildItem img{width:56px;height:44px;object-fit:cover;border-radius:12px}
+    .buildItem span{color:var(--muted);font-size:13px}
+    .status{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900}
+    .dot{width:14px;height:14px;border-radius:50%}.good{background:var(--good)}.warn{background:var(--warn)}.bad{background:var(--bad)}
+    .metric{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}
+    .metric span{color:var(--muted)}
+    .issue{padding:12px;border-radius:16px;background:rgba(7,16,24,.05);border:1px solid var(--line);margin:9px 0;line-height:1.35}
+    .preview-layout{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start}
+    .preview-card{padding:18px}
+    .drone3d{height:480px;border-radius:26px;background:radial-gradient(circle,rgba(14,165,233,.18),transparent 45%),linear-gradient(135deg,#f8fafc,#dbeafe);display:grid;place-items:center;overflow:hidden;position:relative}
+    .drone3d svg{width:72%;filter:drop-shadow(0 30px 40px rgba(7,16,24,.25));animation:hoverDrone 3s ease-in-out infinite alternate}
+    @keyframes hoverDrone{to{transform:translateY(-12px) rotate(1.2deg)}}
+    .prop{transform-origin:center;animation:spin .32s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .preview-title{position:absolute;left:22px;bottom:22px;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);padding:12px 14px;border-radius:18px;font-weight:900}
+    footer{padding:54px 0;color:var(--muted);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    footer b{color:var(--ink)}
+    @media(max-width:1100px){.builder,.preview-layout{grid-template-columns:1fr}}
+    @media(max-width:900px){.mission-grid{grid-template-columns:1fr 1fr}.parts{grid-template-columns:1fr}.nav a:not(.primary){display:none}}
+    @media(max-width:560px){.mission-grid{grid-template-columns:1fr}footer{grid-template-columns:1fr}h1{font-size:64px}.hero{min-height:650px}}
+  </style>
+</head>
+<body>
+<div class="bg"></div>
+<nav class="nav">
+  <div class="brand"><div class="logo"></div>Build Your Own FPV</div>
+  <div><a href="#mission">Choose mission</a> <a href="#builder">Builder</a> <a class="primary" href="#preview">3D result</a></div>
+</nav>
+
 <div class="app">
-<section class="hero" id="home"><div><div class="kicker">FPV drone builder</div><h1>Fly everywhere.<br>Fly anytime.</h1><p>Start with a mission, choose components, auto-build a compatible setup, then jump into a 3D preview of the drone you created.</p><a class="btn primary" href="#mission">Choose mission</a></div><div class="hint">Scroll ↓</div></section>
-<section class="section" id="mission"><div class="title"><h2>Choose mission.</h2><p>Select what kind of FPV drone you want. The site will automatically move you to the builder and filter the parts for that mission.</p></div><div class="grid-missions" id="presetGrid"></div></section>
-<section class="section" id="builder"><div class="title"><h2>Build setup.</h2><p>Choose parts manually, or press Auto build. After Auto build, the site moves you to the 3D result.</p></div><div class="builder"><div class="panel"><h2>Build setup</h2><label>Build type</label><select id="goal" onchange="setGoal(this.value,false)"></select><label>Budget, $</label><input id="budget" type="number" value="650" oninput="analyze()"><label>Sort</label><select id="sort" onchange="renderParts()"><option value="priceAsc">Price ↑</option><option value="priceDesc">Price ↓</option><option value="weightAsc">Weight ↑</option></select><label class="toggle"><input id="compatibleOnly" type="checkbox" checked onchange="renderParts()"> Show only compatible parts</label><button class="btn primary full" onclick="autoPick(true)">Auto build → 3D preview</button><button class="btn full" onclick="clearBuild()">Clear build</button></div><div class="panel"><h2>Component database</h2><div class="tabs" id="tabs"></div><input id="search" placeholder="Search DJI, Walksnail, ELRS..." oninput="renderParts()"><div id="partsCount" style="color:var(--muted);font-weight:800;margin:12px 0"></div><div class="parts" id="parts"></div></div><div class="panel"><h2>Current build</h2><div id="status" class="status"></div><div id="buildList"></div><h3>Summary</h3><div id="metrics"></div><h3>Compatibility</h3><div id="issues"></div></div></div></section>
-<section class="section" id="preview"><div class="title"><h2>3D result.</h2><p>This preview updates from the selected build type and selected components.</p></div><div class="preview-layout"><div class="preview-card"><div class="drone3d"><svg id="resultSvg" viewBox="0 0 500 500"><line x1="125" y1="125" x2="375" y2="375" stroke="#1f2937" stroke-width="16" opacity=".55"/><line x1="375" y1="125" x2="125" y2="375" stroke="#1f2937" stroke-width="16" opacity=".55"/><rect x="198" y="198" width="104" height="104" rx="24" fill="#071018"/><rect id="payload" x="218" y="155" width="64" height="48" rx="12" fill="#334155"/><g class="prop"><ellipse cx="105" cy="105" rx="82" ry="14" fill="#071018"/><ellipse cx="105" cy="105" rx="14" ry="82" fill="#0ea5e9" opacity=".55"/></g><g class="prop"><ellipse cx="395" cy="105" rx="82" ry="14" fill="#071018"/><ellipse cx="395" cy="105" rx="14" ry="82" fill="#0ea5e9" opacity=".55"/></g><g class="prop"><ellipse cx="105" cy="395" rx="82" ry="14" fill="#071018"/><ellipse cx="105" cy="395" rx="14" ry="82" fill="#0ea5e9" opacity=".55"/></g><g class="prop"><ellipse cx="395" cy="395" rx="82" ry="14" fill="#071018"/><ellipse cx="395" cy="395" rx="14" ry="82" fill="#0ea5e9" opacity=".55"/></g></svg><div class="preview-title" id="previewTitle"></div></div></div><div class="panel"><h2>Drone profile</h2><div id="profile"></div></div></div></section>
-<footer><div><b>Build Your Own FPV</b><p>Fly everywhere. Fly anytime.</p></div><div><b>Flow</b><p>Hero → choose mission → builder → 3D result.</p></div><div><b>Next</b><p>Real 3D component models.</p></div></footer></div>
+  <section class="hero" id="home">
+    <div>
+      <div class="kicker">FPV drone builder</div>
+      <h1>Fly everywhere.<br>Fly anytime.</h1>
+      <p>Start with a mission, choose components, auto-build a compatible setup, then jump into a preview of the FPV drone you created.</p>
+      <a class="btn primary" href="#mission">Choose mission</a>
+    </div>
+    <div class="hint">Scroll ↓</div>
+  </section>
+
+  <section class="section" id="mission">
+    <div class="title">
+      <h2>Choose mission.</h2>
+      <p>Select the type of FPV drone you want. After choosing a mission, the site moves you to the builder and filters parts for that drone class.</p>
+    </div>
+    <div class="mission-grid" id="presetGrid"></div>
+  </section>
+
+  <section class="section" id="builder">
+    <div class="title">
+      <h2>Build setup.</h2>
+      <p>Pick parts manually, or press Auto build. After Auto build, the site moves to the drone preview.</p>
+    </div>
+    <div class="builder">
+      <div class="panel">
+        <h2>Build setup</h2>
+        <label>Build type</label>
+        <select id="goal"></select>
+        <label>Budget, $</label>
+        <input id="budget" type="number" value="650">
+        <label>Sort</label>
+        <select id="sort"><option value="priceAsc">Price ↑</option><option value="priceDesc">Price ↓</option><option value="weightAsc">Weight ↑</option></select>
+        <label class="toggle"><input id="compatibleOnly" type="checkbox" checked> Show only compatible parts</label>
+        <button class="btn primary full" id="autoBuildBtn">Auto build → drone preview</button>
+        <button class="btn full" id="clearBtn">Clear build</button>
+      </div>
+      <div class="panel">
+        <h2>Component database</h2>
+        <div class="tabs" id="tabs"></div>
+        <input id="search" placeholder="Search DJI, Walksnail, ELRS, 6S...">
+        <div id="partsCount" style="color:var(--muted);font-weight:800;margin:12px 0"></div>
+        <div class="parts" id="parts"></div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+      <div class="panel">
+        <h2>Current build</h2>
+        <div id="status" class="status"></div>
+        <div id="buildList"></div>
+        <h3>Summary</h3><div id="metrics"></div>
+        <h3>Compatibility</h3><div id="issues"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="preview">
+    <div class="title">
+      <h2>Drone preview.</h2>
+      <p>This preview updates from the selected mission and selected components. It is a procedural preview now; later it can be replaced by real GLB/CAD parts.</p>
+    </div>
+    <div class="preview-layout">
+      <div class="preview-card">
+        <div class="drone3d">
+          <svg id="resultSvg" viewBox="0 0 500 500">
+            <line x1="125" y1="125" x2="375" y2="375" stroke="#1f2937" stroke-width="16" opacity=".55"/>
+            <line x1="375" y1="125" x2="125" y2="375" stroke="#1f2937" stroke-width="16" opacity=".55"/>
+            <rect x="198" y="198" width="104" height="104" rx="24" fill="#071018"/>
+            <rect id="payload" x="218" y="155" width="64" height="48" rx="12" fill="#334155"/>
+            <g class="prop"><ellipse cx="105" cy="105" rx="82" ry="14" fill="#071018"/><ellipse cx="105" cy="105" rx="14" ry="82" fill="#0ea5e9" opacity=".55"/></g>
+            <g class="prop"><ellipse cx="395" cy="105" rx="82" ry="14" fill="#071018"/><ellipse cx="395" cy="105" rx="14" ry="82" fill="#0ea5e9" opacity=".55"/></g>
+            <g class="prop"><ellipse cx="105" cy="395" rx="82" ry="14" fill="#071018"/><ellipse cx="105" cy="395" rx="14" ry="82" fill="#0ea5e9" opacity=".55"/></g>
+            <g class="prop"><ellipse cx="395" cy="395" rx="82" ry="14" fill="#071018"/><ellipse cx="395" cy="395" rx="14" ry="82" fill="#0ea5e9" opacity=".55"/></g>
+          </svg>
+          <div class="preview-title" id="previewTitle"></div>
+        </div>
+      </div>
+      <div class="panel"><h2>Drone profile</h2><div id="profile"></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div><b>Build Your Own FPV</b><p>Fly everywhere. Fly anytime.</p></div>
+    <div><b>Flow</b><p>Hero → choose mission → builder → drone preview.</p></div>
+    <div><b>Next</b><p>Real 3D component models and live store pricing.</p></div>
+  </footer>
+</div>
+
 <script>
-const buildInfo={tinywhoop:{title:"Tinywhoop",skill:"Beginner",desc:"Small indoor FPV drone for learning control safely.",pros:["Cheap crashes","Safe indoors"],best:["Indoor practice"]},toothpick:{title:"Toothpick",skill:"Beginner+",desc:"Light outdoor FPV drone for parks and efficient fun.",pros:["Light","Efficient"],best:["Parks"]},freestyle35:{title:"3.5 Beginner Freestyle",skill:"Beginner / Intermediate",desc:"Compact outdoor freestyle drone. Cheaper and safer than 5 inch.",pros:["Good first outdoor build","Cheap batteries"],best:["Learning acro"]},freestyle5:{title:"5 inch Freestyle",skill:"Intermediate",desc:"Classic powerful FPV drone for tricks and aggressive flying.",pros:["Powerful","Durable"],best:["Freestyle"]},racing5:{title:"5 inch Racing",skill:"Advanced",desc:"Low-latency fast build for racing gates.",pros:["Very fast","Sharp handling"],best:["Race tracks"]},cinewhoop:{title:"Cinewhoop",skill:"Intermediate",desc:"Ducted FPV drone for smooth cinematic shots.",pros:["Protected props","Smooth footage"],best:["Filming"]},cinematic:{title:"Cinematic 5 inch",skill:"Advanced",desc:"Powerful FPV rig for GoPro-style footage.",pros:["Carries camera","Amazing footage"],best:["Mountains"]},longrange:{title:"7 inch Long Range",skill:"Advanced",desc:"Efficient cruiser for longer flights and GPS exploration.",pros:["Long flight time","Stable"],best:["Exploration"]},heavylift:{title:"Heavy Lift",skill:"Professional",desc:"Large payload platform for serious cameras.",pros:["Carries heavy cameras","Stable"],best:["Professional shoots"]}};
-const cats=[["frame","Frames"],["motor","Motors"],["stack","FC/ESC"],["props","Props"],["battery","Batteries"],["vtx","Video"],["rx","Receivers"],["antenna","Antennas"],["extras","Extras"]];
-const presets=Object.keys(buildInfo).map(id=>({id,...buildInfo[id]}));const qimg=(t,c)=>"https://placehold.co/900x620/f4f7fb/"+c+"?text="+encodeURIComponent(t);let nextId=1;function part(category,brand,name,price,weight,tags,specs={},color="0f172a"){return {id:nextId++,category,brand,name,price,weight,tags,specs,imageUrl:qimg(name,color),url:"https://www.google.com/search?q="+encodeURIComponent(brand+" "+name)}}
-const C=[part("frame","NewBeeDrone","Cockroach 65mm Whoop Frame",7,4,["tinywhoop"]),part("frame","GEPRC","GEP-CL35 V2 Frame",39,75,["freestyle35"]),part("frame","TBS","Source One V5 Frame",33,125,["freestyle5","cinematic"]),part("frame","Five33","Switchback Pro Frame",95,118,["racing5"]),part("frame","GEPRC","CineLog35 Frame",79,145,["cinewhoop"]),part("frame","iFlight","Chimera7 Pro Frame",89,220,["longrange"]),part("frame","T-Motor","FT10 Heavy Lift Frame",340,980,["heavylift"]),part("motor","Happymodel","EX0802 19000KV Motors",48,8,["tinywhoop"],{amp:5,thrust:140},"0284c7"),part("motor","iFlight","XING 1404 Motors",60,36,["toothpick"],{amp:14,thrust:1440},"0284c7"),part("motor","T-Motor","F1604 Motors",84,48,["freestyle35"],{amp:19,thrust:2240},"0284c7"),part("motor","iFlight","XING2 2207 Motors",96,128,["freestyle5"],{amp:40,thrust:6200},"0284c7"),part("motor","T-Motor","F60 Pro V Motors",116,132,["racing5"],{amp:45,thrust:6600},"0284c7"),part("motor","BrotherHobby","Avenger 2507 Motors",116,152,["cinematic"],{amp:48,thrust:7000},"0284c7"),part("motor","iFlight","XING2 2806.5 Motors",128,200,["longrange"],{amp:50,thrust:8800},"0284c7"),part("motor","T-Motor","MN4006 Motors",240,360,["heavylift"],{amp:35,thrust:12000},"0284c7"),part("stack","BetaFPV","F4 1S 5A AIO",42,4,["tinywhoop"],{esc:5,voltage:["1s"]},"16a34a"),part("stack","SpeedyBee","F405 Mini 35A Stack",70,14,["toothpick","freestyle35"],{esc:35,voltage:["3s","4s","6s"]},"16a34a"),part("stack","SpeedyBee","F405 V4 55A Stack",82,24,["freestyle5","racing5"],{esc:55,voltage:["4s","6s"]},"16a34a"),part("stack","Foxeer","F722 V4 60A Stack",130,25,["cinematic"],{esc:60,voltage:["4s","6s"]},"16a34a"),part("stack","Holybro","Kakute H7 65A Stack",165,30,["longrange"],{esc:65,voltage:["4s","6s"]},"16a34a"),part("stack","T-Motor","Alpha 80A HV Stack",220,45,["heavylift"],{esc:80,voltage:["6s","12s"]},"16a34a"),part("props","Gemfan","31mm Whoop Props",3,1,["tinywhoop"],{},"f59e0b"),part("props","Gemfan","Hurricane 3028 Props",4,6,["toothpick"],{},"f59e0b"),part("props","Gemfan","Hurricane 3520 Props",4,8,["freestyle35"],{},"f59e0b"),part("props","Gemfan","Hurricane 51466 Props",4,16,["freestyle5","cinematic"],{},"f59e0b"),part("props","HQProp","R38 Racing Props",5,14,["racing5"],{},"f59e0b"),part("props","HQProp","DP 7x3.5x3 Props",7,28,["longrange"],{},"f59e0b"),part("props","T-Motor","10x4.5 Carbon Props",20,70,["heavylift"],{},"f59e0b"),part("battery","BetaFPV","1S 300mAh BT2.0",6,8,["tinywhoop"],{cells:"1s",capacity:300},"dc2626"),part("battery","GNB","3S 450mAh XT30",16,45,["toothpick"],{cells:"3s",capacity:450},"dc2626"),part("battery","Tattu","R-Line 850mAh 4S",24,105,["freestyle35"],{cells:"4s",capacity:850},"dc2626"),part("battery","Tattu","R-Line 1300mAh 6S",35,215,["freestyle5","racing5","cinematic"],{cells:"6s",capacity:1300},"dc2626"),part("battery","Auline","Li-ion 6S 4000mAh",75,410,["longrange"],{cells:"6s",capacity:4000},"dc2626"),part("battery","Tattu","6S 22000mAh Heavy Lift",390,2600,["heavylift"],{cells:"6s",capacity:22000},"dc2626"),part("vtx","DJI","DJI O3 Air Unit",229,39,["freestyle5","cinematic","longrange"],{},"2563eb"),part("vtx","Walksnail","Avatar HD Pro Kit",130,28,["freestyle35","freestyle5","cinematic"],{},"2563eb"),part("vtx","HDZero","Race V3 VTX",70,6,["racing5"],{},"2563eb"),part("rx","RadioMaster","RP1 ELRS Receiver",16,1,["tinywhoop","toothpick","freestyle35","freestyle5","racing5","cinewhoop","cinematic"],{},"334155"),part("rx","TBS","Crossfire Nano RX",30,1,["longrange","heavylift"],{},"334155"),part("antenna","TrueRC","Singularity Stubby 5.8",20,5,["tinywhoop","freestyle35","freestyle5","racing5","cinewhoop","cinematic"],{},"334155"),part("antenna","Lumenier","AXII 2 Long Range",25,8,["longrange"],{},"334155"),part("extras","VIFLY","Finder 2 Buzzer",15,5,["freestyle35","freestyle5","racing5","cinewhoop","cinematic","longrange"],{},"334155"),part("extras","HGLRC","M100 Mini GPS",18,6,["longrange","cinematic","heavylift"],{},"334155"),part("extras","GoPro","Action Camera Payload",0,155,["cinematic","heavylift"],{},"334155")];
-let current="frame",build=JSON.parse(localStorage.getItem("fpv-flow-build")||"{}"),activeGoal="freestyle35";function $(id){return document.getElementById(id)}function money(n){return "$"+Math.round(n)}function byId(id){return C.find(p=>p.id==id)}function sel(c){return build[c]?byId(build[c]):null}
-function init(){goal.innerHTML=presets.map(p=>`<option value="${p.id}">${p.title}</option>`).join("");goal.value=activeGoal;presetGrid.innerHTML=presets.map(p=>`<div id="preset-${p.id}" class="mission" onclick="setGoal('${p.id}',true)"><h3>${p.title}</h3><p>${p.desc}</p><span class="tag">${p.skill}</span></div>`).join("");renderTabs();markPreset();renderParts();analyze();updatePreview()}
-function markPreset(){document.querySelectorAll(".mission").forEach(x=>x.classList.remove("active"));$("preset-"+activeGoal)?.classList.add("active")}function setGoal(id,scroll){activeGoal=id;goal.value=id;markPreset();renderParts();updatePreview();if(scroll)$("builder").scrollIntoView({behavior:"smooth"})}
-function renderTabs(){tabs.innerHTML=cats.map(([id,l])=>`<button class="tab ${id==current?'active':''}" onclick="current='${id}';renderTabs();renderParts()">${l}</button>`).join("")}
-function isCompatible(p){return !compatibleOnly.checked||(p.tags||[]).includes(activeGoal)||(activeGoal==="cinematic"&&p.tags.includes("freestyle5"))}
-function renderParts(){let q=(search.value||"").toLowerCase();let arr=C.filter(p=>p.category==current&&isCompatible(p)&&(`${p.brand} ${p.name}`.toLowerCase().includes(q)));let s=sort.value;if(s=="priceAsc")arr.sort((a,b)=>a.price-b.price);if(s=="priceDesc")arr.sort((a,b)=>b.price-a.price);if(s=="weightAsc")arr.sort((a,b)=>a.weight-b.weight);partsCount.textContent=`Showing ${arr.length} compatible ${current} parts for ${buildInfo[activeGoal].title}`;parts.innerHTML=arr.map(p=>`<div class="part ${build[p.category]==p.id?'selected':''}"><img src="${p.imageUrl}"><div class="top"><div><div class="name">${p.name}</div><div class="brand-name">${p.brand}</div></div><div class="price">${money(p.price)}</div></div><div><span class="chip">${p.weight}g</span>${(p.tags||[]).slice(0,5).map(x=>`<span class="chip">${x}</span>`).join("")}</div><a class="btn full" href="${p.url}" target="_blank">Find product ↗</a><button class="btn primary full" onclick="pick('${p.category}',${p.id})">${build[p.category]==p.id?'Selected':'Select'}</button></div>`).join("")||'<div class="issue">No compatible parts.</div>'}
-function pick(c,id){build[c]=id;localStorage.setItem("fpv-flow-build",JSON.stringify(build));renderParts();analyze();updatePreview()}
-function autoPick(go){build={};for(let [c] of cats){let arr=C.filter(p=>p.category==c&&isCompatible(p));if(arr.length){arr.sort((a,b)=>a.price-b.price);build[c]=arr[0].id}}localStorage.setItem("fpv-flow-build",JSON.stringify(build));current="frame";renderTabs();renderParts();analyze();updatePreview();if(go)$("preview").scrollIntoView({behavior:"smooth"})}
-function clearBuild(){build={};localStorage.setItem("fpv-flow-build","{}");renderParts();analyze();updatePreview()}
-function analyze(){let selected=Object.values(build).map(byId).filter(Boolean),price=selected.reduce((s,p)=>s+p.price,0),weight=selected.reduce((s,p)=>s+p.weight,0),motor=sel("motor"),battery=sel("battery"),issues=[];for(let [c,l] of cats)if(!sel(c))issues.push(l+" is not selected.");let budget=+budget.value||0;if(price>budget)issues.push("Build is over budget by "+money(price-budget));let lvl=issues.length?"warn":"good";status.innerHTML=`<span class="dot ${lvl}"></span><span>${issues.length?"Has warnings":"Build possible"}</span>`;buildList.innerHTML=cats.map(([c,l])=>{let p=sel(c);return `<div class="buildItem">${p?`<img src="${p.imageUrl}">`:"<div></div>"}<div><b>${l}</b><br><span>${p?p.brand+" "+p.name:"Not selected"}</span></div><div>${p?money(p.price):"-"}</div></div>`}).join("");let thrust=motor?.specs?.thrust||0;metrics.innerHTML=`<div class="metric"><span>Price</span><b>${money(price)}</b></div><div class="metric"><span>Weight</span><b>${Math.round(weight)}g</b></div><div class="metric"><span>Thrust</span><b>${Math.round(thrust)}g</b></div><div class="metric"><span>Thrust/weight</span><b>${weight?(thrust/weight).toFixed(2):0}:1</b></div><div class="metric"><span>Flight time</span><b>${battery&&weight?Math.max(1.8,battery.specs.capacity/weight*2.25).toFixed(1)+" min":"-"}</b></div>`;issuesEl.innerHTML=issues.length?issues.map(i=>`<div class="issue">${i}</div>`).join(""):'<div class="issue">No critical issues found.</div>'}
-function updatePreview(){let i=buildInfo[activeGoal],selected=Object.values(build).map(byId).filter(Boolean);previewTitle.textContent=i.title;profile.innerHTML=`<h3>${i.title}</h3><p style="color:var(--muted);line-height:1.55">${i.desc}</p><div class="metric"><span>Skill</span><b>${i.skill}</b></div><div class="metric"><span>Selected parts</span><b>${selected.length}/${cats.length}</b></div><h3>Best for</h3>${i.best.map(x=>`<div class="issue">${x}</div>`).join("")}<h3>Pros</h3>${i.pros.map(x=>`<div class="issue">${x}</div>`).join("")}`;let scale={tinywhoop:.72,toothpick:.82,freestyle35:.9,freestyle5:1,racing5:.95,cinewhoop:.92,cinematic:1.05,longrange:1.18,heavylift:1.35}[activeGoal]||1;resultSvg.style.transform=`scale(${scale})`;payload.style.display=(activeGoal==="cinematic"||activeGoal==="heavylift")?"block":"none"}
-init();
-</script></body></html>
+(function(){
+  const buildInfo = {
+    tinywhoop:{title:"Tinywhoop",skill:"Beginner",img:"/assets/builds/tinywhoop.jpg",desc:"Small indoor FPV drone for learning control safely.",pros:["Cheap crashes","Safe indoors","Daily practice"],best:["Indoor practice","First acro basics"]},
+    toothpick:{title:"Toothpick",skill:"Beginner+",img:"/assets/builds/toothpick.jpg",desc:"Light outdoor FPV drone for parks and efficient fun.",pros:["Light","Efficient","Quiet"],best:["Parks","Small fields"]},
+    freestyle35:{title:"3.5 Beginner Freestyle",skill:"Beginner / Intermediate",img:"/assets/builds/freestyle35.jpg",desc:"Compact outdoor freestyle drone. Cheaper and safer than a 5 inch.",pros:["Good first outdoor build","Cheap batteries","Real FPV feel"],best:["Learning acro","Park flying"]},
+    freestyle5:{title:"5 inch Freestyle",skill:"Intermediate",img:"/assets/builds/freestyle5inch.jpg",desc:"Classic powerful FPV drone for tricks and aggressive flying.",pros:["Powerful","Durable","Huge parts ecosystem"],best:["Freestyle","Open fields"]},
+    racing5:{title:"5 inch Racing",skill:"Advanced",img:"/assets/builds/racing5inch.jpg",desc:"Low-latency fast build for racing gates and sharp control.",pros:["Very fast","Sharp handling","Low latency"],best:["Race tracks","Gate practice"]},
+    cinewhoop:{title:"Cinewhoop",skill:"Intermediate",img:"/assets/builds/cinewhoop.jpg",desc:"Ducted FPV drone for smooth cinematic shots near objects.",pros:["Protected props","Smooth footage"],best:["Filming","Indoor/outdoor proximity"]},
+    cinematic:{title:"Cinematic 5 inch",skill:"Intermediate / Advanced",img:"/assets/builds/cinematic.jpg",desc:"Powerful FPV rig for GoPro-style footage and action shots.",pros:["Carries camera","Amazing footage"],best:["Mountains","Cars","Bikes"]},
+    longrange:{title:"7 inch Long Range",skill:"Advanced",img:"/assets/builds/longrange.jpg",desc:"Efficient cruiser for longer flights, GPS and exploration.",pros:["Long flight time","Stable cruising"],best:["Exploration","GPS cruising"]},
+    heavylift:{title:"Heavy Lift",skill:"Professional",img:"/assets/builds/heavylift.jpg",desc:"Large payload platform for serious cameras and professional work.",pros:["Carries heavy cameras","Stable platform"],best:["Professional shoots","Cinema payloads"]}
+  };
+
+  const cats = [["frame","Frames"],["motor","Motors"],["stack","FC/ESC"],["props","Props"],["battery","Batteries"],["vtx","Video"],["rx","Receivers"],["antenna","Antennas"],["extras","Extras"]];
+  const presets = Object.keys(buildInfo).map(id => ({id,...buildInfo[id]}));
+  const qimg = (t,c) => "https://placehold.co/900x620/f4f7fb/"+c+"?text="+encodeURIComponent(t);
+  let nextId = 1;
+  function part(category,brand,name,price,weight,tags,specs={},color="0f172a"){
+    return {id:nextId++,category,brand,name,price,weight,tags,specs,imageUrl:qimg(name,color),url:"https://www.google.com/search?q="+encodeURIComponent(brand+" "+name)};
+  }
+
+  const C = [
+    part("frame","NewBeeDrone","Cockroach 65mm Whoop Frame",7,4,["tinywhoop"],{size:"whoop"}),
+    part("frame","Flywoo","Firefly Nano Baby Frame",24,22,["toothpick"],{size:"3"}),
+    part("frame","GEPRC","GEP-CL35 V2 Frame",39,75,["freestyle35"],{size:"3.5"}),
+    part("frame","TBS","Source One V5 Frame",33,125,["freestyle5","cinematic"],{size:"5"}),
+    part("frame","Five33","Switchback Pro Frame",95,118,["racing5"],{size:"5"}),
+    part("frame","GEPRC","CineLog35 Frame",79,145,["cinewhoop"],{size:"3.5"}),
+    part("frame","iFlight","Chimera7 Pro Frame",89,220,["longrange"],{size:"7"}),
+    part("frame","T-Motor","FT10 Heavy Lift Frame",340,980,["heavylift"],{size:"10"}),
+
+    part("motor","Happymodel","EX0802 19000KV Motors",48,8,["tinywhoop"],{amp:5,thrust:140},"0284c7"),
+    part("motor","iFlight","XING 1404 4600KV Motors",60,36,["toothpick"],{amp:14,thrust:1440},"0284c7"),
+    part("motor","T-Motor","F1604 3800KV Motors",84,48,["freestyle35"],{amp:19,thrust:2240},"0284c7"),
+    part("motor","iFlight","XING2 2207 1750KV Motors",96,128,["freestyle5"],{amp:40,thrust:6200},"0284c7"),
+    part("motor","T-Motor","F60 Pro V 1950KV Motors",116,132,["racing5"],{amp:45,thrust:6600},"0284c7"),
+    part("motor","BrotherHobby","Avenger 2507 1500KV Motors",116,152,["cinematic"],{amp:48,thrust:7000},"0284c7"),
+    part("motor","iFlight","XING2 2806.5 1300KV Motors",128,200,["longrange"],{amp:50,thrust:8800},"0284c7"),
+    part("motor","T-Motor","MN4006 380KV Motors",240,360,["heavylift"],{amp:35,thrust:12000},"0284c7"),
+
+    part("stack","BetaFPV","F4 1S 5A AIO",42,4,["tinywhoop"],{esc:5,voltage:["1s"]},"16a34a"),
+    part("stack","SpeedyBee","F405 Mini 35A Stack",70,14,["toothpick","freestyle35"],{esc:35,voltage:["3s","4s","6s"]},"16a34a"),
+    part("stack","SpeedyBee","F405 V4 55A Stack",82,24,["freestyle5","racing5"],{esc:55,voltage:["4s","6s"]},"16a34a"),
+    part("stack","Foxeer","F722 V4 60A Stack",130,25,["cinematic"],{esc:60,voltage:["4s","6s"]},"16a34a"),
+    part("stack","Holybro","Kakute H7 65A Stack",165,30,["longrange"],{esc:65,voltage:["4s","6s"]},"16a34a"),
+    part("stack","T-Motor","Alpha 80A HV Stack",220,45,["heavylift"],{esc:80,voltage:["6s","12s"]},"16a34a"),
+
+    part("props","Gemfan","31mm Whoop Props",3,1,["tinywhoop"],{propSize:"whoop"},"f59e0b"),
+    part("props","Gemfan","Hurricane 3028 Props",4,6,["toothpick"],{propSize:"3"},"f59e0b"),
+    part("props","Gemfan","Hurricane 3520 Props",4,8,["freestyle35"],{propSize:"3.5"},"f59e0b"),
+    part("props","Gemfan","Hurricane 51466 Props",4,16,["freestyle5","cinematic"],{propSize:"5"},"f59e0b"),
+    part("props","HQProp","R38 Racing Props",5,14,["racing5"],{propSize:"5"},"f59e0b"),
+    part("props","HQProp","DP 7x3.5x3 Props",7,28,["longrange"],{propSize:"7"},"f59e0b"),
+    part("props","T-Motor","10x4.5 Carbon Props",20,70,["heavylift"],{propSize:"10"},"f59e0b"),
+
+    part("battery","BetaFPV","1S 300mAh BT2.0",6,8,["tinywhoop"],{cells:"1s",capacity:300},"dc2626"),
+    part("battery","GNB","3S 450mAh XT30",16,45,["toothpick"],{cells:"3s",capacity:450},"dc2626"),
+    part("battery","Tattu","R-Line 850mAh 4S XT30",24,105,["freestyle35"],{cells:"4s",capacity:850},"dc2626"),
+    part("battery","Tattu","R-Line 1300mAh 6S XT60",35,215,["freestyle5","racing5","cinematic"],{cells:"6s",capacity:1300},"dc2626"),
+    part("battery","Auline","Li-ion 6S 4000mAh Pack",75,410,["longrange"],{cells:"6s",capacity:4000},"dc2626"),
+    part("battery","Tattu","6S 22000mAh Heavy Lift Pack",390,2600,["heavylift"],{cells:"6s",capacity:22000},"dc2626"),
+
+    part("vtx","Walksnail","Avatar Mini 1S Kit",90,8,["tinywhoop","freestyle35"],{system:"walksnail"},"2563eb"),
+    part("vtx","Walksnail","Avatar HD Pro Kit",130,28,["freestyle35","freestyle5","cinematic"],{system:"walksnail"},"2563eb"),
+    part("vtx","DJI","DJI O3 Air Unit",229,39,["freestyle5","cinematic","longrange"],{system:"dji"},"2563eb"),
+    part("vtx","DJI","DJI O4 Air Unit",109,10,["freestyle35","freestyle5"],{system:"dji"},"2563eb"),
+    part("vtx","HDZero","Race V3 VTX",70,6,["racing5"],{system:"hdzero"},"2563eb"),
+    part("vtx","Walksnail","Moonlight 4K Kit",190,45,["cinematic","longrange"],{system:"walksnail"},"2563eb"),
+
+    part("rx","RadioMaster","RP1 ELRS Receiver",16,1,["tinywhoop","toothpick","freestyle35","freestyle5","racing5","cinewhoop","cinematic"],{},"334155"),
+    part("rx","TBS","Crossfire Nano RX",30,1,["longrange","heavylift"],{},"334155"),
+
+    part("antenna","TrueRC","Singularity Stubby 5.8",20,5,["tinywhoop","freestyle35","freestyle5","racing5","cinewhoop","cinematic"],{},"334155"),
+    part("antenna","Lumenier","AXII 2 Long Range",25,8,["longrange"],{},"334155"),
+    part("antenna","VAS","Minion Pro Long Range",27,9,["heavylift"],{},"334155"),
+
+    part("extras","VIFLY","Finder 2 Buzzer",15,5,["freestyle35","freestyle5","racing5","cinewhoop","cinematic","longrange"],{},"334155"),
+    part("extras","HGLRC","M100 Mini GPS",18,6,["longrange","cinematic","heavylift"],{},"334155"),
+    part("extras","GoPro","Action Camera Payload",0,155,["cinematic","heavylift"],{},"334155")
+  ];
+
+  const state = {
+    current:"frame",
+    activeGoal:"freestyle35",
+    page:1,
+    perPage:6,
+    build: JSON.parse(localStorage.getItem("fpv-working-build") || "{}")
+  };
+
+  function el(id){return document.getElementById(id)}
+  function money(n){return "$" + Math.round(Number(n)||0)}
+  function byId(id){return C.find(p => p.id === Number(id))}
+  function selected(cat){return state.build[cat] ? byId(state.build[cat]) : null}
+  function isCompatible(p){
+    return !el("compatibleOnly").checked ||
+      (p.tags || []).includes(state.activeGoal) ||
+      (state.activeGoal === "cinematic" && (p.tags||[]).includes("freestyle5"));
+  }
+
+  function init(){
+    el("goal").innerHTML = presets.map(p=>`<option value="${p.id}">${p.title}</option>`).join("");
+    el("goal").value = state.activeGoal;
+
+    el("presetGrid").innerHTML = presets.map(p=>`
+      <div id="preset-${p.id}" class="mission" style="background-image:url('${p.img}')" data-id="${p.id}">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+        <span class="tag">${p.skill}</span>
+      </div>
+    `).join("");
+
+    el("goal").addEventListener("change", e => setGoal(e.target.value, false));
+    el("budget").addEventListener("input", analyze);
+    el("sort").addEventListener("change", ()=>{state.page=1;renderParts();});
+    el("compatibleOnly").addEventListener("change", ()=>{state.page=1;renderParts();analyze();});
+    el("search").addEventListener("input", ()=>{state.page=1;renderParts();});
+    el("autoBuildBtn").addEventListener("click", ()=>autoPick(true));
+    el("clearBtn").addEventListener("click", clearBuild);
+    document.querySelectorAll(".mission").forEach(card=>{
+      card.addEventListener("click", ()=>setGoal(card.dataset.id, true));
+    });
+
+    renderTabs();
+    markPreset();
+    renderParts();
+    analyze();
+    updatePreview();
+  }
+
+  function markPreset(){
+    document.querySelectorAll(".mission").forEach(x=>x.classList.remove("active"));
+    const card = el("preset-" + state.activeGoal);
+    if(card) card.classList.add("active");
+  }
+
+  function setGoal(id, scrollToBuilder){
+    state.activeGoal = id;
+    el("goal").value = id;
+    state.page = 1;
+    markPreset();
+    renderParts();
+    analyze();
+    updatePreview();
+    if(scrollToBuilder) el("builder").scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  function renderTabs(){
+    el("tabs").innerHTML = cats.map(([id,label])=>`
+      <button class="tab ${id===state.current?"active":""}" data-cat="${id}">${label}</button>
+    `).join("");
+    document.querySelectorAll(".tab").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        state.current = btn.dataset.cat;
+        state.page = 1;
+        renderTabs();
+        renderParts();
+      });
+    });
+  }
+
+  function filteredParts(){
+    const q = (el("search").value || "").toLowerCase();
+    let arr = C.filter(p =>
+      p.category === state.current &&
+      isCompatible(p) &&
+      `${p.brand} ${p.name} ${(p.tags||[]).join(" ")}`.toLowerCase().includes(q)
+    );
+    const sort = el("sort").value;
+    if(sort === "priceAsc") arr.sort((a,b)=>a.price-b.price);
+    if(sort === "priceDesc") arr.sort((a,b)=>b.price-a.price);
+    if(sort === "weightAsc") arr.sort((a,b)=>a.weight-b.weight);
+    return arr;
+  }
+
+  function chips(p){
+    const s = p.specs || {};
+    const a = [];
+    if(p.weight) a.push(p.weight+"g");
+    if(s.esc) a.push(s.esc+"A ESC");
+    if(s.cells) a.push(String(s.cells).toUpperCase());
+    if(s.capacity) a.push(s.capacity+"mAh");
+    if(s.system) a.push(s.system);
+    return a.concat(p.tags || []).slice(0,8).map(x=>`<span class="chip">${x}</span>`).join("");
+  }
+
+  function renderParts(){
+    const arr = filteredParts();
+    const pages = Math.max(1, Math.ceil(arr.length / state.perPage));
+    if(state.page > pages) state.page = pages;
+    const start = (state.page - 1) * state.perPage;
+    const show = arr.slice(start, start + state.perPage);
+
+    el("partsCount").textContent = `Showing ${show.length} of ${arr.length} compatible ${state.current} parts for ${buildInfo[state.activeGoal].title}`;
+
+    el("parts").innerHTML = show.map(p=>`
+      <div class="part ${state.build[p.category]===p.id?"selected":""}">
+        <img src="${p.imageUrl}" alt="${p.name}">
+        <div class="top">
+          <div><div class="name">${p.name}</div><div class="brand-name">${p.brand}</div></div>
+          <div class="price">${money(p.price)}</div>
+        </div>
+        <div>${chips(p)}</div>
+        <a class="btn full" href="${p.url}" target="_blank" rel="noopener">Find product ↗</a>
+        <button class="btn primary full" data-pick="${p.id}" data-cat="${p.category}">${state.build[p.category]===p.id?"Selected":"Select"}</button>
+      </div>
+    `).join("") || `<div class="issue">No compatible parts found. Turn off compatibility filter to explore all parts.</div>`;
+
+    document.querySelectorAll("[data-pick]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        pick(btn.dataset.cat, Number(btn.dataset.pick));
+      });
+    });
+
+    el("pagination").innerHTML = `
+      <button class="pageBtn" id="prevPage">Prev</button>
+      <b>Page ${state.page} / ${pages}</b>
+      <button class="pageBtn" id="nextPage">Next</button>
+    `;
+    el("prevPage").onclick = ()=>{state.page=Math.max(1,state.page-1);renderParts();};
+    el("nextPage").onclick = ()=>{state.page=Math.min(pages,state.page+1);renderParts();};
+  }
+
+  function pick(cat,id){
+    state.build[cat] = id;
+    localStorage.setItem("fpv-working-build", JSON.stringify(state.build));
+    renderParts();
+    analyze();
+    updatePreview();
+  }
+
+  function autoPick(goPreview){
+    state.build = {};
+    for(const [cat] of cats){
+      const options = C.filter(p=>p.category===cat && isCompatible(p)).sort((a,b)=>a.price-b.price);
+      if(options[0]) state.build[cat] = options[0].id;
+    }
+    localStorage.setItem("fpv-working-build", JSON.stringify(state.build));
+    state.current = "frame";
+    renderTabs();
+    renderParts();
+    analyze();
+    updatePreview();
+    if(goPreview) el("preview").scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  function clearBuild(){
+    state.build = {};
+    localStorage.setItem("fpv-working-build", "{}");
+    renderParts();
+    analyze();
+    updatePreview();
+  }
+
+  function analyze(){
+    const selectedParts = Object.values(state.build).map(byId).filter(Boolean);
+    const price = selectedParts.reduce((s,p)=>s+p.price,0);
+    const weight = selectedParts.reduce((s,p)=>s+p.weight,0);
+    const motor = selected("motor");
+    const stack = selected("stack");
+    const battery = selected("battery");
+    const thrust = motor?.specs?.thrust || 0;
+    const issues = [];
+
+    for(const [cat,label] of cats){
+      if(!selected(cat)) issues.push(`${label} is not selected.`);
+    }
+    if(stack && motor && stack.specs?.esc && motor.specs?.amp && stack.specs.esc < motor.specs.amp * 1.2){
+      issues.push("ESC may be too weak for selected motors.");
+    }
+    if(stack && battery && stack.specs?.voltage && battery.specs?.cells && !stack.specs.voltage.includes(battery.specs.cells)){
+      issues.push("Battery voltage may not match FC/ESC.");
+    }
+    const budgetValue = Number(el("budget").value || 0);
+    if(price > budgetValue) issues.push(`Build is over budget by ${money(price - budgetValue)}.`);
+
+    const level = issues.length ? "warn" : "good";
+    el("status").innerHTML = `<span class="dot ${level}"></span><span>${issues.length ? "Has warnings" : "Build possible"}</span>`;
+
+    el("buildList").innerHTML = cats.map(([cat,label])=>{
+      const p = selected(cat);
+      return `<div class="buildItem">
+        ${p ? `<img src="${p.imageUrl}" alt="${p.name}">` : "<div></div>"}
+        <div><b>${label}</b><br><span>${p ? p.brand+" "+p.name : "Not selected"}</span></div>
+        <div>${p ? money(p.price) : "-"}</div>
+      </div>`;
+    }).join("");
+
+    el("metrics").innerHTML = `
+      <div class="metric"><span>Price</span><b>${money(price)}</b></div>
+      <div class="metric"><span>Weight</span><b>${Math.round(weight)}g</b></div>
+      <div class="metric"><span>Thrust</span><b>${Math.round(thrust)}g</b></div>
+      <div class="metric"><span>Thrust/weight</span><b>${weight ? (thrust/weight).toFixed(2) : 0}:1</b></div>
+      <div class="metric"><span>Flight time</span><b>${battery && weight ? Math.max(1.8,battery.specs.capacity/weight*2.25).toFixed(1)+" min" : "-"}</b></div>
+    `;
+    el("issues").innerHTML = issues.length ? issues.map(i=>`<div class="issue">${i}</div>`).join("") : `<div class="issue">No critical issues found.</div>`;
+  }
+
+  function updatePreview(){
+    const i = buildInfo[state.activeGoal];
+    const selectedParts = Object.values(state.build).map(byId).filter(Boolean);
+    el("previewTitle").textContent = i.title;
+    el("profile").innerHTML = `
+      <h3>${i.title}</h3>
+      <p style="color:var(--muted);line-height:1.55">${i.desc}</p>
+      <div class="metric"><span>Skill</span><b>${i.skill}</b></div>
+      <div class="metric"><span>Selected parts</span><b>${selectedParts.length}/${cats.length}</b></div>
+      <h3>Best for</h3>${i.best.map(x=>`<div class="issue">${x}</div>`).join("")}
+      <h3>Pros</h3>${i.pros.map(x=>`<div class="issue">${x}</div>`).join("")}
+    `;
+    const scale = {tinywhoop:.72,toothpick:.82,freestyle35:.9,freestyle5:1,racing5:.95,cinewhoop:.92,cinematic:1.05,longrange:1.18,heavylift:1.35}[state.activeGoal] || 1;
+    el("resultSvg").style.transform = `scale(${scale})`;
+    el("payload").style.display = (state.activeGoal === "cinematic" || state.activeGoal === "heavylift") ? "block" : "none";
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>
