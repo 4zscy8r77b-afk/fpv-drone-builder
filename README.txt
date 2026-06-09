@@ -1,12 +1,29 @@
 
-Upload:
-- premium-ui.css
-- premium-ui.js
+This pack gives you a scalable system for REAL FPV component images.
 
-Add in <head>:
-<link rel="stylesheet" href="/premium-ui.css">
+What it does:
+- components.json stores all FPV parts
+- each part has imageUrl + officialUrl
+- image-fetcher.js automatically downloads product images
+  from official product pages
 
-Add before </body>:
-<script src="/premium-ui.js"></script>
+How to use:
 
-Replace footer with footer.html content.
+1. Put components.json in your project root
+2. Put image-fetcher.js in your project root
+3. Create folder:
+   assets/products
+
+4. Install:
+npm install axios cheerio sharp fs-extra
+
+5. Run:
+node image-fetcher.js
+
+The script will:
+- open official product pages
+- find product image automatically
+- download image
+- save locally into assets/products
+
+This is the scalable production approach.

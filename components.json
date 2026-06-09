@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "category": "frame",
+    "brand": "GEPRC",
+    "name": "GEP-CL35 V2",
+    "imageUrl": "/assets/products/geprc-cl35-v2.webp",
+    "officialUrl": "https://geprc.com/product/gep-cl35-v2-frame/"
+  },
+  {
+    "id": 2,
+    "category": "vtx",
+    "brand": "DJI",
+    "name": "O3 Air Unit",
+    "imageUrl": "/assets/products/dji-o3-air-unit.webp",
+    "officialUrl": "https://store.dji.com/product/dji-o3-air-unit"
+  },
+  {
+    "id": 3,
+    "category": "stack",
+    "brand": "SpeedyBee",
+    "name": "F405 Mini Stack",
+    "imageUrl": "/assets/products/speedybee-f405-mini.webp",
+    "officialUrl": "https://www.speedybee.com/speedybee-f405-mini-bls-35a-20x20-stack/"
+  }
+]
