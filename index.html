@@ -156,6 +156,53 @@ font-size:20px;
 margin-top:4px;
 }
 
+
+.glass-banner{
+margin:18px 0 24px;
+padding:18px 22px;
+border-radius:24px;
+background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(255,255,255,.72));
+border:1px solid rgba(14,165,233,.18);
+backdrop-filter:blur(18px);
+box-shadow:0 18px 60px rgba(7,16,24,.08);
+}
+.glass-banner h3{
+margin:0 0 6px;
+font-size:24px;
+}
+.glass-banner p{
+margin:0;
+color:#64748b;
+line-height:1.5;
+}
+.spec-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:12px;
+margin-top:18px;
+}
+.spec-card{
+padding:16px;
+border-radius:20px;
+background:rgba(255,255,255,.72);
+border:1px solid rgba(7,16,24,.08);
+}
+.spec-card span{
+display:block;
+color:#64748b;
+font-size:13px;
+font-weight:700;
+margin-bottom:6px;
+}
+.spec-card b{
+font-size:20px;
+}
+@media(max-width:700px){
+.spec-grid{
+grid-template-columns:1fr;
+}
+}
+
 </style>
 </head>
 <body>
@@ -185,6 +232,10 @@ margin-top:4px;
   </section>
 
   <section class="section" id="builder">
+<div class="glass-banner">
+<h3>AI Compatibility Engine</h3>
+<p>The configurator now filters incompatible FPV parts automatically and adapts the 3D preview depending on the selected build style.</p>
+</div>
     <div class="title">
       <h2>Build setup.</h2><div style='margin-top:10px;color:#667085;font-weight:700'>Phase 1 configurator build — compatibility engine enabled.</div>
       <p>Pick parts manually, or press Auto build. After Auto build, the site moves to the drone preview.</p>
@@ -216,6 +267,12 @@ margin-top:4px;
         <div id="buildList"></div>
         <h3>Summary</h3><div id="metrics"></div>
         <h3>Compatibility</h3><div id="issues"></div>
+<div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
+<button class="btn">Save Build</button>
+<button class="btn">Share Build</button>
+<button class="btn primary">Export Parts List</button>
+</div>
+
       </div>
     </div>
   </section>
