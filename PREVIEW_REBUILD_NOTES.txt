@@ -1,0 +1,14 @@
+
+PREVIEW REBUILD COMPLETE
+
+Fixed:
+- removed old broken SVG/fallback preview references
+- removed empty giant preview panel
+- replaced ugly box/cross preview with a cleaner procedural Three.js FPV drone
+- added carbon-style body, stack, battery, camera, motors, props, ducts, antennas
+- model now changes by mission:
+  tinywhoop, toothpick, 3.5, 5 inch, racing, cinewhoop, cinematic, long range, heavy lift
+
+Important:
+This is still procedural 3D, not real CAD/GLB models. It is now suitable as a clean MVP preview.
+Next quality step is importing real GLB models for frames/motors/cameras.
