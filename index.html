@@ -126,6 +126,36 @@ transition:.25s ease;
 transform:translateY(-5px);
 }
 
+
+.build-type-badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+padding:10px 14px;
+border-radius:999px;
+background:#071018;
+color:white;
+font-weight:900;
+margin-bottom:16px;
+}
+.preview-stats{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+margin-top:16px;
+}
+.preview-stat{
+padding:14px;
+border-radius:18px;
+background:rgba(7,16,24,.05);
+border:1px solid rgba(7,16,24,.08);
+}
+.preview-stat b{
+display:block;
+font-size:20px;
+margin-top:4px;
+}
+
 </style>
 </head>
 <body>
@@ -542,105 +572,224 @@ NEXT PHASE:
 -->
 
 
+
 <script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js';
 
-const canvasContainer = document.getElementById('three-preview');
+const container = document.getElementById('three-preview');
 
-if(canvasContainer){
+if(container){
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xeef3f7);
 
-const camera = new THREE.PerspectiveCamera(55, canvasContainer.clientWidth / 420, 0.1, 1000);
-camera.position.set(0,2.4,5.5);
+const camera = new THREE.PerspectiveCamera(
+55,
+container.clientWidth / 420,
+0.1,
+1000
+);
 
-const renderer = new THREE.WebGLRenderer({antialias:true});
-renderer.setSize(canvasContainer.clientWidth,420);
+camera.position.set(0,2.8,6);
+
+const renderer = new THREE.WebGLRenderer({
+antialias:true,
+alpha:true
+});
+
 renderer.setPixelRatio(window.devicePixelRatio);
-canvasContainer.appendChild(renderer.domElement);
+renderer.setSize(container.clientWidth,420);
 
-const light = new THREE.DirectionalLight(0xffffff,2.5);
-light.position.set(5,8,7);
-scene.add(light);
+container.appendChild(renderer.domElement);
 
-const ambient = new THREE.AmbientLight(0xffffff,1.2);
+const ambient = new THREE.AmbientLight(0xffffff,1.5);
 scene.add(ambient);
 
-const material = new THREE.MeshStandardMaterial({
+const dir = new THREE.DirectionalLight(0xffffff,2.2);
+dir.position.set(6,10,8);
+scene.add(dir);
+
+let droneGroup;
+
+function clearDrone(){
+if(droneGroup){
+scene.remove(droneGroup);
+}
+droneGroup = new THREE.Group();
+scene.add(droneGroup);
+}
+
+function createDrone(type){
+
+clearDrone();
+
+const bodyMat = new THREE.MeshStandardMaterial({
 color:0x111827,
 metalness:0.5,
 roughness:0.35
 });
 
-const armMaterial = new THREE.MeshStandardMaterial({
+const armMat = new THREE.MeshStandardMaterial({
 color:0x0ea5e9,
 metalness:0.3,
 roughness:0.45
 });
 
-const group = new THREE.Group();
+let armLength = 2.1;
+let propSize = 0.5;
+let bodySize = 1.3;
+let ducts = false;
+let payload = false;
+
+if(type === "tinywhoop"){
+armLength = 1.2;
+propSize = 0.32;
+bodySize = 0.9;
+ducts = true;
+}
+
+if(type === "freestyle35"){
+armLength = 1.8;
+propSize = 0.45;
+}
+
+if(type === "freestyle5"){
+armLength = 2.4;
+propSize = 0.62;
+}
+
+if(type === "racing5"){
+armLength = 2.3;
+propSize = 0.55;
+}
+
+if(type === "cinewhoop"){
+armLength = 1.9;
+propSize = 0.48;
+ducts = true;
+}
+
+if(type === "cinematic"){
+armLength = 2.5;
+propSize = 0.65;
+payload = true;
+}
+
+if(type === "longrange"){
+armLength = 3.2;
+propSize = 0.82;
+}
+
+if(type === "heavylift"){
+armLength = 4.2;
+propSize = 1.15;
+bodySize = 2;
+payload = true;
+}
 
 const body = new THREE.Mesh(
-new THREE.BoxGeometry(1.4,0.35,1.4),
-material
+new THREE.BoxGeometry(bodySize,0.35,bodySize),
+bodyMat
 );
-group.add(body);
 
-function arm(x,z,rot){
-const g = new THREE.Mesh(
-new THREE.BoxGeometry(2.2,0.12,0.18),
-armMaterial
+droneGroup.add(body);
+
+function arm(rot){
+const arm = new THREE.Mesh(
+new THREE.BoxGeometry(armLength,0.12,0.18),
+armMat
 );
-g.rotation.y = rot;
-g.position.set(x,0,z);
-group.add(g);
+arm.rotation.y = rot;
+droneGroup.add(arm);
 }
 
-arm(0,0,Math.PI/4);
-arm(0,0,-Math.PI/4);
+arm(Math.PI/4);
+arm(-Math.PI/4);
 
 function prop(x,z){
-const ring = new THREE.Mesh(
-new THREE.TorusGeometry(0.42,0.05,12,50),
-new THREE.MeshStandardMaterial({color:0x071018})
-);
-ring.rotation.x = Math.PI/2;
-ring.position.set(x,0.05,z);
-group.add(ring);
 
-const blade = new THREE.Mesh(
-new THREE.BoxGeometry(0.7,0.02,0.08),
-new THREE.MeshStandardMaterial({color:0x38bdf8})
+if(ducts){
+const duct = new THREE.Mesh(
+new THREE.TorusGeometry(propSize,0.05,12,40),
+new THREE.MeshStandardMaterial({color:0x1e293b})
 );
-blade.position.set(x,0.06,z);
-group.add(blade);
-
-const blade2 = blade.clone();
-blade2.rotation.y = Math.PI/2;
-group.add(blade2);
+duct.rotation.x = Math.PI/2;
+duct.position.set(x,0.05,z);
+droneGroup.add(duct);
 }
 
-prop(-1.45,-1.45);
-prop(1.45,-1.45);
-prop(-1.45,1.45);
-prop(1.45,1.45);
+const blade1 = new THREE.Mesh(
+new THREE.BoxGeometry(propSize*1.8,0.02,0.08),
+new THREE.MeshStandardMaterial({color:0x38bdf8})
+);
 
-scene.add(group);
+blade1.position.set(x,0.07,z);
+
+const blade2 = blade1.clone();
+blade2.rotation.y = Math.PI/2;
+
+const propGroup = new THREE.Group();
+propGroup.add(blade1);
+propGroup.add(blade2);
+
+propGroup.position.set(0,0,0);
+
+propGroup.userData.spin = true;
+
+droneGroup.add(propGroup);
+}
+
+prop(-armLength/1.5,-armLength/1.5);
+prop(armLength/1.5,-armLength/1.5);
+prop(-armLength/1.5,armLength/1.5);
+prop(armLength/1.5,armLength/1.5);
+
+if(payload){
+const cam = new THREE.Mesh(
+new THREE.BoxGeometry(0.7,0.45,0.7),
+new THREE.MeshStandardMaterial({color:0x334155})
+);
+
+cam.position.y = 0.45;
+
+droneGroup.add(cam);
+}
+}
+
+const buildType = window.activeGoal || "freestyle35";
+createDrone(buildType);
+
+window.updateDronePreview = function(type){
+createDrone(type);
+}
 
 function animate(){
 requestAnimationFrame(animate);
-group.rotation.y += 0.005;
+
+if(droneGroup){
+droneGroup.rotation.y += 0.004;
+
+droneGroup.traverse(obj=>{
+if(obj.userData.spin){
+obj.rotation.y += 0.3;
+}
+});
+}
+
 renderer.render(scene,camera);
 }
+
 animate();
 
 window.addEventListener('resize',()=>{
-camera.aspect = canvasContainer.clientWidth / 420;
+camera.aspect = container.clientWidth / 420;
 camera.updateProjectionMatrix();
-renderer.setSize(canvasContainer.clientWidth,420);
+renderer.setSize(container.clientWidth,420);
 });
+
 }
 </script>
+
 
 </body>
 </html>

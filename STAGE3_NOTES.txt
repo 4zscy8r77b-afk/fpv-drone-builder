@@ -1,0 +1,19 @@
+
+STAGE 3 COMPLETE
+
+Added:
+- component-driven drone geometry
+- different drone silhouettes
+- cinewhoop ducts
+- long range arm scaling
+- heavy lift geometry
+- rotating prop system
+- dynamic payload blocks
+- improved drone profile cards
+
+Next:
+- real GLB drone assets
+- real component image database
+- dynamic component mounting
+- realistic camera systems
+- build export/share system
