@@ -959,7 +959,7 @@
     const missingCount=issues.filter(i=>i.type==="missing").length;
     const warnCount=issues.filter(i=>i.type==="warn").length;
     const level=warnCount>0?"warn":missingCount===0?"good":"warn";
-    el("status").innerHTML=`<span class="dot ${level}"></span><span>${missingCount===0&&warnCount===0?"Build complete ✓":warnCount>0?warnCount+" compatibility issue"+(warnCount>1?"s",""):missingCount+" part"+(missingCount>1?"s":"")+" missing"}</span>`;
+    el("status").innerHTML=`<span class="dot ${level}"></span><span>${missingCount===0&&warnCount===0?"Build complete ✓":warnCount>0?warnCount+" compatibility issue"+(warnCount>1?"s":""):missingCount+" part"+(missingCount>1?"s":"")+" missing"}</span>`;
     el("buildList").innerHTML=cats.map(([cat,label])=>{
       const part=selected(cat);
       return `<div class="buildItem">
@@ -1075,15 +1075,14 @@ if(container){
     const st1=rb(.55*c.body,.12,.55*c.body,mats.darkBlue);st1.position.y=.34;drone.add(st1);
     const st2=rb(.46*c.body,.10,.46*c.body,mats.black);st2.position.y=.50;drone.add(st2);
     const bat=new THREE.Group();
-    bat.add(Object.assign(rb(1.0*c.battery,.28*c.battery,.62*c.battery,mats.carbon2),{position:{y:.36*c.battery}}));
-    bat.add(Object.assign(rb(1.12*c.battery,.045*c.battery,.12*c.battery,mats.rubber),{position:{y:.53*c.battery}}));
+    const batPack=rb(1.0*c.battery,.28*c.battery,.62*c.battery,mats.carbon2);batPack.position.y=.36*c.battery;bat.add(batPack);
+    const batStrap=rb(1.12*c.battery,.045*c.battery,.12*c.battery,mats.rubber);batStrap.position.y=.53*c.battery;bat.add(batStrap);
     bat.position.z=-.18*c.body;bat.position.y=.33;drone.add(bat);
     const cam=new THREE.Group();
     cam.add(rb(.48*c.camera,.32*c.camera,.34*c.camera,mats.carbon2));
     const cl=new THREE.Mesh(new THREE.CylinderGeometry(.12*c.camera,.12*c.camera,.08*c.camera,32),mats.lens);
-    cl.rotation.x=Math.PI/2;cl.position.z=.22*c.camera;cam.position.set(0,.22,.72*c.body);drone.add(cam);
+    cl.rotation.x=Math.PI/2;cl.position.z=.22*c.camera;cam.add(cl);cam.position.set(0,.22,.72*c.body);drone.add(cam);
     if(c.payload){
-      drone.add(Object.assign(rb(.82*c.camera,.55*c.camera,.55*c.camera,mats.carbon2),{position:{set:(x,y,z)=>{}}}) );
       const ap=rb(.82*c.camera,.55*c.camera,.55*c.camera,mats.carbon2);ap.position.set(0,.88,.44);drone.add(ap);
       const al=new THREE.Mesh(new THREE.CylinderGeometry(.17*c.camera,.17*c.camera,.09*c.camera,32),mats.lens);
       al.rotation.x=Math.PI/2;al.position.set(0,.88,.75);drone.add(al);
