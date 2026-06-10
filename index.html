@@ -27,16 +27,19 @@
       width:min(1280px,calc(100% - 28px));z-index:20;
       display:flex;justify-content:space-between;align-items:center;gap:12px;
       padding:14px 18px;background:rgba(255,255,255,.64);backdrop-filter:blur(22px);
-      border:1px solid var(--line);box-shadow:0 18px 50px rgba(7,16,24,.08)
+      border:1px solid var(--line);box-shadow:0 18px 50px rgba(7,16,24,.08);
+      border-radius:999px;
     }
     .brand{font-family:Space Grotesk,sans-serif;font-size:22px;font-weight:700;display:flex;gap:12px;align-items:center}
     .logo{width:42px;height:42px;border-radius:16px;background:#fff;border:1px solid var(--line);position:relative}
     .logo:before,.logo:after{content:"";position:absolute;left:8px;top:18px;width:26px;height:7px;border-radius:99px;background:#071018;transform:rotate(35deg)}
     .logo:after{transform:rotate(-35deg)}
+    .nav-links{display:flex;gap:8px;align-items:center}
     .nav a,.btn{
       border:1px solid var(--line);background:rgba(255,255,255,.76);border-radius:999px;
       padding:12px 16px;font-weight:900;color:var(--ink);text-decoration:none;cursor:pointer;
-      display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.25s
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.25s;
+      font-size:14px;
     }
     .nav a:hover,.btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px rgba(7,16,24,.12)}
     .primary{background:var(--deep)!important;color:white!important;border-color:var(--deep)!important}
@@ -48,7 +51,7 @@
     .hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);font-weight:900;color:#334155;animation:hint 1.4s ease-in-out infinite}
     @keyframes hint{50%{transform:translate(-50%,8px)}}
     .section{padding:72px 0}
-    .title{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px}
+    .title{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:22px;flex-wrap:wrap}
     .title h2{font-family:Space Grotesk,sans-serif;font-size:clamp(42px,6vw,82px);line-height:.88;letter-spacing:-.08em;margin:0}
     .title p{max-width:660px;color:var(--muted);font-size:18px;line-height:1.5}
     .mission-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
@@ -59,207 +62,140 @@
     .mission{padding:22px;min-height:180px;cursor:pointer;transition:.25s;background-size:cover;background-position:center;position:relative;overflow:hidden}
     .mission:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,.92))}
     .mission>*{position:relative;z-index:1}
-    .mission:hover{transform:translateY(-6px)}
+    .mission:hover{transform:translateY(-6px);box-shadow:0 28px 80px rgba(7,16,24,.14)}
     .mission.active{box-shadow:0 0 0 2px #071018}
     .mission h3{font-family:Space Grotesk,sans-serif;font-size:28px;margin:0 0 8px;letter-spacing:-.05em}
     .mission p{color:#334155;line-height:1.45;margin:0}
     .tag{display:inline-block;background:#071018;color:white;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:900;margin-top:12px}
-    .builder{display:grid;grid-template-columns:330px 1fr 390px;gap:16px;align-items:start}
+    .builder{display:grid;grid-template-columns:300px 1fr 360px;gap:16px;align-items:start}
     .panel{padding:18px}
     label{display:block;margin:14px 0 7px;font-weight:900}
-    select,input{width:100%;padding:15px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.82);font-size:16px;color:var(--ink)}
+    select,input[type="number"],input[type="text"]{width:100%;padding:15px;border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.82);font-size:16px;color:var(--ink)}
     .full{width:100%;margin-top:12px}
+
+    /* Progress bar */
+    .progress-wrap{margin:14px 0 4px}
+    .progress-label{display:flex;justify-content:space-between;font-weight:800;font-size:13px;color:var(--muted);margin-bottom:8px}
+    .progress-bar{height:8px;border-radius:99px;background:rgba(7,16,24,.08);overflow:hidden}
+    .progress-fill{height:100%;border-radius:99px;background:var(--deep);transition:.4s ease;width:0%}
+
     .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
-    .tab{padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:white;font-weight:900;cursor:pointer}
+    .tab{padding:10px 12px;border-radius:999px;border:1px solid var(--line);background:white;font-weight:900;cursor:pointer;font-size:13px;transition:.2s;display:flex;align-items:center;gap:6px}
+    .tab:hover{background:#f1f5f9}
     .tab.active{background:#071018;color:white}
+    .tab-check{width:16px;height:16px;border-radius:50%;background:#1faa6d;display:inline-flex;align-items:center;justify-content:center;font-size:10px;color:white;flex-shrink:0}
     .toggle{display:flex;gap:8px;align-items:center;color:#334155;font-weight:800}
     .toggle input{width:auto}
     .parts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .part{padding:14px;transition:.25s}
+    .part{padding:14px;transition:.25s;cursor:pointer}
     .part.selected{box-shadow:0 0 0 2px #071018}
-    .part:hover{transform:translateY(-4px)}
+    .part:hover{transform:translateY(-4px);box-shadow:0 18px 60px rgba(7,16,24,.12)}
     .part img{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:20px;background:#dbeafe;margin-bottom:12px}
     .top{display:flex;justify-content:space-between;gap:10px}
-    .name{font-weight:900;font-size:20px;line-height:1.15}
-    .brand-name{color:var(--muted);margin-top:4px}
-    .price{font-size:20px;font-weight:900;color:#0f766e}
+    .name{font-weight:900;font-size:18px;line-height:1.15}
+    .brand-name{color:var(--muted);margin-top:4px;font-size:13px}
+    .price{font-size:20px;font-weight:900;color:#0f766e;white-space:nowrap}
     .chip{display:inline-block;margin:7px 4px 0 0;padding:6px 9px;border-radius:999px;background:rgba(7,16,24,.07);color:#334155;font-size:13px;font-weight:700}
     .pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:16px}
-    .pageBtn{border:1px solid var(--line);background:white;border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer}
+    .pageBtn{border:1px solid var(--line);background:white;border-radius:999px;padding:10px 14px;font-weight:900;cursor:pointer;transition:.2s}
+    .pageBtn:hover{background:#f1f5f9}
     .buildItem{display:grid;grid-template-columns:56px 1fr auto;gap:10px;align-items:center;padding:11px 0;border-bottom:1px solid var(--line)}
-    .buildItem img{width:56px;height:44px;object-fit:cover;border-radius:12px}
+    .buildItem img{width:56px;height:44px;object-fit:cover;border-radius:12px;background:#dbeafe}
     .buildItem span{color:var(--muted);font-size:13px}
     .status{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:900}
     .dot{width:14px;height:14px;border-radius:50%}.good{background:var(--good)}.warn{background:var(--warn)}.bad{background:var(--bad)}
     .metric{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--line)}
     .metric span{color:var(--muted)}
-    .issue{padding:12px;border-radius:16px;background:rgba(7,16,24,.05);border:1px solid var(--line);margin:9px 0;line-height:1.35}
+    .issue{padding:12px;border-radius:16px;background:rgba(7,16,24,.05);border:1px solid var(--line);margin:9px 0;line-height:1.35;font-size:14px}
+    .issue.warn-issue{background:rgba(201,138,0,.08);border-color:rgba(201,138,0,.25)}
+    .issue.ok-issue{background:rgba(31,170,109,.08);border-color:rgba(31,170,109,.25)}
     .preview-layout{display:grid;grid-template-columns:1fr 420px;gap:18px;align-items:start}
     .preview-card{padding:18px}
     .drone3d{height:480px;border-radius:26px;background:radial-gradient(circle,rgba(14,165,233,.18),transparent 45%),linear-gradient(135deg,#f8fafc,#dbeafe);display:grid;place-items:center;overflow:hidden;position:relative}
-    .drone3d svg{width:72%;filter:drop-shadow(0 30px 40px rgba(7,16,24,.25));animation:hoverDrone 3s ease-in-out infinite alternate}
-    @keyframes hoverDrone{to{transform:translateY(-12px) rotate(1.2deg)}}
-    .prop{transform-origin:center;animation:spin .32s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .preview-title{position:absolute;left:22px;bottom:22px;background:rgba(255,255,255,.78);backdrop-filter:blur(12px);padding:12px 14px;border-radius:18px;font-weight:900}
+
+    /* Category tooltips */
+    .cat-info{background:rgba(14,165,233,.08);border:1px solid rgba(14,165,233,.2);border-radius:16px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#0369a1;line-height:1.4}
+    .cat-info b{display:block;font-weight:900;margin-bottom:3px}
+
+    /* Action buttons */
+    .action-btns{display:flex;flex-direction:column;gap:8px;margin-top:18px}
+    .btn-sm{padding:10px 14px;font-size:13px}
+
+    /* Toast notification */
+    .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:#071018;color:white;padding:14px 22px;border-radius:999px;font-weight:900;font-size:14px;z-index:1000;transition:.35s;opacity:0;pointer-events:none;white-space:nowrap}
+    .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+    .three-preview{
+      width:100%;
+      height:560px;
+      border-radius:30px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at 50% 34%, rgba(14,165,233,.22), transparent 42%),
+        linear-gradient(180deg,#f8fafc,#dbeafe);
+      border:1px solid rgba(7,16,24,.10);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.75);
+    }
+    .fpv-preview-card{position:relative;padding:18px}
+    .fpv-preview-card canvas{display:block;width:100%!important;height:100%!important;border-radius:30px}
+    .preview-help{
+      position:absolute;right:34px;bottom:34px;max-width:260px;
+      color:#64748b;font-size:13px;line-height:1.35;text-align:right;font-weight:700
+    }
+    .preview-title{
+      position:absolute;left:34px;bottom:30px;
+      background:rgba(255,255,255,.76);backdrop-filter:blur(14px);
+      padding:14px 18px;border-radius:20px;border:1px solid rgba(7,16,24,.08);
+      box-shadow:0 14px 40px rgba(7,16,24,.10);font-weight:900
+    }
+
+    .preview-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+    .preview-stat{padding:14px;border-radius:18px;background:rgba(7,16,24,.05);border:1px solid rgba(7,16,24,.08)}
+    .preview-stat b{display:block;font-size:20px;margin-top:4px}
+
     footer{padding:54px 0;color:var(--muted);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    footer b{color:var(--ink)}
+    footer b{color:var(--ink);display:block;margin-bottom:8px}
+    footer a{color:var(--muted);text-decoration:none;display:block;margin-top:6px;font-size:14px}
+    footer a:hover{color:var(--ink)}
+
+    /* Search highlight */
+    input#search{background:rgba(255,255,255,.9)}
+
+    /* Empty state */
+    .empty-state{padding:32px;text-align:center;color:var(--muted);grid-column:1/-1}
+    .empty-state svg{margin-bottom:12px;opacity:.4}
+
     @media(max-width:1100px){.builder,.preview-layout{grid-template-columns:1fr}}
-    @media(max-width:900px){.mission-grid{grid-template-columns:1fr 1fr}.parts{grid-template-columns:1fr}.nav a:not(.primary){display:none}}
-    @media(max-width:560px){.mission-grid{grid-template-columns:1fr}footer{grid-template-columns:1fr}h1{font-size:64px}.hero{min-height:650px}}
-  
-.part:hover,.mission:hover{
-transform:translateY(-6px) scale(1.01);
-box-shadow:0 24px 70px rgba(7,16,24,.14);
-transition:.25s ease;
-}
-
-
-#three-preview canvas{
-border-radius:24px;
-box-shadow:0 24px 70px rgba(7,16,24,.18);
-}
-.mission,.part,.panel,.preview-card{
-transition:.25s ease;
-}
-.mission:hover,.part:hover,.panel:hover{
-transform:translateY(-5px);
-}
-
-
-.build-type-badge{
-display:inline-flex;
-align-items:center;
-gap:8px;
-padding:10px 14px;
-border-radius:999px;
-background:#071018;
-color:white;
-font-weight:900;
-margin-bottom:16px;
-}
-.preview-stats{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:10px;
-margin-top:16px;
-}
-.preview-stat{
-padding:14px;
-border-radius:18px;
-background:rgba(7,16,24,.05);
-border:1px solid rgba(7,16,24,.08);
-}
-.preview-stat b{
-display:block;
-font-size:20px;
-margin-top:4px;
-}
-
-
-.glass-banner{
-margin:18px 0 24px;
-padding:18px 22px;
-border-radius:24px;
-background:linear-gradient(135deg,rgba(14,165,233,.12),rgba(255,255,255,.72));
-border:1px solid rgba(14,165,233,.18);
-backdrop-filter:blur(18px);
-box-shadow:0 18px 60px rgba(7,16,24,.08);
-}
-.glass-banner h3{
-margin:0 0 6px;
-font-size:24px;
-}
-.glass-banner p{
-margin:0;
-color:#64748b;
-line-height:1.5;
-}
-.spec-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:12px;
-margin-top:18px;
-}
-.spec-card{
-padding:16px;
-border-radius:20px;
-background:rgba(255,255,255,.72);
-border:1px solid rgba(7,16,24,.08);
-}
-.spec-card span{
-display:block;
-color:#64748b;
-font-size:13px;
-font-weight:700;
-margin-bottom:6px;
-}
-.spec-card b{
-font-size:20px;
-}
-@media(max-width:700px){
-.spec-grid{
-grid-template-columns:1fr;
-}
-}
-
-
-.three-preview{
-  width:100%;
-  height:560px;
-  border-radius:30px;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 50% 34%, rgba(14,165,233,.22), transparent 42%),
-    linear-gradient(180deg,#f8fafc,#dbeafe);
-  border:1px solid rgba(7,16,24,.10);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.75);
-}
-.fpv-preview-card{
-  position:relative;
-  padding:18px;
-}
-.fpv-preview-card canvas{
-  display:block;
-  width:100%!important;
-  height:100%!important;
-  border-radius:30px;
-}
-.preview-help{
-  position:absolute;
-  right:34px;
-  bottom:34px;
-  max-width:260px;
-  color:#64748b;
-  font-size:13px;
-  line-height:1.35;
-  text-align:right;
-  font-weight:700;
-}
-.preview-title{
-  position:absolute;
-  left:34px;
-  bottom:30px;
-  background:rgba(255,255,255,.76);
-  backdrop-filter:blur(14px);
-  padding:14px 18px;
-  border-radius:20px;
-  border:1px solid rgba(7,16,24,.08);
-  box-shadow:0 14px 40px rgba(7,16,24,.10);
-  font-weight:900;
-}
-@media(max-width:700px){
-  .three-preview{height:430px}
-  .preview-help{display:none}
-}
-
-</style>
+    @media(max-width:900px){
+      .mission-grid{grid-template-columns:1fr 1fr}
+      .parts{grid-template-columns:1fr}
+      .nav a:not(.primary){display:none}
+      .builder{grid-template-columns:1fr}
+    }
+    @media(max-width:560px){
+      .mission-grid{grid-template-columns:1fr}
+      footer{grid-template-columns:1fr}
+      h1{font-size:64px}
+      .hero{min-height:650px}
+      .preview-layout{grid-template-columns:1fr}
+      .three-preview{height:360px}
+      .preview-help{display:none}
+    }
+  </style>
 </head>
 <body>
 <div class="bg"></div>
+
+<!-- Toast notification -->
+<div class="toast" id="toast"></div>
+
 <nav class="nav">
   <div class="brand"><div class="logo"></div>Build Your Own FPV</div>
-  <div><a href="#mission">Choose mission</a> <a href="#builder">Builder</a> <a class="primary" href="#preview">3D result</a></div>
+  <div class="nav-links">
+    <a href="#mission">Mission</a>
+    <a href="#builder">Builder</a>
+    <a class="primary" href="#preview">3D preview</a>
+  </div>
 </nav>
 
 <div class="app">
@@ -267,8 +203,8 @@ grid-template-columns:1fr;
     <div>
       <div class="kicker">FPV drone builder</div>
       <h1>Fly everywhere.<br>Fly anytime.</h1>
-      <p>Start with a mission, choose components, auto-build a compatible setup, then jump into a preview of the FPV drone you created.</p>
-      <a class="btn primary" href="#mission">Choose mission</a>
+      <p>Pick your mission, choose compatible parts, and see your drone come to life in 3D. No experience needed.</p>
+      <a class="btn primary" href="#mission" style="font-size:16px;padding:16px 28px">Choose mission ↓</a>
     </div>
     <div class="hint">Scroll ↓</div>
   </section>
@@ -276,95 +212,138 @@ grid-template-columns:1fr;
   <section class="section" id="mission">
     <div class="title">
       <h2>Choose mission.</h2>
-      <p>Select the type of FPV drone you want. After choosing a mission, the site moves you to the builder and filters parts for that drone class.</p>
+      <p>What do you want to do with your drone? Select a mission and the builder will filter parts automatically.</p>
     </div>
     <div class="mission-grid" id="presetGrid"></div>
   </section>
 
   <section class="section" id="builder">
-<div class="glass-banner">
-<h3>AI Compatibility Engine</h3>
-<p>The configurator now filters incompatible FPV parts automatically and adapts the 3D preview depending on the selected build style.</p>
-</div>
     <div class="title">
-      <h2>Build setup.</h2><div style='margin-top:10px;color:#667085;font-weight:700'>Phase 1 configurator build — compatibility engine enabled.</div>
-      <p>Pick parts manually, or press Auto build. After Auto build, the site moves to the drone preview.</p>
+      <h2>Build setup.</h2>
+      <p>Pick parts manually, or hit Auto build for an instant compatible setup.</p>
     </div>
     <div class="builder">
+      <!-- Left panel: settings -->
       <div class="panel">
-        <h2>Build setup</h2>
+        <h2 style="margin-top:0">Settings</h2>
         <label>Build type</label>
         <select id="goal"></select>
-        <label>Budget, $</label>
+        <label>Budget ($)</label>
         <input id="budget" type="number" value="650">
-        <label>Sort</label>
-        <select id="sort"><option value="priceAsc">Price ↑</option><option value="priceDesc">Price ↓</option><option value="weightAsc">Weight ↑</option></select>
-        <label class="toggle"><input id="compatibleOnly" type="checkbox" checked> Show only compatible parts</label>
-        <button class="btn primary full" id="autoBuildBtn">Auto build → drone preview</button>
-        <button class="btn full" id="clearBtn">Clear build</button>
+        <label>Sort parts by</label>
+        <select id="sort">
+          <option value="priceAsc">Price: low to high</option>
+          <option value="priceDesc">Price: high to low</option>
+          <option value="weightAsc">Weight: lightest first</option>
+        </select>
+        <label class="toggle" style="margin-top:14px">
+          <input id="compatibleOnly" type="checkbox" checked>
+          Compatible parts only
+        </label>
+
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>Build progress</span>
+            <span id="progressText">0 / 9 parts</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+
+        <button class="btn primary full" id="autoBuildBtn" style="margin-top:16px">⚡ Auto build</button>
+        <button class="btn full" id="clearBtn">✕ Clear build</button>
       </div>
+
+      <!-- Middle panel: parts browser -->
       <div class="panel">
-        <h2>Component database</h2>
+        <h2 style="margin-top:0">Parts</h2>
         <div class="tabs" id="tabs"></div>
-        <input id="search" placeholder="Search DJI, Walksnail, ELRS, 6S...">
-        <div id="partsCount" style="color:var(--muted);font-weight:800;margin:12px 0"></div>
+        <div class="cat-info" id="catInfo"></div>
+        <input id="search" type="text" placeholder="Search by brand, name, or spec…" style="margin-bottom:12px">
+        <div id="partsCount" style="color:var(--muted);font-weight:800;margin-bottom:12px;font-size:13px"></div>
         <div class="parts" id="parts"></div>
         <div class="pagination" id="pagination"></div>
       </div>
-      <div class="panel">
-        <h2>Current build</h2>
-        <div id="status" class="status"></div>
-        <div id="buildList"></div>
-        <h3>Summary</h3><div id="metrics"></div>
-        <h3>Compatibility</h3><div id="issues"></div>
-<div style="display:flex;gap:10px;margin-top:18px;flex-wrap:wrap">
-<button class="btn">Save Build</button>
-<button class="btn">Share Build</button>
-<button class="btn primary">Export Parts List</button>
-</div>
 
+      <!-- Right panel: current build -->
+      <div class="panel">
+        <h2 style="margin-top:0">Your build</h2>
+        <div id="status" class="status" style="margin-bottom:12px"></div>
+        <div id="buildList"></div>
+        <h3>Summary</h3>
+        <div id="metrics"></div>
+        <h3>Compatibility</h3>
+        <div id="issues"></div>
+        <div class="action-btns">
+          <button class="btn btn-sm" id="shareBtn">🔗 Copy share link</button>
+          <button class="btn primary btn-sm full" id="exportBtn">⬇ Export parts list</button>
+        </div>
       </div>
     </div>
   </section>
 
-  
-<section class="section" id="preview">
-  <div class="title">
-    <h2>Drone preview.</h2>
-    <p>A cleaner procedural 3D FPV model. The frame size, ducts, camera payload, motors and prop scale change by selected mission.</p>
-  </div>
-  <div class="preview-layout">
-    <div class="preview-card fpv-preview-card">
-      <div id="three-preview" class="three-preview"></div>
-      <div class="preview-title" id="previewTitle"></div>
-      <div class="preview-help">Drag-free animated preview · component-driven shape · procedural FPV model</div>
+  <section class="section" id="preview">
+    <div class="title">
+      <h2>Drone preview.</h2>
+      <p>A procedural 3D model that changes shape based on your selected mission.</p>
     </div>
-    <div class="panel">
-      <h2>Drone profile</h2>
-      <div id="profile"></div>
+    <div class="preview-layout">
+      <div class="preview-card fpv-preview-card">
+        <div id="three-preview" class="three-preview"></div>
+        <div class="preview-title" id="previewTitle"></div>
+        <div class="preview-help">Animated 3D preview · shape adapts to mission</div>
+      </div>
+      <div class="panel">
+        <h2 style="margin-top:0">Drone profile</h2>
+        <div id="profile"></div>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
 
   <footer>
-    <div><b>Build Your Own FPV</b><p>Fly everywhere. Fly anytime.</p></div>
-    <div><b>Flow</b><p>Hero → choose mission → builder → drone preview.</p></div>
-    <div><b>Next</b><p>Real 3D component models and live store pricing.</p></div>
+    <div>
+      <b>Build Your Own FPV</b>
+      <p style="margin:0 0 8px;line-height:1.5">A free tool for planning your first (or next) FPV drone build.</p>
+      <a href="https://github.com/4zscy8r77b-afk/fpv-drone-builder" target="_blank" rel="noopener">GitHub repo ↗</a>
+    </div>
+    <div>
+      <b>Learn FPV</b>
+      <a href="https://oscarliang.com" target="_blank" rel="noopener">Oscar Liang's guides ↗</a>
+      <a href="https://rotorbuilds.com" target="_blank" rel="noopener">RotorBuilds community ↗</a>
+      <a href="https://www.reddit.com/r/fpv/" target="_blank" rel="noopener">r/fpv subreddit ↗</a>
+    </div>
+    <div>
+      <b>Buy parts</b>
+      <a href="https://www.getfpv.com" target="_blank" rel="noopener">GetFPV ↗</a>
+      <a href="https://www.racedayquads.com" target="_blank" rel="noopener">RaceDayQuads ↗</a>
+      <a href="https://www.banggood.com/fpv" target="_blank" rel="noopener">Banggood FPV ↗</a>
+    </div>
   </footer>
 </div>
 
 <script>
 (function(){
+  // Category descriptions for tooltips
+  const catInfo = {
+    frame:    {label:"Frame", desc:"The skeleton of your drone. Determines size, weight class, and what propellers fit. Carbon fiber is standard."},
+    motor:    {label:"Motors", desc:"4 brushless motors spin the props. KV rating matters: higher KV = faster spin on smaller props. Match to your frame size."},
+    stack:    {label:"FC/ESC Stack", desc:"Flight Controller (FC) runs Betaflight firmware and controls everything. ESC (Electronic Speed Controller) drives the motors. Usually sold as a combo."},
+    props:    {label:"Propellers", desc:"Plastic or carbon blades that generate thrust. Size must match your frame. Buy extras — you will break them."},
+    battery:  {label:"Battery", desc:"LiPo batteries. Cell count (3S, 4S, 6S) must match your motors and ESC. Higher S = more power, heavier, more expensive."},
+    vtx:      {label:"Video System", desc:"Sends live FPV video to your goggles. DJI O3/O4 and Walksnail Avatar are digital (HD quality). Analog is cheaper but lower quality."},
+    rx:       {label:"Receiver", desc:"Gets your stick inputs from the radio controller. Must match your transmitter protocol — ELRS is the current standard."},
+    antenna:  {label:"Antennas", desc:"Improves video and RC link range. Usually included with video kits. Upgrade for long-range builds."},
+    extras:   {label:"Extras", desc:"Useful additions: a buzzer helps you find a crashed drone, GPS adds return-to-home and position hold."}
+  };
+
   const buildInfo = {
     tinywhoop:{title:"Tinywhoop",skill:"Beginner",img:"/assets/builds/tinywhoop.jpg",desc:"Small indoor FPV drone for learning control safely.",pros:["Cheap crashes","Safe indoors","Daily practice"],best:["Indoor practice","First acro basics"]},
     toothpick:{title:"Toothpick",skill:"Beginner+",img:"/assets/builds/toothpick.jpg",desc:"Light outdoor FPV drone for parks and efficient fun.",pros:["Light","Efficient","Quiet"],best:["Parks","Small fields"]},
-    freestyle35:{title:"3.5 Beginner Freestyle",skill:"Beginner / Intermediate",img:"/assets/builds/freestyle35.jpg",desc:"Compact outdoor freestyle drone. Cheaper and safer than a 5 inch.",pros:["Good first outdoor build","Cheap batteries","Real FPV feel"],best:["Learning acro","Park flying"]},
-    freestyle5:{title:"5 inch Freestyle",skill:"Intermediate",img:"/assets/builds/freestyle5inch.jpg",desc:"Classic powerful FPV drone for tricks and aggressive flying.",pros:["Powerful","Durable","Huge parts ecosystem"],best:["Freestyle","Open fields"]},
-    racing5:{title:"5 inch Racing",skill:"Advanced",img:"/assets/builds/racing5inch.jpg",desc:"Low-latency fast build for racing gates and sharp control.",pros:["Very fast","Sharp handling","Low latency"],best:["Race tracks","Gate practice"]},
+    freestyle35:{title:"3.5\" Beginner Freestyle",skill:"Beginner / Intermediate",img:"/assets/builds/freestyle35.jpg",desc:"Compact outdoor freestyle drone. Cheaper and safer than a 5 inch.",pros:["Good first outdoor build","Cheap batteries","Real FPV feel"],best:["Learning acro","Park flying"]},
+    freestyle5:{title:"5\" Freestyle",skill:"Intermediate",img:"/assets/builds/freestyle5inch.jpg",desc:"Classic powerful FPV drone for tricks and aggressive flying.",pros:["Powerful","Durable","Huge parts ecosystem"],best:["Freestyle","Open fields"]},
+    racing5:{title:"5\" Racing",skill:"Advanced",img:"/assets/builds/racing5inch.jpg",desc:"Low-latency fast build for racing gates and sharp control.",pros:["Very fast","Sharp handling","Low latency"],best:["Race tracks","Gate practice"]},
     cinewhoop:{title:"Cinewhoop",skill:"Intermediate",img:"/assets/builds/cinewhoop.jpg",desc:"Ducted FPV drone for smooth cinematic shots near objects.",pros:["Protected props","Smooth footage"],best:["Filming","Indoor/outdoor proximity"]},
-    cinematic:{title:"Cinematic 5 inch",skill:"Intermediate / Advanced",img:"/assets/builds/cinematic.jpg",desc:"Powerful FPV rig for GoPro-style footage and action shots.",pros:["Carries camera","Amazing footage"],best:["Mountains","Cars","Bikes"]},
-    longrange:{title:"7 inch Long Range",skill:"Advanced",img:"/assets/builds/longrange.jpg",desc:"Efficient cruiser for longer flights, GPS and exploration.",pros:["Long flight time","Stable cruising"],best:["Exploration","GPS cruising"]},
+    cinematic:{title:"Cinematic 5\"",skill:"Intermediate / Advanced",img:"/assets/builds/cinematic.jpg",desc:"Powerful FPV rig for GoPro-style footage and action shots.",pros:["Carries camera","Amazing footage"],best:["Mountains","Cars","Bikes"]},
+    longrange:{title:"7\" Long Range",skill:"Advanced",img:"/assets/builds/longrange.jpg",desc:"Efficient cruiser for longer flights, GPS and exploration.",pros:["Long flight time","Stable cruising"],best:["Exploration","GPS cruising"]},
     heavylift:{title:"Heavy Lift",skill:"Professional",img:"/assets/builds/heavylift.jpg",desc:"Large payload platform for serious cameras and professional work.",pros:["Carries heavy cameras","Stable platform"],best:["Professional shoots","Cinema payloads"]}
   };
 
@@ -373,7 +352,7 @@ grid-template-columns:1fr;
   const qimg = (t,c) => "https://placehold.co/900x620/f4f7fb/"+c+"?text="+encodeURIComponent(t);
   let nextId = 1;
   function part(category,brand,name,price,weight,tags,specs={},color="0f172a"){
-    return {id:nextId++,category,brand,name,price,weight,tags,specs,imageUrl:qimg(name,color),url:"https://www.google.com/search?q="+encodeURIComponent(brand+" "+name)};
+    return {id:nextId++,category,brand,name,price,weight,tags,specs,imageUrl:qimg(name,color),url:"https://www.google.com/search?q="+encodeURIComponent(brand+" "+name+" buy")};
   }
 
   const C = [
@@ -386,14 +365,14 @@ grid-template-columns:1fr;
     part("frame","iFlight","Chimera7 Pro Frame",89,220,["longrange"],{size:"7"}),
     part("frame","T-Motor","FT10 Heavy Lift Frame",340,980,["heavylift"],{size:"10"}),
 
-    part("motor","Happymodel","EX0802 19000KV Motors",48,8,["tinywhoop"],{amp:5,thrust:140},"0284c7"),
-    part("motor","iFlight","XING 1404 4600KV Motors",60,36,["toothpick"],{amp:14,thrust:1440},"0284c7"),
-    part("motor","T-Motor","F1604 3800KV Motors",84,48,["freestyle35"],{amp:19,thrust:2240},"0284c7"),
-    part("motor","iFlight","XING2 2207 1750KV Motors",96,128,["freestyle5"],{amp:40,thrust:6200},"0284c7"),
-    part("motor","T-Motor","F60 Pro V 1950KV Motors",116,132,["racing5"],{amp:45,thrust:6600},"0284c7"),
-    part("motor","BrotherHobby","Avenger 2507 1500KV Motors",116,152,["cinematic"],{amp:48,thrust:7000},"0284c7"),
-    part("motor","iFlight","XING2 2806.5 1300KV Motors",128,200,["longrange"],{amp:50,thrust:8800},"0284c7"),
-    part("motor","T-Motor","MN4006 380KV Motors",240,360,["heavylift"],{amp:35,thrust:12000},"0284c7"),
+    part("motor","Happymodel","EX0802 19000KV",48,8,["tinywhoop"],{amp:5,thrust:140},"0284c7"),
+    part("motor","iFlight","XING 1404 4600KV",60,36,["toothpick"],{amp:14,thrust:1440},"0284c7"),
+    part("motor","T-Motor","F1604 3800KV",84,48,["freestyle35"],{amp:19,thrust:2240},"0284c7"),
+    part("motor","iFlight","XING2 2207 1750KV",96,128,["freestyle5"],{amp:40,thrust:6200},"0284c7"),
+    part("motor","T-Motor","F60 Pro V 1950KV",116,132,["racing5"],{amp:45,thrust:6600},"0284c7"),
+    part("motor","BrotherHobby","Avenger 2507 1500KV",116,152,["cinematic"],{amp:48,thrust:7000},"0284c7"),
+    part("motor","iFlight","XING2 2806.5 1300KV",128,200,["longrange"],{amp:50,thrust:8800},"0284c7"),
+    part("motor","T-Motor","MN4006 380KV",240,360,["heavylift"],{amp:35,thrust:12000},"0284c7"),
 
     part("stack","BetaFPV","F4 1S 5A AIO",42,4,["tinywhoop"],{esc:5,voltage:["1s"]},"16a34a"),
     part("stack","SpeedyBee","F405 Mini 35A Stack",70,14,["toothpick","freestyle35"],{esc:35,voltage:["3s","4s","6s"]},"16a34a"),
@@ -403,24 +382,24 @@ grid-template-columns:1fr;
     part("stack","T-Motor","Alpha 80A HV Stack",220,45,["heavylift"],{esc:80,voltage:["6s","12s"]},"16a34a"),
 
     part("props","Gemfan","31mm Whoop Props",3,1,["tinywhoop"],{propSize:"whoop"},"f59e0b"),
-    part("props","Gemfan","Hurricane 3028 Props",4,6,["toothpick"],{propSize:"3"},"f59e0b"),
-    part("props","Gemfan","Hurricane 3520 Props",4,8,["freestyle35"],{propSize:"3.5"},"f59e0b"),
-    part("props","Gemfan","Hurricane 51466 Props",4,16,["freestyle5","cinematic"],{propSize:"5"},"f59e0b"),
+    part("props","Gemfan","Hurricane 3028",4,6,["toothpick"],{propSize:"3"},"f59e0b"),
+    part("props","Gemfan","Hurricane 3520",4,8,["freestyle35"],{propSize:"3.5"},"f59e0b"),
+    part("props","Gemfan","Hurricane 51466",4,16,["freestyle5","cinematic"],{propSize:"5"},"f59e0b"),
     part("props","HQProp","R38 Racing Props",5,14,["racing5"],{propSize:"5"},"f59e0b"),
-    part("props","HQProp","DP 7x3.5x3 Props",7,28,["longrange"],{propSize:"7"},"f59e0b"),
+    part("props","HQProp","DP 7x3.5x3",7,28,["longrange"],{propSize:"7"},"f59e0b"),
     part("props","T-Motor","10x4.5 Carbon Props",20,70,["heavylift"],{propSize:"10"},"f59e0b"),
 
     part("battery","BetaFPV","1S 300mAh BT2.0",6,8,["tinywhoop"],{cells:"1s",capacity:300},"dc2626"),
     part("battery","GNB","3S 450mAh XT30",16,45,["toothpick"],{cells:"3s",capacity:450},"dc2626"),
     part("battery","Tattu","R-Line 850mAh 4S XT30",24,105,["freestyle35"],{cells:"4s",capacity:850},"dc2626"),
     part("battery","Tattu","R-Line 1300mAh 6S XT60",35,215,["freestyle5","racing5","cinematic"],{cells:"6s",capacity:1300},"dc2626"),
-    part("battery","Auline","Li-ion 6S 4000mAh Pack",75,410,["longrange"],{cells:"6s",capacity:4000},"dc2626"),
-    part("battery","Tattu","6S 22000mAh Heavy Lift Pack",390,2600,["heavylift"],{cells:"6s",capacity:22000},"dc2626"),
+    part("battery","Auline","Li-ion 6S 4000mAh",75,410,["longrange"],{cells:"6s",capacity:4000},"dc2626"),
+    part("battery","Tattu","6S 22000mAh Heavy Lift",390,2600,["heavylift"],{cells:"6s",capacity:22000},"dc2626"),
 
     part("vtx","Walksnail","Avatar Mini 1S Kit",90,8,["tinywhoop","freestyle35"],{system:"walksnail"},"2563eb"),
     part("vtx","Walksnail","Avatar HD Pro Kit",130,28,["freestyle35","freestyle5","cinematic"],{system:"walksnail"},"2563eb"),
-    part("vtx","DJI","DJI O3 Air Unit",229,39,["freestyle5","cinematic","longrange"],{system:"dji"},"2563eb"),
-    part("vtx","DJI","DJI O4 Air Unit",109,10,["freestyle35","freestyle5"],{system:"dji"},"2563eb"),
+    part("vtx","DJI","O3 Air Unit",229,39,["freestyle5","cinematic","longrange"],{system:"dji"},"2563eb"),
+    part("vtx","DJI","O4 Air Unit",109,10,["freestyle35","freestyle5"],{system:"dji"},"2563eb"),
     part("vtx","HDZero","Race V3 VTX",70,6,["racing5"],{system:"hdzero"},"2563eb"),
     part("vtx","Walksnail","Moonlight 4K Kit",190,45,["cinematic","longrange"],{system:"walksnail"},"2563eb"),
 
@@ -429,7 +408,7 @@ grid-template-columns:1fr;
 
     part("antenna","TrueRC","Singularity Stubby 5.8",20,5,["tinywhoop","freestyle35","freestyle5","racing5","cinewhoop","cinematic"],{},"334155"),
     part("antenna","Lumenier","AXII 2 Long Range",25,8,["longrange"],{},"334155"),
-    part("antenna","VAS","Minion Pro Long Range",27,9,["heavylift"],{},"334155"),
+    part("antenna","VAS","Minion Pro",27,9,["heavylift"],{},"334155"),
 
     part("extras","VIFLY","Finder 2 Buzzer",15,5,["freestyle35","freestyle5","racing5","cinewhoop","cinematic","longrange"],{},"334155"),
     part("extras","HGLRC","M100 Mini GPS",18,6,["longrange","cinematic","heavylift"],{},"334155"),
@@ -445,13 +424,20 @@ grid-template-columns:1fr;
   };
 
   function el(id){return document.getElementById(id)}
-  function money(n){return "$" + Math.round(Number(n)||0)}
-  function byId(id){return C.find(p => p.id === Number(id))}
-  function selected(cat){return state.build[cat] ? byId(state.build[cat]) : null}
+  function money(n){return "$"+Math.round(Number(n)||0)}
+  function byId(id){return C.find(p=>p.id===Number(id))}
+  function selected(cat){return state.build[cat]?byId(state.build[cat]):null}
   function isCompatible(p){
     return !el("compatibleOnly").checked ||
-      (p.tags || []).includes(state.activeGoal) ||
-      (state.activeGoal === "cinematic" && (p.tags||[]).includes("freestyle5"));
+      (p.tags||[]).includes(state.activeGoal) ||
+      (state.activeGoal==="cinematic" && (p.tags||[]).includes("freestyle5"));
+  }
+
+  function showToast(msg){
+    const t = el("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(()=>t.classList.remove("show"), 2800);
   }
 
   function init(){
@@ -466,27 +452,84 @@ grid-template-columns:1fr;
       </div>
     `).join("");
 
-    el("goal").addEventListener("change", e => setGoal(e.target.value, false));
+    el("goal").addEventListener("change", e=>setGoal(e.target.value,false));
     el("budget").addEventListener("input", analyze);
     el("sort").addEventListener("change", ()=>{state.page=1;renderParts();});
     el("compatibleOnly").addEventListener("change", ()=>{state.page=1;renderParts();analyze();});
     el("search").addEventListener("input", ()=>{state.page=1;renderParts();});
     el("autoBuildBtn").addEventListener("click", ()=>autoPick(true));
     el("clearBtn").addEventListener("click", clearBuild);
+
+    // Working share button
+    el("shareBtn").addEventListener("click", ()=>{
+      const params = new URLSearchParams();
+      params.set("goal", state.activeGoal);
+      params.set("build", JSON.stringify(state.build));
+      const url = window.location.origin + window.location.pathname + "?" + params.toString();
+      navigator.clipboard.writeText(url).then(()=>{
+        showToast("✓ Link copied to clipboard!");
+      }).catch(()=>{
+        // Fallback for older browsers
+        const ta = document.createElement("textarea");
+        ta.value = url;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        showToast("✓ Link copied to clipboard!");
+      });
+    });
+
+    // Working export button
+    el("exportBtn").addEventListener("click", ()=>{
+      const selectedParts = Object.values(state.build).map(byId).filter(Boolean);
+      if(selectedParts.length === 0){
+        showToast("⚠ Select some parts first");
+        return;
+      }
+      const goal = buildInfo[state.activeGoal];
+      const price = selectedParts.reduce((s,p)=>s+p.price,0);
+      const weight = selectedParts.reduce((s,p)=>s+p.weight,0);
+
+      let csv = "Category,Brand,Name,Price ($),Weight (g),Buy Link\n";
+      for(const [cat,label] of cats){
+        const p = selected(cat);
+        if(p) csv += `"${label}","${p.brand}","${p.name}",${p.price},${p.weight},"${p.url}"\n`;
+        else csv += `"${label}","—","Not selected","—","—","—"\n`;
+      }
+      csv += `\n"TOTAL","","",${price},${weight},""\n`;
+      csv += `\n"Build type","${goal.title}","Skill: ${goal.skill}","",""`;
+
+      const blob = new Blob([csv], {type:"text/csv"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `fpv-build-${state.activeGoal}-${Date.now()}.csv`;
+      a.click();
+      showToast("✓ Parts list downloaded!");
+    });
+
     document.querySelectorAll(".mission").forEach(card=>{
       card.addEventListener("click", ()=>setGoal(card.dataset.id, true));
     });
+
+    // Load from URL share params if present
+    const params = new URLSearchParams(window.location.search);
+    if(params.get("goal") && buildInfo[params.get("goal")]){
+      state.activeGoal = params.get("goal");
+      try { state.build = JSON.parse(params.get("build")||"{}"); } catch(e){}
+    }
 
     renderTabs();
     markPreset();
     renderParts();
     analyze();
     updatePreview();
+    updateProgress();
   }
 
   function markPreset(){
     document.querySelectorAll(".mission").forEach(x=>x.classList.remove("active"));
-    const card = el("preset-" + state.activeGoal);
+    const card = el("preset-"+state.activeGoal);
     if(card) card.classList.add("active");
   }
 
@@ -495,100 +538,134 @@ grid-template-columns:1fr;
     el("goal").value = id;
     state.page = 1;
     markPreset();
+    renderTabs();
     renderParts();
     analyze();
     updatePreview();
-    if(scrollToBuilder) el("builder").scrollIntoView({behavior:"smooth", block:"start"});
+    updateProgress();
+    if(scrollToBuilder) el("builder").scrollIntoView({behavior:"smooth",block:"start"});
+  }
+
+  function updateProgress(){
+    const count = Object.keys(state.build).filter(cat=>state.build[cat]&&byId(state.build[cat])).length;
+    const total = cats.length;
+    const pct = Math.round(count/total*100);
+    el("progressFill").style.width = pct+"%";
+    el("progressText").textContent = count+" / "+total+" parts";
   }
 
   function renderTabs(){
-    el("tabs").innerHTML = cats.map(([id,label])=>`
-      <button class="tab ${id===state.current?"active":""}" data-cat="${id}">${label}</button>
-    `).join("");
+    el("tabs").innerHTML = cats.map(([id,label])=>{
+      const isDone = !!selected(id);
+      return `<button class="tab ${id===state.current?"active":""}" data-cat="${id}">
+        ${isDone?`<span class="tab-check">✓</span>`:""}${label}
+      </button>`;
+    }).join("");
     document.querySelectorAll(".tab").forEach(btn=>{
       btn.addEventListener("click", ()=>{
         state.current = btn.dataset.cat;
         state.page = 1;
         renderTabs();
         renderParts();
+        updateCatInfo();
       });
     });
+    updateCatInfo();
+  }
+
+  function updateCatInfo(){
+    const info = catInfo[state.current];
+    if(info) el("catInfo").innerHTML = `<b>${info.label}</b>${info.desc}`;
   }
 
   function filteredParts(){
-    const q = (el("search").value || "").toLowerCase();
-    let arr = C.filter(p =>
-      p.category === state.current &&
+    const q = (el("search").value||"").toLowerCase();
+    let arr = C.filter(p=>
+      p.category===state.current &&
       isCompatible(p) &&
       `${p.brand} ${p.name} ${(p.tags||[]).join(" ")}`.toLowerCase().includes(q)
     );
     const sort = el("sort").value;
-    if(sort === "priceAsc") arr.sort((a,b)=>a.price-b.price);
-    if(sort === "priceDesc") arr.sort((a,b)=>b.price-a.price);
-    if(sort === "weightAsc") arr.sort((a,b)=>a.weight-b.weight);
+    if(sort==="priceAsc") arr.sort((a,b)=>a.price-b.price);
+    if(sort==="priceDesc") arr.sort((a,b)=>b.price-a.price);
+    if(sort==="weightAsc") arr.sort((a,b)=>a.weight-b.weight);
     return arr;
   }
 
   function chips(p){
-    const s = p.specs || {};
+    const s = p.specs||{};
     const a = [];
     if(p.weight) a.push(p.weight+"g");
     if(s.esc) a.push(s.esc+"A ESC");
     if(s.cells) a.push(String(s.cells).toUpperCase());
     if(s.capacity) a.push(s.capacity+"mAh");
-    if(s.system) a.push(s.system);
-    return a.concat(p.tags || []).slice(0,8).map(x=>`<span class="chip">${x}</span>`).join("");
+    if(s.system) a.push(s.system.toUpperCase());
+    return a.slice(0,5).map(x=>`<span class="chip">${x}</span>`).join("");
   }
 
   function renderParts(){
     const arr = filteredParts();
-    const pages = Math.max(1, Math.ceil(arr.length / state.perPage));
-    if(state.page > pages) state.page = pages;
-    const start = (state.page - 1) * state.perPage;
-    const show = arr.slice(start, start + state.perPage);
+    const pages = Math.max(1,Math.ceil(arr.length/state.perPage));
+    if(state.page>pages) state.page=pages;
+    const start = (state.page-1)*state.perPage;
+    const show = arr.slice(start,start+state.perPage);
 
-    el("partsCount").textContent = `Showing ${show.length} of ${arr.length} compatible ${state.current} parts for ${buildInfo[state.activeGoal].title}`;
+    const goalName = buildInfo[state.activeGoal].title;
+    el("partsCount").textContent = arr.length+" compatible parts for "+goalName;
 
-    el("parts").innerHTML = show.map(p=>`
-      <div class="part ${state.build[p.category]===p.id?"selected":""}">
-        <img src="${p.imageUrl}" alt="${p.name}">
-        <div class="top">
-          <div><div class="name">${p.name}</div><div class="brand-name">${p.brand}</div></div>
-          <div class="price">${money(p.price)}</div>
+    if(show.length===0){
+      el("parts").innerHTML = `<div class="empty-state">
+        <div style="font-size:32px;margin-bottom:8px">🔍</div>
+        <b>No parts found</b>
+        <p style="margin-top:8px;font-size:14px">Try turning off "Compatible parts only" or clearing the search.</p>
+      </div>`;
+    } else {
+      el("parts").innerHTML = show.map(p=>`
+        <div class="part ${state.build[p.category]===p.id?"selected":""}">
+          <img src="${p.imageUrl}" alt="${p.name}" loading="lazy">
+          <div class="top">
+            <div><div class="name">${p.name}</div><div class="brand-name">${p.brand}</div></div>
+            <div class="price">${money(p.price)}</div>
+          </div>
+          <div>${chips(p)}</div>
+          <div style="display:flex;gap:8px;margin-top:10px">
+            <a class="btn btn-sm" href="${p.url}" target="_blank" rel="noopener" style="flex:1">Find ↗</a>
+            <button class="btn ${state.build[p.category]===p.id?"primary":""} btn-sm" style="flex:2" data-pick="${p.id}" data-cat="${p.category}">
+              ${state.build[p.category]===p.id?"✓ Selected":"Select"}
+            </button>
+          </div>
         </div>
-        <div>${chips(p)}</div>
-        <a class="btn full" href="${p.url}" target="_blank" rel="noopener">Find product ↗</a>
-        <button class="btn primary full" data-pick="${p.id}" data-cat="${p.category}">${state.build[p.category]===p.id?"Selected":"Select"}</button>
-      </div>
-    `).join("") || `<div class="issue">No compatible parts found. Turn off compatibility filter to explore all parts.</div>`;
+      `).join("");
+    }
 
     document.querySelectorAll("[data-pick]").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
-        pick(btn.dataset.cat, Number(btn.dataset.pick));
-      });
+      btn.addEventListener("click", ()=>pick(btn.dataset.cat, Number(btn.dataset.pick)));
     });
 
-    el("pagination").innerHTML = `
-      <button class="pageBtn" id="prevPage">Prev</button>
-      <b>Page ${state.page} / ${pages}</b>
-      <button class="pageBtn" id="nextPage">Next</button>
-    `;
-    el("prevPage").onclick = ()=>{state.page=Math.max(1,state.page-1);renderParts();};
-    el("nextPage").onclick = ()=>{state.page=Math.min(pages,state.page+1);renderParts();};
+    el("pagination").innerHTML = pages>1 ? `
+      <button class="pageBtn" id="prevPage">← Prev</button>
+      <b style="font-size:14px;color:var(--muted)">Page ${state.page} / ${pages}</b>
+      <button class="pageBtn" id="nextPage">Next →</button>
+    ` : "";
+    if(el("prevPage")) el("prevPage").onclick=()=>{state.page=Math.max(1,state.page-1);renderParts();};
+    if(el("nextPage")) el("nextPage").onclick=()=>{state.page=Math.min(pages,state.page+1);renderParts();};
   }
 
   function pick(cat,id){
     state.build[cat] = id;
     localStorage.setItem("fpv-working-build", JSON.stringify(state.build));
     renderParts();
+    renderTabs();
     analyze();
     updatePreview();
+    updateProgress();
+    showToast("✓ Part added to build");
   }
 
   function autoPick(goPreview){
     state.build = {};
     for(const [cat] of cats){
-      const options = C.filter(p=>p.category===cat && isCompatible(p)).sort((a,b)=>a.price-b.price);
+      const options = C.filter(p=>p.category===cat&&isCompatible(p)).sort((a,b)=>a.price-b.price);
       if(options[0]) state.build[cat] = options[0].id;
     }
     localStorage.setItem("fpv-working-build", JSON.stringify(state.build));
@@ -597,15 +674,20 @@ grid-template-columns:1fr;
     renderParts();
     analyze();
     updatePreview();
-    if(goPreview) el("preview").scrollIntoView({behavior:"smooth", block:"start"});
+    updateProgress();
+    showToast("⚡ Build complete! Scroll down to preview.");
+    if(goPreview) setTimeout(()=>el("preview").scrollIntoView({behavior:"smooth",block:"start"}), 600);
   }
 
   function clearBuild(){
     state.build = {};
-    localStorage.setItem("fpv-working-build", "{}");
+    localStorage.setItem("fpv-working-build","{}");
+    renderTabs();
     renderParts();
     analyze();
     updatePreview();
+    updateProgress();
+    showToast("Build cleared");
   }
 
   function analyze(){
@@ -615,84 +697,76 @@ grid-template-columns:1fr;
     const motor = selected("motor");
     const stack = selected("stack");
     const battery = selected("battery");
-    const thrust = motor?.specs?.thrust || 0;
+    const thrust = motor?.specs?.thrust||0;
     const issues = [];
 
     for(const [cat,label] of cats){
-      if(!selected(cat)) issues.push(`${label} is not selected.`);
+      if(!selected(cat)) issues.push({type:"missing",msg:`${label} not selected yet.`});
     }
-    if(stack && motor && stack.specs?.esc && motor.specs?.amp && stack.specs.esc < motor.specs.amp * 1.2){
-      issues.push("ESC may be too weak for selected motors.");
+    if(stack&&motor&&stack.specs?.esc&&motor.specs?.amp&&stack.specs.esc<motor.specs.amp*1.2){
+      issues.push({type:"warn",msg:"ESC may be too weak for selected motors."});
     }
-    if(stack && battery && stack.specs?.voltage && battery.specs?.cells && !stack.specs.voltage.includes(battery.specs.cells)){
-      issues.push("Battery voltage may not match FC/ESC.");
+    if(stack&&battery&&stack.specs?.voltage&&battery.specs?.cells&&!stack.specs.voltage.includes(battery.specs.cells)){
+      issues.push({type:"warn",msg:"Battery voltage doesn't match FC/ESC rating."});
     }
-    const budgetValue = Number(el("budget").value || 0);
-    if(price > budgetValue) issues.push(`Build is over budget by ${money(price - budgetValue)}.`);
+    const budgetValue = Number(el("budget").value||0);
+    if(price>budgetValue) issues.push({type:"warn",msg:`Over budget by ${money(price-budgetValue)}.`});
 
-    const level = issues.length ? "warn" : "good";
-    el("status").innerHTML = `<span class="dot ${level}"></span><span>${issues.length ? "Has warnings" : "Build possible"}</span>`;
+    const missingCount = issues.filter(i=>i.type==="missing").length;
+    const warnCount = issues.filter(i=>i.type==="warn").length;
+    const level = warnCount>0 ? "warn" : missingCount===0 ? "good" : "warn";
+
+    el("status").innerHTML = `<span class="dot ${level}"></span><span>${
+      missingCount===0&&warnCount===0 ? "Build complete ✓" :
+      warnCount>0 ? warnCount+" compatibility issue"+(warnCount>1?"s":"") :
+      missingCount+" part"+(missingCount>1?"s":"")+" missing"
+    }</span>`;
 
     el("buildList").innerHTML = cats.map(([cat,label])=>{
       const p = selected(cat);
       return `<div class="buildItem">
-        ${p ? `<img src="${p.imageUrl}" alt="${p.name}">` : "<div></div>"}
-        <div><b>${label}</b><br><span>${p ? p.brand+" "+p.name : "Not selected"}</span></div>
-        <div>${p ? money(p.price) : "-"}</div>
+        ${p?`<img src="${p.imageUrl}" alt="${p.name}">`:`<div style="width:56px;height:44px;border-radius:12px;background:rgba(7,16,24,.06)"></div>`}
+        <div><b>${label}</b><br><span>${p?p.brand+" "+p.name:"Not selected"}</span></div>
+        <div style="font-weight:900;color:${p?"#0f766e":"var(--muted)"}">${p?money(p.price):"—"}</div>
       </div>`;
     }).join("");
 
     el("metrics").innerHTML = `
-      <div class="metric"><span>Price</span><b>${money(price)}</b></div>
-      <div class="metric"><span>Weight</span><b>${Math.round(weight)}g</b></div>
-      <div class="metric"><span>Thrust</span><b>${Math.round(thrust)}g</b></div>
-      <div class="metric"><span>Thrust/weight</span><b>${weight ? (thrust/weight).toFixed(2) : 0}:1</b></div>
-      <div class="metric"><span>Flight time</span><b>${battery && weight ? Math.max(1.8,battery.specs.capacity/weight*2.25).toFixed(1)+" min" : "-"}</b></div>
+      <div class="metric"><span>Total price</span><b>${money(price)}</b></div>
+      <div class="metric"><span>Total weight</span><b>${Math.round(weight)}g</b></div>
+      <div class="metric"><span>Motor thrust</span><b>${Math.round(thrust)}g</b></div>
+      <div class="metric"><span>Thrust / weight</span><b>${weight?(thrust/weight).toFixed(2):0}:1</b></div>
+      <div class="metric"><span>Est. flight time</span><b>${battery&&weight?Math.max(1.8,battery.specs.capacity/weight*2.25).toFixed(1)+" min":"—"}</b></div>
     `;
-    el("issues").innerHTML = issues.length ? issues.map(i=>`<div class="issue">${i}</div>`).join("") : `<div class="issue">No critical issues found.</div>`;
+
+    const realIssues = issues.filter(i=>i.type==="warn");
+    const missing = issues.filter(i=>i.type==="missing");
+    el("issues").innerHTML = realIssues.length ?
+      realIssues.map(i=>`<div class="issue warn-issue">⚠ ${i.msg}</div>`).join("") :
+      missingCount===0 ?
+        `<div class="issue ok-issue">✓ No compatibility issues found.</div>` :
+        `<div class="issue">${missing.length} parts still need to be selected.</div>`;
   }
 
   function updatePreview(){
     const i = buildInfo[state.activeGoal];
     const selectedParts = Object.values(state.build).map(byId).filter(Boolean);
-
     el("previewTitle").textContent = i.title;
-
     el("profile").innerHTML = `
-      <h3>${i.title}</h3>
-      <p style="color:var(--muted);line-height:1.55">${i.desc}</p>
-      <div class="metric"><span>Skill</span><b>${i.skill}</b></div>
-      <div class="metric"><span>Selected parts</span><b>${selectedParts.length}/${cats.length}</b></div>
+      <p style="color:var(--muted);line-height:1.55;margin-top:0">${i.desc}</p>
+      <div class="metric"><span>Skill level</span><b>${i.skill}</b></div>
+      <div class="metric"><span>Parts selected</span><b>${selectedParts.length} / ${cats.length}</b></div>
       <h3>Best for</h3>${i.best.map(x=>`<div class="issue">${x}</div>`).join("")}
       <h3>Pros</h3>${i.pros.map(x=>`<div class="issue">${x}</div>`).join("")}
     `;
-
     window.activeGoal = state.activeGoal;
     window.selectedFpvParts = selectedParts;
-
-    if(window.updateDronePreview){
-      window.updateDronePreview(state.activeGoal, selectedParts);
-    }
+    if(window.updateDronePreview) window.updateDronePreview(state.activeGoal, selectedParts);
   }
 
   init();
 })();
 </script>
-
-<!--
-NEXT PHASE:
-- real Three.js drone renderer
-- dynamic arm length
-- ducts for cinewhoop
-- component-driven geometry
-- real product image database
--->
-
-
-
-
-
-
 
 <script type="module">
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js';
@@ -703,12 +777,12 @@ if(container){
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(0xeef3f7, 9, 22);
 
-  const camera = new THREE.PerspectiveCamera(42, container.clientWidth / container.clientHeight, 0.1, 1000);
+  const camera = new THREE.PerspectiveCamera(42, container.clientWidth/container.clientHeight, 0.1, 1000);
   camera.position.set(0, 4.2, 8.2);
-  camera.lookAt(0, 0, 0);
+  camera.lookAt(0,0,0);
 
   const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio||1, 2));
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -717,290 +791,149 @@ if(container){
 
   const hemi = new THREE.HemisphereLight(0xffffff, 0x94a3b8, 2.0);
   scene.add(hemi);
-
   const key = new THREE.DirectionalLight(0xffffff, 3.2);
-  key.position.set(5, 9, 7);
-  key.castShadow = true;
-  key.shadow.mapSize.width = 2048;
-  key.shadow.mapSize.height = 2048;
+  key.position.set(5,9,7); key.castShadow=true;
+  key.shadow.mapSize.width=2048; key.shadow.mapSize.height=2048;
   scene.add(key);
-
   const fill = new THREE.DirectionalLight(0x7dd3fc, 1.0);
-  fill.position.set(-5, 3, -5);
-  scene.add(fill);
+  fill.position.set(-5,3,-5); scene.add(fill);
 
-  const floor = new THREE.Mesh(
-    new THREE.CircleGeometry(10, 72),
-    new THREE.ShadowMaterial({opacity:0.18})
-  );
-  floor.rotation.x = -Math.PI / 2;
-  floor.position.y = -1.35;
-  floor.receiveShadow = true;
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(10,72), new THREE.ShadowMaterial({opacity:.18}));
+  floor.rotation.x=-Math.PI/2; floor.position.y=-1.35; floor.receiveShadow=true;
   scene.add(floor);
 
-  let drone = null;
+  let drone=null;
 
   const mats = {
-    carbon: new THREE.MeshStandardMaterial({color:0x0b1220, metalness:.55, roughness:.32}),
-    carbon2: new THREE.MeshStandardMaterial({color:0x111827, metalness:.65, roughness:.28}),
-    blue: new THREE.MeshStandardMaterial({color:0x0ea5e9, metalness:.42, roughness:.34}),
-    darkBlue: new THREE.MeshStandardMaterial({color:0x0369a1, metalness:.35, roughness:.42}),
-    black: new THREE.MeshStandardMaterial({color:0x030712, metalness:.7, roughness:.25}),
-    rubber: new THREE.MeshStandardMaterial({color:0x1f2937, metalness:.18, roughness:.72}),
-    glass: new THREE.MeshStandardMaterial({color:0x38bdf8, transparent:true, opacity:.58, metalness:.1, roughness:.12}),
-    lens: new THREE.MeshStandardMaterial({color:0x020617, metalness:1, roughness:.05}),
-    copper: new THREE.MeshStandardMaterial({color:0xb45309, metalness:.75, roughness:.22}),
-    red: new THREE.MeshStandardMaterial({color:0xef4444, metalness:.25, roughness:.4})
+    carbon: new THREE.MeshStandardMaterial({color:0x0b1220,metalness:.55,roughness:.32}),
+    carbon2: new THREE.MeshStandardMaterial({color:0x111827,metalness:.65,roughness:.28}),
+    blue: new THREE.MeshStandardMaterial({color:0x0ea5e9,metalness:.42,roughness:.34}),
+    darkBlue: new THREE.MeshStandardMaterial({color:0x0369a1,metalness:.35,roughness:.42}),
+    black: new THREE.MeshStandardMaterial({color:0x030712,metalness:.7,roughness:.25}),
+    rubber: new THREE.MeshStandardMaterial({color:0x1f2937,metalness:.18,roughness:.72}),
+    glass: new THREE.MeshStandardMaterial({color:0x38bdf8,transparent:true,opacity:.58,metalness:.1,roughness:.12}),
+    lens: new THREE.MeshStandardMaterial({color:0x020617,metalness:1,roughness:.05}),
+    copper: new THREE.MeshStandardMaterial({color:0xb45309,metalness:.75,roughness:.22}),
+    red: new THREE.MeshStandardMaterial({color:0xef4444,metalness:.25,roughness:.4})
   };
 
   function roundedBox(w,h,d,mat){
-    const mesh = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat);
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-    return mesh;
+    const m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);
+    m.castShadow=true; m.receiveShadow=true; return m;
   }
-
-  function cylinderBetween(a, b, radius, mat){
-    const start = new THREE.Vector3(a[0], a[1], a[2]);
-    const end = new THREE.Vector3(b[0], b[1], b[2]);
-    const mid = start.clone().add(end).multiplyScalar(.5);
-    const dir = end.clone().sub(start);
-    const len = dir.length();
-
-    const geom = new THREE.CylinderGeometry(radius, radius, len, 18);
-    const mesh = new THREE.Mesh(geom, mat);
-
-    mesh.position.copy(mid);
-    mesh.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), dir.normalize());
-    mesh.castShadow = true;
-    mesh.receiveShadow = true;
-    return mesh;
+  function cylinderBetween(a,b,radius,mat){
+    const start=new THREE.Vector3(a[0],a[1],a[2]);
+    const end=new THREE.Vector3(b[0],b[1],b[2]);
+    const mid=start.clone().add(end).multiplyScalar(.5);
+    const dir=end.clone().sub(start);
+    const len=dir.length();
+    const geom=new THREE.CylinderGeometry(radius,radius,len,18);
+    const m=new THREE.Mesh(geom,mat);
+    m.position.copy(mid);
+    m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),dir.normalize());
+    m.castShadow=true; return m;
   }
-
-  function makeProp(size, colorMat){
-    const group = new THREE.Group();
-
-    const bladeGeom = new THREE.SphereGeometry(1, 32, 12);
-    const b1 = new THREE.Mesh(bladeGeom, colorMat);
-    b1.scale.set(size*.52, .018, size*.105);
-    b1.position.x = size*.25;
-
-    const b2 = b1.clone();
-    b2.position.x = -size*.25;
-
-    const b3 = b1.clone();
-    b3.rotation.y = Math.PI/2;
-    b3.position.set(0,0,size*.25);
-
-    const b4 = b1.clone();
-    b4.rotation.y = Math.PI/2;
-    b4.position.set(0,0,-size*.25);
-
-    [b1,b2,b3,b4].forEach(b=>{
-      b.castShadow = true;
-      group.add(b);
+  function makeProp(size,colorMat){
+    const group=new THREE.Group();
+    const bg=new THREE.SphereGeometry(1,32,12);
+    [[size*.25,0],[- size*.25,0],[0,0,size*.25],[0,0,-size*.25]].forEach(([px,py,pz=0])=>{
+      const b=new THREE.Mesh(bg,colorMat);
+      b.scale.set(size*.52,.018,size*.105);
+      if(pz){ b.rotation.y=Math.PI/2; b.position.set(0,0,pz); }
+      else b.position.x=px;
+      b.castShadow=true; group.add(b);
     });
-
-    const hub = new THREE.Mesh(new THREE.CylinderGeometry(size*.09,size*.09,.08,24), mats.black);
-    hub.rotation.x = Math.PI/2;
-    hub.castShadow = true;
-    group.add(hub);
-
-    group.userData.spin = true;
-    return group;
+    const hub=new THREE.Mesh(new THREE.CylinderGeometry(size*.09,size*.09,.08,24),mats.black);
+    hub.rotation.x=Math.PI/2; hub.castShadow=true; group.add(hub);
+    group.userData.spin=true; return group;
   }
-
   function makeMotor(size){
-    const group = new THREE.Group();
-    const base = new THREE.Mesh(new THREE.CylinderGeometry(size*.17,size*.19,.22,32), mats.black);
-    base.castShadow = true;
-    group.add(base);
-
-    const ring = new THREE.Mesh(new THREE.CylinderGeometry(size*.18,size*.18,.055,32), mats.copper);
-    ring.position.y = .14;
-    ring.castShadow = true;
-    group.add(ring);
-
-    const cap = new THREE.Mesh(new THREE.CylinderGeometry(size*.12,size*.12,.05,32), mats.carbon2);
-    cap.position.y = .2;
-    cap.castShadow = true;
-    group.add(cap);
-
-    return group;
+    const g=new THREE.Group();
+    const base=new THREE.Mesh(new THREE.CylinderGeometry(size*.17,size*.19,.22,32),mats.black); base.castShadow=true; g.add(base);
+    const ring=new THREE.Mesh(new THREE.CylinderGeometry(size*.18,size*.18,.055,32),mats.copper); ring.position.y=.14; ring.castShadow=true; g.add(ring);
+    const cap=new THREE.Mesh(new THREE.CylinderGeometry(size*.12,size*.12,.05,32),mats.carbon2); cap.position.y=.2; cap.castShadow=true; g.add(cap);
+    return g;
   }
-
-  function makeCamera(scale, forwardZ){
-    const group = new THREE.Group();
-    const body = roundedBox(.48*scale,.32*scale,.34*scale,mats.carbon2);
-    group.add(body);
-
-    const lens = new THREE.Mesh(new THREE.CylinderGeometry(.12*scale,.12*scale,.08*scale,32), mats.lens);
-    lens.rotation.x = Math.PI/2;
-    lens.position.z = forwardZ;
-    lens.castShadow = true;
-    group.add(lens);
-
-    return group;
+  function makeCamera(scale,fz){
+    const g=new THREE.Group();
+    g.add(roundedBox(.48*scale,.32*scale,.34*scale,mats.carbon2));
+    const lens=new THREE.Mesh(new THREE.CylinderGeometry(.12*scale,.12*scale,.08*scale,32),mats.lens);
+    lens.rotation.x=Math.PI/2; lens.position.z=fz; lens.castShadow=true; g.add(lens);
+    return g;
   }
-
   function makeBattery(scale){
-    const group = new THREE.Group();
-    const pack = roundedBox(1.0*scale,.28*scale,.62*scale,mats.carbon2);
-    pack.position.y = .36*scale;
-    group.add(pack);
-
-    const strap = roundedBox(1.12*scale,.045*scale,.12*scale,mats.rubber);
-    strap.position.y = .53*scale;
-    group.add(strap);
-
-    const lead = cylinderBetween([.36*scale,.53*scale,.18*scale],[.65*scale,.8*scale,.44*scale],.025*scale,mats.red);
-    group.add(lead);
-    return group;
+    const g=new THREE.Group();
+    const pack=roundedBox(1.0*scale,.28*scale,.62*scale,mats.carbon2); pack.position.y=.36*scale; g.add(pack);
+    const strap=roundedBox(1.12*scale,.045*scale,.12*scale,mats.rubber); strap.position.y=.53*scale; g.add(strap);
+    g.add(cylinderBetween([.36*scale,.53*scale,.18*scale],[.65*scale,.8*scale,.44*scale],.025*scale,mats.red));
+    return g;
   }
-
   function config(type){
-    const map = {
-      tinywhoop: {arm:1.05, prop:.58, body:.72, ducts:true, camera:.55, battery:.55, lift:.05},
-      toothpick: {arm:1.55, prop:.72, body:.82, ducts:false, camera:.62, battery:.65, lift:.04},
-      freestyle35: {arm:1.9, prop:.82, body:.95, ducts:false, camera:.72, battery:.78, lift:.03},
-      freestyle5: {arm:2.35, prop:1.04, body:1.05, ducts:false, camera:.82, battery:.92, lift:.02},
-      racing5: {arm:2.28, prop:.95, body:.94, ducts:false, camera:.72, battery:.82, lift:.02, low:true},
-      cinewhoop: {arm:1.75, prop:.78, body:.92, ducts:true, camera:.75, battery:.82, lift:.04},
-      cinematic: {arm:2.55, prop:1.08, body:1.14, ducts:false, camera:1.05, battery:1.04, payload:true, lift:.02},
-      longrange: {arm:3.15, prop:1.28, body:1.08, ducts:false, camera:.8, battery:1.25, long:true, lift:.02},
-      heavylift: {arm:3.75, prop:1.55, body:1.55, ducts:false, camera:1.25, battery:1.55, payload:true, lift:.01}
+    const map={
+      tinywhoop:{arm:1.05,prop:.58,body:.72,ducts:true,camera:.55,battery:.55,lift:.05},
+      toothpick:{arm:1.55,prop:.72,body:.82,ducts:false,camera:.62,battery:.65,lift:.04},
+      freestyle35:{arm:1.9,prop:.82,body:.95,ducts:false,camera:.72,battery:.78,lift:.03},
+      freestyle5:{arm:2.35,prop:1.04,body:1.05,ducts:false,camera:.82,battery:.92,lift:.02},
+      racing5:{arm:2.28,prop:.95,body:.94,ducts:false,camera:.72,battery:.82,lift:.02,low:true},
+      cinewhoop:{arm:1.75,prop:.78,body:.92,ducts:true,camera:.75,battery:.82,lift:.04},
+      cinematic:{arm:2.55,prop:1.08,body:1.14,ducts:false,camera:1.05,battery:1.04,payload:true,lift:.02},
+      longrange:{arm:3.15,prop:1.28,body:1.08,ducts:false,camera:.8,battery:1.25,long:true,lift:.02},
+      heavylift:{arm:3.75,prop:1.55,body:1.55,ducts:false,camera:1.25,battery:1.55,payload:true,lift:.01}
     };
-    return map[type] || map.freestyle5;
+    return map[type]||map.freestyle5;
   }
-
   function buildDrone(type){
-    if(drone){
-      scene.remove(drone);
-    }
-
-    const c = config(type);
-    drone = new THREE.Group();
-
-    const armY = 0;
-    const motorY = .02;
-    const center = [0,armY,0];
-    const motorPoints = [
-      [-c.arm, motorY, -c.arm],
-      [ c.arm, motorY, -c.arm],
-      [-c.arm, motorY,  c.arm],
-      [ c.arm, motorY,  c.arm]
-    ];
-
-    // X arms
-    motorPoints.forEach(p=>{
-      drone.add(cylinderBetween(center, p, c.low ? .045 : .06, mats.blue));
-    });
-
-    // Center frame plates
-    const lower = roundedBox(1.08*c.body,.10,1.28*c.body,mats.carbon);
-    lower.position.y = -.05;
-    drone.add(lower);
-
-    const upper = roundedBox(.92*c.body,.10,1.05*c.body,mats.carbon2);
-    upper.position.y = .18;
-    drone.add(upper);
-
-    // Stack
-    const stack1 = roundedBox(.55*c.body,.12,.55*c.body,mats.darkBlue);
-    stack1.position.y = .34;
-    drone.add(stack1);
-
-    const stack2 = roundedBox(.46*c.body,.10,.46*c.body,mats.black);
-    stack2.position.y = .50;
-    drone.add(stack2);
-
-    // Battery
-    const battery = makeBattery(c.battery);
-    battery.position.z = -.18*c.body;
-    battery.position.y = .33;
-    drone.add(battery);
-
-    // Camera
-    const cam = makeCamera(c.camera, .22*c.camera);
-    cam.position.set(0,.22,.72*c.body);
-    drone.add(cam);
-
-    // Action camera for cinematic/heavy lift
+    if(drone) scene.remove(drone);
+    const c=config(type);
+    drone=new THREE.Group();
+    const motorPoints=[[-c.arm,.02,-c.arm],[c.arm,.02,-c.arm],[-c.arm,.02,c.arm],[c.arm,.02,c.arm]];
+    motorPoints.forEach(p=>drone.add(cylinderBetween([0,0,0],p,c.low?.045:.06,mats.blue)));
+    const lower=roundedBox(1.08*c.body,.10,1.28*c.body,mats.carbon); lower.position.y=-.05; drone.add(lower);
+    const upper=roundedBox(.92*c.body,.10,1.05*c.body,mats.carbon2); upper.position.y=.18; drone.add(upper);
+    const stack1=roundedBox(.55*c.body,.12,.55*c.body,mats.darkBlue); stack1.position.y=.34; drone.add(stack1);
+    const stack2=roundedBox(.46*c.body,.10,.46*c.body,mats.black); stack2.position.y=.50; drone.add(stack2);
+    const battery=makeBattery(c.battery); battery.position.z=-.18*c.body; battery.position.y=.33; drone.add(battery);
+    const cam=makeCamera(c.camera,.22*c.camera); cam.position.set(0,.22,.72*c.body); drone.add(cam);
     if(c.payload){
-      const action = roundedBox(.82*c.camera,.55*c.camera,.55*c.camera,mats.carbon2);
-      action.position.set(0,.88,.44);
-      drone.add(action);
-      const lens = new THREE.Mesh(new THREE.CylinderGeometry(.17*c.camera,.17*c.camera,.09*c.camera,32), mats.lens);
-      lens.rotation.x = Math.PI/2;
-      lens.position.set(0,.88,.75);
-      drone.add(lens);
+      const action=roundedBox(.82*c.camera,.55*c.camera,.55*c.camera,mats.carbon2); action.position.set(0,.88,.44); drone.add(action);
+      const alens=new THREE.Mesh(new THREE.CylinderGeometry(.17*c.camera,.17*c.camera,.09*c.camera,32),mats.lens);
+      alens.rotation.x=Math.PI/2; alens.position.set(0,.88,.75); drone.add(alens);
     }
-
-    // Motors, props, ducts
     motorPoints.forEach(([x,y,z])=>{
-      const motor = makeMotor(c.prop);
-      motor.position.set(x,.05,z);
-      drone.add(motor);
-
-      const prop = makeProp(c.prop, mats.glass);
-      prop.position.set(x,.30,z);
-      drone.add(prop);
-
+      const motor=makeMotor(c.prop); motor.position.set(x,.05,z); drone.add(motor);
+      const prop=makeProp(c.prop,mats.glass); prop.position.set(x,.30,z); drone.add(prop);
       if(c.ducts){
-        const duct = new THREE.Mesh(new THREE.TorusGeometry(c.prop*.58,.055,18,72), mats.rubber);
-        duct.rotation.x = Math.PI/2;
-        duct.position.set(x,.24,z);
-        duct.castShadow = true;
-        drone.add(duct);
+        const duct=new THREE.Mesh(new THREE.TorusGeometry(c.prop*.58,.055,18,72),mats.rubber);
+        duct.rotation.x=Math.PI/2; duct.position.set(x,.24,z); duct.castShadow=true; drone.add(duct);
       }
     });
-
-    // Antennas
-    const antBase = new THREE.Vector3(.34*c.body,.48,-.58*c.body);
-    const antEnd = new THREE.Vector3(.72*c.body,1.22,-1.05*c.body);
-    drone.add(cylinderBetween([antBase.x,antBase.y,antBase.z],[antEnd.x,antEnd.y,antEnd.z],.018,mats.black));
-
-    if(c.long || type==="heavylift"){
-      drone.add(cylinderBetween([-antBase.x,antBase.y,antBase.z],[-antEnd.x,antEnd.y,antEnd.z],.018,mats.black));
-    }
-
-    drone.rotation.x = -0.20;
-    drone.rotation.z = -0.08;
-    drone.position.y = c.lift;
-
+    const ab=new THREE.Vector3(.34*c.body,.48,-.58*c.body);
+    const ae=new THREE.Vector3(.72*c.body,1.22,-1.05*c.body);
+    drone.add(cylinderBetween([ab.x,ab.y,ab.z],[ae.x,ae.y,ae.z],.018,mats.black));
+    if(c.long||type==="heavylift") drone.add(cylinderBetween([-ab.x,ab.y,ab.z],[-ae.x,ae.y,ae.z],.018,mats.black));
+    drone.rotation.x=-.20; drone.rotation.z=-.08; drone.position.y=c.lift;
     scene.add(drone);
   }
 
-  window.updateDronePreview = function(type){
-    buildDrone(type || "freestyle5");
-  };
-
-  buildDrone(window.activeGoal || "freestyle35");
+  window.updateDronePreview=function(type){ buildDrone(type||"freestyle5"); };
+  buildDrone(window.activeGoal||"freestyle35");
 
   function animate(){
     requestAnimationFrame(animate);
-
     if(drone){
-      drone.rotation.y += .004;
-      drone.traverse(obj=>{
-        if(obj.userData.spin){
-          obj.rotation.y += .48;
-        }
-      });
+      drone.rotation.y+=.004;
+      drone.traverse(obj=>{ if(obj.userData.spin) obj.rotation.y+=.48; });
     }
-
     renderer.render(scene,camera);
   }
-
   animate();
 
   window.addEventListener("resize",()=>{
-    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.aspect=container.clientWidth/container.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setSize(container.clientWidth,container.clientHeight);
   });
 }
 </script>
-
 </body>
 </html>
