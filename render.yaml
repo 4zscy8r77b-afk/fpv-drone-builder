@@ -1,11 +1,15 @@
 services:
   - type: web
     name: fpv-drone-builder
-    env: node
+    runtime: node
     plan: free
-    buildCommand: npm install
+    buildCommand: npm ci
     startCommand: npm start
-    autoDeploy: true
+    healthCheckPath: /api/health
     envVars:
-      - key: NODE_ENV
-        value: production
+      - key: NODE_VERSION
+        value: 20
+      - key: SITE_URL
+        value: https://buildyourownfpv.com
+      - key: ALLOWED_ORIGINS
+        value: https://buildyourownfpv.com

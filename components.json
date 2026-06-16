@@ -2,25 +2,2452 @@
   {
     "id": 1,
     "category": "frame",
-    "brand": "GEPRC",
-    "name": "GEP-CL35 V2",
-    "imageUrl": "/assets/products/geprc-cl35-v2.webp",
-    "officialUrl": "https://geprc.com/product/gep-cl35-v2-frame/"
+    "brand": "NewBeeDrone",
+    "name": "Cockroach 65mm",
+    "price": 7,
+    "weight": 4,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "size": "whoop"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/06/betafpv-meteor65-brushless-whoop-fpv-drone-frame.jpg",
+    "url": "https://newbeedrone.com/products/cockroach-65mm-frame",
+    "officialUrl": "https://newbeedrone.com/products/cockroach-65mm-frame"
   },
   {
     "id": 2,
-    "category": "vtx",
-    "brand": "DJI",
-    "name": "O3 Air Unit",
-    "imageUrl": "/assets/products/dji-o3-air-unit.webp",
-    "officialUrl": "https://store.dji.com/product/dji-o3-air-unit"
+    "category": "frame",
+    "brand": "Happymodel",
+    "name": "Mobula6 Frame",
+    "price": 9,
+    "weight": 4,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "size": "whoop"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/01/happymodel-mobula6-hd-whoop-drone-frame.jpg",
+    "url": "https://www.happymodel.cn",
+    "officialUrl": "https://www.happymodel.cn"
   },
   {
     "id": 3,
+    "category": "frame",
+    "brand": "BetaFPV",
+    "name": "Meteor65 Frame",
+    "price": 8,
+    "weight": 3,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "size": "whoop"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/04/betafpv-meteor75-pro-brushless-whoop-frame.jpg",
+    "url": "https://betafpv.com/products/meteor65-brushless-whoop-frame",
+    "officialUrl": "https://betafpv.com/products/meteor65-brushless-whoop-frame"
+  },
+  {
+    "id": 4,
+    "category": "frame",
+    "brand": "Flywoo",
+    "name": "Firefly Nano Baby",
+    "price": 24,
+    "weight": 22,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "size": "3"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/04/flywoo-firefly-baby-nano-frame.jpg",
+    "url": "https://flywoo.net",
+    "officialUrl": "https://flywoo.net"
+  },
+  {
+    "id": 5,
+    "category": "frame",
+    "brand": "GEPRC",
+    "name": "Mark4 HD 3\"",
+    "price": 38,
+    "weight": 68,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "size": "3"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/geprc-mark4-hd-frame.jpg",
+    "url": "https://geprc.com",
+    "officialUrl": "https://geprc.com"
+  },
+  {
+    "id": 6,
+    "category": "frame",
+    "brand": "iFlight",
+    "name": "TurboBee 120RS",
+    "price": 29,
+    "weight": 32,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "size": "3"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/iflight-turbobee-120rs-toothpick-frame.jpg",
+    "url": "https://shop.iflight.com",
+    "officialUrl": "https://shop.iflight.com"
+  },
+  {
+    "id": 7,
+    "category": "frame",
+    "brand": "GEPRC",
+    "name": "GEP-CL35 V2",
+    "price": 39,
+    "weight": 75,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "size": "3.5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/05/geprc-cinelog35-frame-hd-cinewhoop.jpg",
+    "url": "https://geprc.com/product/gep-cl35-v2-frame/",
+    "officialUrl": "https://geprc.com/product/gep-cl35-v2-frame/"
+  },
+  {
+    "id": 8,
+    "category": "frame",
+    "brand": "iFlight",
+    "name": "Cidora SL5-E",
+    "price": 45,
+    "weight": 85,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "size": "3.5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/10/iflight-cidora-sl5-e-frame.jpg",
+    "url": "https://shop.iflight.com",
+    "officialUrl": "https://shop.iflight.com"
+  },
+  {
+    "id": 9,
+    "category": "frame",
+    "brand": "Diatone",
+    "name": "Mamba Diatone 3.5\"",
+    "price": 35,
+    "weight": 72,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "size": "3.5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/diatone-roma-f35-frame.jpg",
+    "url": "https://www.diatone.us",
+    "officialUrl": "https://www.diatone.us"
+  },
+  {
+    "id": 10,
+    "category": "frame",
+    "brand": "TBS",
+    "name": "Source One V5",
+    "price": 33,
+    "weight": 125,
+    "tags": [
+      "freestyle5",
+      "cinematic"
+    ],
+    "specs": {
+      "size": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/10/tbs-source-one-v5-fpv-drone-frame.jpg",
+    "url": "https://www.team-blacksheep.com/products/prod:source_one_v5",
+    "officialUrl": "https://www.team-blacksheep.com/products/prod:source_one_v5"
+  },
+  {
+    "id": 11,
+    "category": "frame",
+    "brand": "iFlight",
+    "name": "Cidora SL5 V2.1",
+    "price": 65,
+    "weight": 144,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "size": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/10/iflight-cidora-sl5-fpv-drone-frame.jpg",
+    "url": "https://shop.iflight.com/cidora-sl5-v21-freestyle-frame-kit-pro1963",
+    "officialUrl": "https://shop.iflight.com/cidora-sl5-v21-freestyle-frame-kit-pro1963"
+  },
+  {
+    "id": 12,
+    "category": "frame",
+    "brand": "Diatone",
+    "name": "Roma F5 V2",
+    "price": 54,
+    "weight": 118,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "size": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/04/diatone-roma-f5-v2-frame.jpg",
+    "url": "https://www.diatone.us",
+    "officialUrl": "https://www.diatone.us"
+  },
+  {
+    "id": 13,
+    "category": "frame",
+    "brand": "GEPRC",
+    "name": "Mark5 HD",
+    "price": 62,
+    "weight": 135,
+    "tags": [
+      "freestyle5",
+      "cinematic"
+    ],
+    "specs": {
+      "size": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/geprc-mark5-hd-o3-freestyle-frame.jpg",
+    "url": "https://geprc.com",
+    "officialUrl": "https://geprc.com"
+  },
+  {
+    "id": 14,
+    "category": "frame",
+    "brand": "ImpulseRC",
+    "name": "ApexDC 5\"",
+    "price": 110,
+    "weight": 142,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "size": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/12/impulserc-apex-dc-5-frame.jpg",
+    "url": "https://impulserc.com",
+    "officialUrl": "https://impulserc.com"
+  },
+  {
+    "id": 15,
+    "category": "frame",
+    "brand": "Five33",
+    "name": "Switchback Pro",
+    "price": 95,
+    "weight": 118,
+    "tags": [
+      "racing5"
+    ],
+    "specs": {
+      "size": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/09/five33-switchback-pro-racing-frame.jpg",
+    "url": "https://five33.com",
+    "officialUrl": "https://five33.com"
+  },
+  {
+    "id": 16,
+    "category": "frame",
+    "brand": "Armattan",
+    "name": "Chameleon Ti",
+    "price": 89,
+    "weight": 112,
+    "tags": [
+      "racing5"
+    ],
+    "specs": {
+      "size": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/06/armattan-chameleon-ti-frame.jpg",
+    "url": "https://armattanproductions.com",
+    "officialUrl": "https://armattanproductions.com"
+  },
+  {
+    "id": 17,
+    "category": "frame",
+    "brand": "Hyperlite",
+    "name": "Floss 3",
+    "price": 79,
+    "weight": 108,
+    "tags": [
+      "racing5"
+    ],
+    "specs": {
+      "size": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/04/hyperlite-floss-3-racing-frame.jpg",
+    "url": "https://www.hyperliteflightco.com",
+    "officialUrl": "https://www.hyperliteflightco.com"
+  },
+  {
+    "id": 18,
+    "category": "frame",
+    "brand": "GEPRC",
+    "name": "CineLog35",
+    "price": 79,
+    "weight": 145,
+    "tags": [
+      "cinewhoop"
+    ],
+    "specs": {
+      "size": "3.5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/05/geprc-cinelog35-cinewhoop-frame-build.jpg",
+    "url": "https://geprc.com/product/cineseries-cinelog35-frame/",
+    "officialUrl": "https://geprc.com/product/cineseries-cinelog35-frame/"
+  },
+  {
+    "id": 19,
+    "category": "frame",
+    "brand": "iFlight",
+    "name": "Nazgul Evoque F4X",
+    "price": 78,
+    "weight": 148,
+    "tags": [
+      "cinewhoop"
+    ],
+    "specs": {
+      "size": "4"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/08/iflight-nazgul-evoque-f4x-cinewhoop-frame.jpg",
+    "url": "https://shop.iflight.com",
+    "officialUrl": "https://shop.iflight.com"
+  },
+  {
+    "id": 20,
+    "category": "frame",
+    "brand": "Flywoo",
+    "name": "CineRace20",
+    "price": 68,
+    "weight": 65,
+    "tags": [
+      "cinewhoop"
+    ],
+    "specs": {
+      "size": "2"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/flywoo-cinerace20-frame.jpg",
+    "url": "https://flywoo.net",
+    "officialUrl": "https://flywoo.net"
+  },
+  {
+    "id": 21,
+    "category": "frame",
+    "brand": "iFlight",
+    "name": "Chimera7 Pro",
+    "price": 89,
+    "weight": 220,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "size": "7"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/06/iflight-chimera7-pro-frame-7inch.jpg",
+    "url": "https://shop.iflight.com/chimera7-pro-frame-kit-pro2004",
+    "officialUrl": "https://shop.iflight.com/chimera7-pro-frame-kit-pro2004"
+  },
+  {
+    "id": 22,
+    "category": "frame",
+    "brand": "TBS",
+    "name": "Source One 7\"",
+    "price": 45,
+    "weight": 185,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "size": "7"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/10/tbs-source-one-v5-fpv-drone-frame.jpg",
+    "url": "https://www.team-blacksheep.com",
+    "officialUrl": "https://www.team-blacksheep.com"
+  },
+  {
+    "id": 23,
+    "category": "frame",
+    "brand": "GEPRC",
+    "name": "Mark5 7\"",
+    "price": 75,
+    "weight": 195,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "size": "7"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/geprc-mark5-hd-o3-freestyle-frame.jpg",
+    "url": "https://geprc.com",
+    "officialUrl": "https://geprc.com"
+  },
+  {
+    "id": 24,
+    "category": "frame",
+    "brand": "T-Motor",
+    "name": "FT10 Heavy Lift",
+    "price": 340,
+    "weight": 980,
+    "tags": [
+      "heavylift"
+    ],
+    "specs": {
+      "size": "10"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/large-fpv-drone-frame-heavy-lift.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 25,
+    "category": "frame",
+    "brand": "Tarot",
+    "name": "X4 Quadcopter",
+    "price": 280,
+    "weight": 820,
+    "tags": [
+      "heavylift"
+    ],
+    "specs": {
+      "size": "10"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/large-fpv-drone-frame-heavy-lift.jpg",
+    "url": "https://www.tarotrc.com",
+    "officialUrl": "https://www.tarotrc.com"
+  },
+  {
+    "id": 26,
+    "category": "motor",
+    "brand": "Happymodel",
+    "name": "EX0802 19000KV",
+    "price": 48,
+    "weight": 8,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "amp": 5,
+      "thrust": 140,
+      "kv": 19000
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/06/happymodel-se0802-motor-tiny-whoop.jpg",
+    "url": "https://www.happymodel.cn",
+    "officialUrl": "https://www.happymodel.cn"
+  },
+  {
+    "id": 27,
+    "category": "motor",
+    "brand": "BetaFPV",
+    "name": "1102 18000KV",
+    "price": 18,
+    "weight": 3,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "amp": 5,
+      "thrust": 130,
+      "kv": 18000
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/06/betafpv-1102-motor-brushless-micro.jpg",
+    "url": "https://betafpv.com/products/1102-brushless-motors",
+    "officialUrl": "https://betafpv.com/products/1102-brushless-motors"
+  },
+  {
+    "id": 28,
+    "category": "motor",
+    "brand": "Flywoo",
+    "name": "Recon1404 3800KV",
+    "price": 42,
+    "weight": 7,
+    "tags": [
+      "tinywhoop",
+      "toothpick"
+    ],
+    "specs": {
+      "amp": 8,
+      "thrust": 280,
+      "kv": 3800
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/09/flywoo-recon-toothpick-motor.jpg",
+    "url": "https://flywoo.net",
+    "officialUrl": "https://flywoo.net"
+  },
+  {
+    "id": 29,
+    "category": "motor",
+    "brand": "iFlight",
+    "name": "XING 1404 4600KV",
+    "price": 60,
+    "weight": 36,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "amp": 14,
+      "thrust": 1440,
+      "kv": 4600
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/iflight-xing-1404-motor-toothpick.jpg",
+    "url": "https://shop.iflight.com",
+    "officialUrl": "https://shop.iflight.com"
+  },
+  {
+    "id": 30,
+    "category": "motor",
+    "brand": "T-Motor",
+    "name": "F1404 3700KV",
+    "price": 52,
+    "weight": 14,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "amp": 12,
+      "thrust": 1350,
+      "kv": 3700
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/t-motor-f1404-brushless-motor.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 31,
+    "category": "motor",
+    "brand": "Emax",
+    "name": "ECO II 1404 3700KV",
+    "price": 38,
+    "weight": 12,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "amp": 12,
+      "thrust": 1320,
+      "kv": 3700
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/08/emax-eco-ii-motor.jpg",
+    "url": "https://emaxmodel.com",
+    "officialUrl": "https://emaxmodel.com"
+  },
+  {
+    "id": 32,
+    "category": "motor",
+    "brand": "T-Motor",
+    "name": "F1604 3800KV",
+    "price": 84,
+    "weight": 48,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "amp": 19,
+      "thrust": 2240,
+      "kv": 3800
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/04/t-motor-f1604-motor.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 33,
+    "category": "motor",
+    "brand": "iFlight",
+    "name": "XING2 1805 2450KV",
+    "price": 68,
+    "weight": 22,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "amp": 16,
+      "thrust": 2100,
+      "kv": 2450
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/iflight-xing2-1805-motor.jpg",
+    "url": "https://shop.iflight.com",
+    "officialUrl": "https://shop.iflight.com"
+  },
+  {
+    "id": 34,
+    "category": "motor",
+    "brand": "GEPRC",
+    "name": "GR1408 3750KV",
+    "price": 55,
+    "weight": 20,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "amp": 18,
+      "thrust": 2200,
+      "kv": 3750
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/geprc-gr1408-motor-3-5inch.jpg",
+    "url": "https://geprc.com",
+    "officialUrl": "https://geprc.com"
+  },
+  {
+    "id": 35,
+    "category": "motor",
+    "brand": "iFlight",
+    "name": "XING2 2207 1750KV",
+    "price": 96,
+    "weight": 128,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "amp": 40,
+      "thrust": 6200,
+      "kv": 1750
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/06/iflight-xing2-2207-motor-fpv.jpg",
+    "url": "https://shop.iflight.com/xing2-2207-fpv-motor-unibell-pro1799",
+    "officialUrl": "https://shop.iflight.com/xing2-2207-fpv-motor-unibell-pro1799"
+  },
+  {
+    "id": 36,
+    "category": "motor",
+    "brand": "T-Motor",
+    "name": "F40 Pro IV 2400KV",
+    "price": 82,
+    "weight": 32,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "amp": 38,
+      "thrust": 5900,
+      "kv": 2400
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/03/t-motor-f40-pro-iv-motor.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 37,
+    "category": "motor",
+    "brand": "Emax",
+    "name": "ECO II 2306 2400KV",
+    "price": 46,
+    "weight": 30,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "amp": 35,
+      "thrust": 5600,
+      "kv": 2400
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/08/emax-eco-ii-2306-motor.jpg",
+    "url": "https://emaxmodel.com",
+    "officialUrl": "https://emaxmodel.com"
+  },
+  {
+    "id": 38,
+    "category": "motor",
+    "brand": "BrotherHobby",
+    "name": "Returner R5 2306",
+    "price": 72,
+    "weight": 30,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "amp": 38,
+      "thrust": 5900,
+      "kv": 2400
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/12/brotherhobby-returner-r5-2306-motor.jpg",
+    "url": "https://brotherhobbystore.com",
+    "officialUrl": "https://brotherhobbystore.com"
+  },
+  {
+    "id": 39,
+    "category": "motor",
+    "brand": "Diatone",
+    "name": "Mamba 2306.5 2450KV",
+    "price": 58,
+    "weight": 28,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "amp": 36,
+      "thrust": 5800,
+      "kv": 2450
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/diatone-mamba-motor-2306.jpg",
+    "url": "https://www.diatone.us",
+    "officialUrl": "https://www.diatone.us"
+  },
+  {
+    "id": 40,
+    "category": "motor",
+    "brand": "T-Motor",
+    "name": "F60 Pro V 1950KV",
+    "price": 116,
+    "weight": 132,
+    "tags": [
+      "racing5"
+    ],
+    "specs": {
+      "amp": 45,
+      "thrust": 6600,
+      "kv": 1950
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/03/t-motor-f60-pro-motor.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 41,
+    "category": "motor",
+    "brand": "iFlight",
+    "name": "XING2 2207 2450KV",
+    "price": 96,
+    "weight": 30,
+    "tags": [
+      "racing5"
+    ],
+    "specs": {
+      "amp": 42,
+      "thrust": 6400,
+      "kv": 2450
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/06/iflight-xing2-2207-motor-fpv.jpg",
+    "url": "https://shop.iflight.com",
+    "officialUrl": "https://shop.iflight.com"
+  },
+  {
+    "id": 42,
+    "category": "motor",
+    "brand": "Hyperlite",
+    "name": "Team Edition 2205 2350KV",
+    "price": 52,
+    "weight": 28,
+    "tags": [
+      "racing5"
+    ],
+    "specs": {
+      "amp": 38,
+      "thrust": 6000,
+      "kv": 2350
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/05/hyperlite-team-edition-motor-2205.jpg",
+    "url": "https://www.hyperliteflightco.com",
+    "officialUrl": "https://www.hyperliteflightco.com"
+  },
+  {
+    "id": 43,
+    "category": "motor",
+    "brand": "BrotherHobby",
+    "name": "Avenger 2507 1500KV",
+    "price": 116,
+    "weight": 152,
+    "tags": [
+      "cinematic",
+      "cinewhoop"
+    ],
+    "specs": {
+      "amp": 48,
+      "thrust": 7000,
+      "kv": 1500
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/brotherhobby-avenger-2507-motor.jpg",
+    "url": "https://brotherhobbystore.com",
+    "officialUrl": "https://brotherhobbystore.com"
+  },
+  {
+    "id": 44,
+    "category": "motor",
+    "brand": "T-Motor",
+    "name": "F2207 2550KV",
+    "price": 88,
+    "weight": 32,
+    "tags": [
+      "cinematic"
+    ],
+    "specs": {
+      "amp": 40,
+      "thrust": 6800,
+      "kv": 2550
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/03/t-motor-f2207-motor.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 45,
+    "category": "motor",
+    "brand": "iFlight",
+    "name": "XING2 2806.5 1300KV",
+    "price": 128,
+    "weight": 200,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "amp": 50,
+      "thrust": 8800,
+      "kv": 1300
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/iflight-xing2-2806-motor-7inch.jpg",
+    "url": "https://shop.iflight.com",
+    "officialUrl": "https://shop.iflight.com"
+  },
+  {
+    "id": 46,
+    "category": "motor",
+    "brand": "T-Motor",
+    "name": "MN2806 KV760",
+    "price": 98,
+    "weight": 78,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "amp": 40,
+      "thrust": 7800,
+      "kv": 760
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/t-motor-mn2806-motor.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 47,
+    "category": "motor",
+    "brand": "GEPRC",
+    "name": "GR2806.5 1300KV",
+    "price": 88,
+    "weight": 68,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "amp": 44,
+      "thrust": 8200,
+      "kv": 1300
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/iflight-xing2-2806-motor-7inch.jpg",
+    "url": "https://geprc.com",
+    "officialUrl": "https://geprc.com"
+  },
+  {
+    "id": 48,
+    "category": "motor",
+    "brand": "T-Motor",
+    "name": "MN4006 380KV",
+    "price": 240,
+    "weight": 360,
+    "tags": [
+      "heavylift"
+    ],
+    "specs": {
+      "amp": 35,
+      "thrust": 12000,
+      "kv": 380
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/large-fpv-drone-motor-heavy-lift.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 49,
+    "category": "motor",
+    "brand": "T-Motor",
+    "name": "U8 KV85",
+    "price": 320,
+    "weight": 195,
+    "tags": [
+      "heavylift"
+    ],
+    "specs": {
+      "amp": 50,
+      "thrust": 15000,
+      "kv": 85
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/large-fpv-drone-motor-heavy-lift.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 50,
+    "category": "stack",
+    "brand": "BetaFPV",
+    "name": "F4 1S 5A AIO",
+    "price": 42,
+    "weight": 4,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "esc": 5,
+      "voltage": [
+        "1s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/04/betafpv-f4-1s-5a-aio-fc-whoop.jpg",
+    "url": "https://betafpv.com/products/betafpv-f4-1s-5a-aio-brushless-flight-controller",
+    "officialUrl": "https://betafpv.com/products/betafpv-f4-1s-5a-aio-brushless-flight-controller"
+  },
+  {
+    "id": 51,
+    "category": "stack",
+    "brand": "Happymodel",
+    "name": "Crazybee F4 PRO",
+    "price": 38,
+    "weight": 3,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "esc": 5,
+      "voltage": [
+        "1s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/05/happymodel-crazybee-f4-pro-aio-fc-whoop.jpg",
+    "url": "https://www.happymodel.cn",
+    "officialUrl": "https://www.happymodel.cn"
+  },
+  {
+    "id": 52,
     "category": "stack",
     "brand": "SpeedyBee",
-    "name": "F405 Mini Stack",
-    "imageUrl": "/assets/products/speedybee-f405-mini.webp",
+    "name": "F405 Mini 35A",
+    "price": 70,
+    "weight": 14,
+    "tags": [
+      "toothpick",
+      "freestyle35"
+    ],
+    "specs": {
+      "esc": 35,
+      "voltage": [
+        "3s",
+        "4s",
+        "6s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/08/SpeedyBee-F405-Mini-Stack-flight-controller-esc.jpg",
+    "url": "https://www.speedybee.com/speedybee-f405-mini-bls-35a-20x20-stack/",
     "officialUrl": "https://www.speedybee.com/speedybee-f405-mini-bls-35a-20x20-stack/"
+  },
+  {
+    "id": 53,
+    "category": "stack",
+    "brand": "GEPRC",
+    "name": "Taker F405 35A AIO",
+    "price": 68,
+    "weight": 12,
+    "tags": [
+      "toothpick",
+      "freestyle35"
+    ],
+    "specs": {
+      "esc": 35,
+      "voltage": [
+        "3s",
+        "4s",
+        "6s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/geprc-taker-f405-mini-stack.jpg",
+    "url": "https://geprc.com",
+    "officialUrl": "https://geprc.com"
+  },
+  {
+    "id": 54,
+    "category": "stack",
+    "brand": "Diatone",
+    "name": "Mamba F405 MK3 Stack",
+    "price": 78,
+    "weight": 24,
+    "tags": [
+      "freestyle35",
+      "freestyle5"
+    ],
+    "specs": {
+      "esc": 50,
+      "voltage": [
+        "4s",
+        "6s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/diatone-mamba-f405-mk3-stack.jpg",
+    "url": "https://www.diatone.us",
+    "officialUrl": "https://www.diatone.us"
+  },
+  {
+    "id": 55,
+    "category": "stack",
+    "brand": "SpeedyBee",
+    "name": "F405 V4 55A",
+    "price": 82,
+    "weight": 24,
+    "tags": [
+      "freestyle5",
+      "racing5"
+    ],
+    "specs": {
+      "esc": 55,
+      "voltage": [
+        "4s",
+        "6s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/09/SpeedyBee-F405-V4-FC-ESC-stack.jpg",
+    "url": "https://www.speedybee.com/speedybee-f405-v4-bls-55a-30x30-fc-esc-stack/",
+    "officialUrl": "https://www.speedybee.com/speedybee-f405-v4-bls-55a-30x30-fc-esc-stack/"
+  },
+  {
+    "id": 56,
+    "category": "stack",
+    "brand": "SpeedyBee",
+    "name": "F7 45A Stack",
+    "price": 94,
+    "weight": 28,
+    "tags": [
+      "freestyle5",
+      "racing5"
+    ],
+    "specs": {
+      "esc": 45,
+      "voltage": [
+        "4s",
+        "6s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/10/speedybee-f7-45a-stack.jpg",
+    "url": "https://www.speedybee.com",
+    "officialUrl": "https://www.speedybee.com"
+  },
+  {
+    "id": 57,
+    "category": "stack",
+    "brand": "Holybro",
+    "name": "Kakute H7 Mini 45A",
+    "price": 108,
+    "weight": 18,
+    "tags": [
+      "freestyle5",
+      "racing5"
+    ],
+    "specs": {
+      "esc": 45,
+      "voltage": [
+        "4s",
+        "6s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/06/holybro-kakute-h7-mini-stack.jpg",
+    "url": "https://holybro.com",
+    "officialUrl": "https://holybro.com"
+  },
+  {
+    "id": 58,
+    "category": "stack",
+    "brand": "Foxeer",
+    "name": "F722 V4 60A",
+    "price": 130,
+    "weight": 25,
+    "tags": [
+      "cinematic"
+    ],
+    "specs": {
+      "esc": 60,
+      "voltage": [
+        "4s",
+        "6s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/05/foxeer-f722-v4-60a-stack-fc.jpg",
+    "url": "https://www.foxeer.com",
+    "officialUrl": "https://www.foxeer.com"
+  },
+  {
+    "id": 59,
+    "category": "stack",
+    "brand": "Holybro",
+    "name": "Kakute H7 65A",
+    "price": 165,
+    "weight": 30,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "esc": 65,
+      "voltage": [
+        "4s",
+        "6s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/06/holybro-kakute-h7-mini-stack.jpg",
+    "url": "https://holybro.com/products/kakute-h7-wing",
+    "officialUrl": "https://holybro.com/products/kakute-h7-wing"
+  },
+  {
+    "id": 60,
+    "category": "stack",
+    "brand": "Diatone",
+    "name": "Mamba H743 60A",
+    "price": 148,
+    "weight": 32,
+    "tags": [
+      "freestyle5",
+      "longrange"
+    ],
+    "specs": {
+      "esc": 60,
+      "voltage": [
+        "4s",
+        "6s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/diatone-mamba-h743-stack.jpg",
+    "url": "https://www.diatone.us",
+    "officialUrl": "https://www.diatone.us"
+  },
+  {
+    "id": 61,
+    "category": "stack",
+    "brand": "T-Motor",
+    "name": "Alpha 80A HV Stack",
+    "price": 220,
+    "weight": 45,
+    "tags": [
+      "heavylift"
+    ],
+    "specs": {
+      "esc": 80,
+      "voltage": [
+        "6s",
+        "12s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/how-to-build-fpv-drone-2023-fc-stack-nuts.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 62,
+    "category": "stack",
+    "brand": "Holybro",
+    "name": "Kakute H7 V2 Stack",
+    "price": 185,
+    "weight": 38,
+    "tags": [
+      "heavylift"
+    ],
+    "specs": {
+      "esc": 80,
+      "voltage": [
+        "6s",
+        "12s"
+      ]
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/06/holybro-kakute-h7-mini-stack.jpg",
+    "url": "https://holybro.com",
+    "officialUrl": "https://holybro.com"
+  },
+  {
+    "id": 63,
+    "category": "props",
+    "brand": "Gemfan",
+    "name": "31mm Whoop Props (x8)",
+    "price": 3,
+    "weight": 1,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "propSize": "whoop"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/best-tiny-whoop-propellers-shoot-out-comparison-testing-thrust-response-efficiency-micro-fpv-drone-.jpg",
+    "url": "https://www.gemfanhobby.com",
+    "officialUrl": "https://www.gemfanhobby.com"
+  },
+  {
+    "id": 64,
+    "category": "props",
+    "brand": "HQProp",
+    "name": "31mm 1.2\" Micro",
+    "price": 4,
+    "weight": 1,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "propSize": "whoop"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/best-tiny-whoop-propellers-shoot-out-comparison-testing-thrust-response-efficiency-micro-fpv-drone-.jpg",
+    "url": "https://www.hqprop.com",
+    "officialUrl": "https://www.hqprop.com"
+  },
+  {
+    "id": 65,
+    "category": "props",
+    "brand": "Gemfan",
+    "name": "Hurricane 3028 (x4)",
+    "price": 4,
+    "weight": 6,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "propSize": "3"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/09/gemfan-hurricane-3028-propeller-toothpick.jpg",
+    "url": "https://www.gemfanhobby.com",
+    "officialUrl": "https://www.gemfanhobby.com"
+  },
+  {
+    "id": 66,
+    "category": "props",
+    "brand": "HQProp",
+    "name": "T3x2.5x3 Durable",
+    "price": 4,
+    "weight": 5,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "propSize": "3"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/09/hqprop-3-inch-propeller.jpg",
+    "url": "https://www.hqprop.com",
+    "officialUrl": "https://www.hqprop.com"
+  },
+  {
+    "id": 67,
+    "category": "props",
+    "brand": "Gemfan",
+    "name": "Hurricane 3520 (x4)",
+    "price": 4,
+    "weight": 8,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "propSize": "3.5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/03/gemfan-hurricane-3520-propeller.jpg",
+    "url": "https://www.gemfanhobby.com",
+    "officialUrl": "https://www.gemfanhobby.com"
+  },
+  {
+    "id": 68,
+    "category": "props",
+    "brand": "HQProp",
+    "name": "T3.5x2.5x3 Durable",
+    "price": 4,
+    "weight": 7,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "propSize": "3.5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/03/hqprop-3-5-inch-propeller.jpg",
+    "url": "https://www.hqprop.com",
+    "officialUrl": "https://www.hqprop.com"
+  },
+  {
+    "id": 69,
+    "category": "props",
+    "brand": "Gemfan",
+    "name": "Hurricane 51466 (x4)",
+    "price": 4,
+    "weight": 16,
+    "tags": [
+      "freestyle5",
+      "cinematic"
+    ],
+    "specs": {
+      "propSize": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/09/gemfan-hurricane-5inch-propeller-drone.jpg",
+    "url": "https://www.gemfanhobby.com",
+    "officialUrl": "https://www.gemfanhobby.com"
+  },
+  {
+    "id": 70,
+    "category": "props",
+    "brand": "HQProp",
+    "name": "5.1x4.8x3 V1S",
+    "price": 5,
+    "weight": 15,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "propSize": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/hq-props-5x4.3x3.jpg",
+    "url": "https://www.hqprop.com",
+    "officialUrl": "https://www.hqprop.com"
+  },
+  {
+    "id": 71,
+    "category": "props",
+    "brand": "Ethix",
+    "name": "S4 Watermelon 5\"",
+    "price": 8,
+    "weight": 16,
+    "tags": [
+      "freestyle5"
+    ],
+    "specs": {
+      "propSize": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/ethix-s4-watermelon-props-5inch.jpg",
+    "url": "https://www.ethix-fpv.com",
+    "officialUrl": "https://www.ethix-fpv.com"
+  },
+  {
+    "id": 72,
+    "category": "props",
+    "brand": "Gemfan",
+    "name": "Flash 5152S (x4)",
+    "price": 5,
+    "weight": 14,
+    "tags": [
+      "freestyle5",
+      "cinematic"
+    ],
+    "specs": {
+      "propSize": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/07/gemfan-5152s-props-5inch.jpg",
+    "url": "https://www.gemfanhobby.com",
+    "officialUrl": "https://www.gemfanhobby.com"
+  },
+  {
+    "id": 73,
+    "category": "props",
+    "brand": "HQProp",
+    "name": "R38 Racing (x4)",
+    "price": 5,
+    "weight": 14,
+    "tags": [
+      "racing5"
+    ],
+    "specs": {
+      "propSize": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/09/hqprop-r38-racing-propeller.jpg",
+    "url": "https://www.hqprop.com",
+    "officialUrl": "https://www.hqprop.com"
+  },
+  {
+    "id": 74,
+    "category": "props",
+    "brand": "Ethix",
+    "name": "P3 Pineapple 5\"",
+    "price": 8,
+    "weight": 15,
+    "tags": [
+      "racing5"
+    ],
+    "specs": {
+      "propSize": "5"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/ethix-p3-pineapple-props.jpg",
+    "url": "https://www.ethix-fpv.com",
+    "officialUrl": "https://www.ethix-fpv.com"
+  },
+  {
+    "id": 75,
+    "category": "props",
+    "brand": "HQProp",
+    "name": "DP 7x3.5x3 (x4)",
+    "price": 7,
+    "weight": 28,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "propSize": "7"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/05/hqprop-7-inch-propeller-long-range.jpg",
+    "url": "https://www.hqprop.com",
+    "officialUrl": "https://www.hqprop.com"
+  },
+  {
+    "id": 76,
+    "category": "props",
+    "brand": "Gemfan",
+    "name": "7042-3 Tri-blade",
+    "price": 8,
+    "weight": 30,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "propSize": "7"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/06/gemfan-7042-props-7inch.jpg",
+    "url": "https://www.gemfanhobby.com",
+    "officialUrl": "https://www.gemfanhobby.com"
+  },
+  {
+    "id": 77,
+    "category": "props",
+    "brand": "T-Motor",
+    "name": "10x4.5 Carbon (x2)",
+    "price": 20,
+    "weight": 70,
+    "tags": [
+      "heavylift"
+    ],
+    "specs": {
+      "propSize": "10"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/t-motor-carbon-fiber-propeller.jpg",
+    "url": "https://store.tmotor.com",
+    "officialUrl": "https://store.tmotor.com"
+  },
+  {
+    "id": 78,
+    "category": "battery",
+    "brand": "BetaFPV",
+    "name": "1S 300mAh BT2.0",
+    "price": 6,
+    "weight": 8,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "cells": "1s",
+      "capacity": 300
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/02/betafpv-1s-300mah-bt2-lipo-battery-whoop.jpg",
+    "url": "https://betafpv.com/products/bt2-0-1s-300mah-lipo-battery",
+    "officialUrl": "https://betafpv.com/products/bt2-0-1s-300mah-lipo-battery"
+  },
+  {
+    "id": 79,
+    "category": "battery",
+    "brand": "Tattu",
+    "name": "1S 450mAh BT2.0",
+    "price": 7,
+    "weight": 11,
+    "tags": [
+      "tinywhoop"
+    ],
+    "specs": {
+      "cells": "1s",
+      "capacity": 450
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/02/tattu-1s-450mah-lipo-battery-whoop.jpg",
+    "url": "https://genstattu.com",
+    "officialUrl": "https://genstattu.com"
+  },
+  {
+    "id": 80,
+    "category": "battery",
+    "brand": "GNB",
+    "name": "3S 450mAh XT30",
+    "price": 16,
+    "weight": 45,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "cells": "3s",
+      "capacity": 450
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/gnb-3s-450mah-lipo-battery.jpg",
+    "url": "https://www.grepow.com",
+    "officialUrl": "https://www.grepow.com"
+  },
+  {
+    "id": 81,
+    "category": "battery",
+    "brand": "CNHL",
+    "name": "4S 550mAh XT30",
+    "price": 18,
+    "weight": 68,
+    "tags": [
+      "toothpick"
+    ],
+    "specs": {
+      "cells": "4s",
+      "capacity": 550
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/01/cnhl-4s-550mah-lipo-battery.jpg",
+    "url": "https://chinahobbyline.com",
+    "officialUrl": "https://chinahobbyline.com"
+  },
+  {
+    "id": 82,
+    "category": "battery",
+    "brand": "Tattu",
+    "name": "R-Line 850mAh 4S XT30",
+    "price": 24,
+    "weight": 105,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "cells": "4s",
+      "capacity": 850
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/tattu-rline-850mah-4s-lipo-battery.jpg",
+    "url": "https://genstattu.com",
+    "officialUrl": "https://genstattu.com"
+  },
+  {
+    "id": 83,
+    "category": "battery",
+    "brand": "CNHL",
+    "name": "Black 1100mAh 4S XT60",
+    "price": 22,
+    "weight": 125,
+    "tags": [
+      "freestyle35"
+    ],
+    "specs": {
+      "cells": "4s",
+      "capacity": 1100
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/cnhl-black-1100mah-4s-lipo-battery.jpg",
+    "url": "https://chinahobbyline.com",
+    "officialUrl": "https://chinahobbyline.com"
+  },
+  {
+    "id": 84,
+    "category": "battery",
+    "brand": "Tattu",
+    "name": "R-Line 1300mAh 6S XT60",
+    "price": 35,
+    "weight": 215,
+    "tags": [
+      "freestyle5",
+      "racing5",
+      "cinematic"
+    ],
+    "specs": {
+      "cells": "6s",
+      "capacity": 1300
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/tattu-r-line-1300mah-6s-lipo-battery.jpg",
+    "url": "https://genstattu.com",
+    "officialUrl": "https://genstattu.com"
+  },
+  {
+    "id": 85,
+    "category": "battery",
+    "brand": "CNHL",
+    "name": "Black 1500mAh 6S XT60",
+    "price": 30,
+    "weight": 232,
+    "tags": [
+      "freestyle5",
+      "racing5",
+      "cinematic"
+    ],
+    "specs": {
+      "cells": "6s",
+      "capacity": 1500
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/cnhl-black-1500mah-6s-lipo-battery.jpg",
+    "url": "https://chinahobbyline.com",
+    "officialUrl": "https://chinahobbyline.com"
+  },
+  {
+    "id": 86,
+    "category": "battery",
+    "brand": "GNB",
+    "name": "6S 1800mAh 120C XT60",
+    "price": 38,
+    "weight": 258,
+    "tags": [
+      "freestyle5",
+      "cinematic"
+    ],
+    "specs": {
+      "cells": "6s",
+      "capacity": 1800
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/gnb-6s-1800mah-lipo-battery.jpg",
+    "url": "https://www.grepow.com",
+    "officialUrl": "https://www.grepow.com"
+  },
+  {
+    "id": 87,
+    "category": "battery",
+    "brand": "Tattu",
+    "name": "R-Line 6S 1550mAh",
+    "price": 42,
+    "weight": 245,
+    "tags": [
+      "racing5"
+    ],
+    "specs": {
+      "cells": "6s",
+      "capacity": 1550
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/tattu-r-line-6s-racing-lipo-battery.jpg",
+    "url": "https://genstattu.com",
+    "officialUrl": "https://genstattu.com"
+  },
+  {
+    "id": 88,
+    "category": "battery",
+    "brand": "Auline",
+    "name": "Li-ion 6S 4000mAh",
+    "price": 75,
+    "weight": 410,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "cells": "6s",
+      "capacity": 4000
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/09/auline-liion-6s-4000mah-long-range.jpg",
+    "url": "https://www.aulinefpv.com",
+    "officialUrl": "https://www.aulinefpv.com"
+  },
+  {
+    "id": 89,
+    "category": "battery",
+    "brand": "CNHL",
+    "name": "6S 3300mAh Li-ion",
+    "price": 65,
+    "weight": 388,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "cells": "6s",
+      "capacity": 3300
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/09/cnhl-liion-6s-3300mah-long-range.jpg",
+    "url": "https://chinahobbyline.com",
+    "officialUrl": "https://chinahobbyline.com"
+  },
+  {
+    "id": 90,
+    "category": "battery",
+    "brand": "Tattu",
+    "name": "6S 22000mAh Heavy Lift",
+    "price": 390,
+    "weight": 2600,
+    "tags": [
+      "heavylift"
+    ],
+    "specs": {
+      "cells": "6s",
+      "capacity": 22000
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/lipo-battery-guide-fpv-racing-drone-mini-quad-quadcopter-rc.jpg",
+    "url": "https://genstattu.com",
+    "officialUrl": "https://genstattu.com"
+  },
+  {
+    "id": 91,
+    "category": "vtx",
+    "brand": "Walksnail",
+    "name": "Avatar Mini 1S Kit",
+    "price": 90,
+    "weight": 8,
+    "tags": [
+      "tinywhoop",
+      "freestyle35"
+    ],
+    "specs": {
+      "system": "walksnail",
+      "res": "1080p"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/02/Walksnail-Avatar-hd-mini-1s-lite-vtx-top.jpg",
+    "url": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-1s-kit",
+    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-1s-kit"
+  },
+  {
+    "id": 92,
+    "category": "vtx",
+    "brand": "Walksnail",
+    "name": "Avatar HD Mini Kit",
+    "price": 110,
+    "weight": 19,
+    "tags": [
+      "freestyle35",
+      "freestyle5"
+    ],
+    "specs": {
+      "system": "walksnail",
+      "res": "1080p"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/02/Walksnail-Avatar-hd-mini-1s-lite-vtx-top.jpg",
+    "url": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-kit",
+    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-kit"
+  },
+  {
+    "id": 93,
+    "category": "vtx",
+    "brand": "Walksnail",
+    "name": "Avatar HD Pro Kit",
+    "price": 130,
+    "weight": 28,
+    "tags": [
+      "freestyle5",
+      "cinematic",
+      "longrange"
+    ],
+    "specs": {
+      "system": "walksnail",
+      "res": "1080p"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/03/Walksnail-Avatar-HD-Pro-V2-Kit-vtx-solder-pads-connector.jpg",
+    "url": "https://www.caddxfpv.com/products/walksnail-avatar-hd-pro-kit",
+    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-hd-pro-kit"
+  },
+  {
+    "id": 94,
+    "category": "vtx",
+    "brand": "Walksnail",
+    "name": "Moonlight 4K Kit",
+    "price": 190,
+    "weight": 45,
+    "tags": [
+      "cinematic",
+      "longrange"
+    ],
+    "specs": {
+      "system": "walksnail",
+      "res": "4K"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2024/01/Walksnail-Moonlight-VTX-Camera-Kit-heatsink-25x25mm-mounting.jpg",
+    "url": "https://www.caddxfpv.com/products/walksnail-avatar-moonlight-kit",
+    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-moonlight-kit"
+  },
+  {
+    "id": 95,
+    "category": "vtx",
+    "brand": "DJI",
+    "name": "O3 Air Unit",
+    "price": 229,
+    "weight": 39,
+    "tags": [
+      "freestyle5",
+      "cinematic",
+      "longrange"
+    ],
+    "specs": {
+      "system": "dji",
+      "res": "4K"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/dji-o3-air-unit-vtx-video-transmitter.jpg",
+    "url": "https://store.dji.com/product/dji-o3-air-unit",
+    "officialUrl": "https://store.dji.com/product/dji-o3-air-unit"
+  },
+  {
+    "id": 96,
+    "category": "vtx",
+    "brand": "DJI",
+    "name": "O4 Air Unit",
+    "price": 109,
+    "weight": 10,
+    "tags": [
+      "freestyle35",
+      "freestyle5",
+      "cinewhoop"
+    ],
+    "specs": {
+      "system": "dji",
+      "res": "1080p"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/09/dji-o4-air-unit-vtx-fpv.jpg",
+    "url": "https://store.dji.com/product/dji-o4-air-unit",
+    "officialUrl": "https://store.dji.com/product/dji-o4-air-unit"
+  },
+  {
+    "id": 97,
+    "category": "vtx",
+    "brand": "HDZero",
+    "name": "Race V3 VTX",
+    "price": 70,
+    "weight": 6,
+    "tags": [
+      "racing5",
+      "freestyle5"
+    ],
+    "specs": {
+      "system": "hdzero",
+      "res": "720p"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/10/hdzero-freestyle-v2-video-transmitter-vtx-connectors.jpg",
+    "url": "https://www.hd-zero.com/shop/race-v3",
+    "officialUrl": "https://www.hd-zero.com/shop/race-v3"
+  },
+  {
+    "id": 98,
+    "category": "vtx",
+    "brand": "HDZero",
+    "name": "Freestyle VTX",
+    "price": 85,
+    "weight": 8,
+    "tags": [
+      "freestyle5",
+      "longrange"
+    ],
+    "specs": {
+      "system": "hdzero",
+      "res": "720p"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/10/hdzero-freestyle-v2-video-transmitter-vtx-connectors.jpg",
+    "url": "https://www.hd-zero.com",
+    "officialUrl": "https://www.hd-zero.com"
+  },
+  {
+    "id": 99,
+    "category": "vtx",
+    "brand": "Caddx",
+    "name": "Polar Nano Vista Kit",
+    "price": 85,
+    "weight": 6,
+    "tags": [
+      "freestyle35",
+      "cinewhoop"
+    ],
+    "specs": {
+      "system": "dji",
+      "res": "1080p"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/Replace-Camera-Cable-DJI-caddx-vista-lift-connector.jpg",
+    "url": "https://www.caddxfpv.com/products/caddx-polar-nano-starlight-digital-hd-fpv-camera",
+    "officialUrl": "https://www.caddxfpv.com/products/caddx-polar-nano-starlight-digital-hd-fpv-camera"
+  },
+  {
+    "id": 100,
+    "category": "vtx",
+    "brand": "AKK",
+    "name": "FX3 Ultimate 200mW",
+    "price": 22,
+    "weight": 4,
+    "tags": [
+      "tinywhoop",
+      "toothpick"
+    ],
+    "specs": {
+      "system": "analog",
+      "res": "analog"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/how-to-build-fpv-drone-analog-install-vtx.jpg",
+    "url": "https://www.akktek.com",
+    "officialUrl": "https://www.akktek.com"
+  },
+  {
+    "id": 101,
+    "category": "vtx",
+    "brand": "RushFPV",
+    "name": "Tank Solo",
+    "price": 35,
+    "weight": 5,
+    "tags": [
+      "freestyle35",
+      "freestyle5",
+      "racing5"
+    ],
+    "specs": {
+      "system": "analog",
+      "res": "analog"
+    },
+    "imageUrl": "https://www.racedayquads.com/cdn/shop/products/rushfpv-rushfpv-tank-solo-25-1000mw-5-8ghz-vtx-mmcx-vtx-16637972840561.jpg",
+    "url": "https://rushfpv.net",
+    "officialUrl": "https://rushfpv.net"
+  },
+  {
+    "id": 102,
+    "category": "vtx",
+    "brand": "TBS",
+    "name": "Unify Pro32 HV",
+    "price": 45,
+    "weight": 3,
+    "tags": [
+      "freestyle5",
+      "longrange"
+    ],
+    "specs": {
+      "system": "analog",
+      "res": "analog"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/tbs-unify-pro32-vtx.jpg",
+    "url": "https://www.team-blacksheep.com/products/prod:tbs_unify_pro32_hv",
+    "officialUrl": "https://www.team-blacksheep.com/products/prod:tbs_unify_pro32_hv"
+  },
+  {
+    "id": 103,
+    "category": "vtx",
+    "brand": "Foxeer",
+    "name": "Reaper 2500mW",
+    "price": 55,
+    "weight": 9,
+    "tags": [
+      "longrange",
+      "heavylift"
+    ],
+    "specs": {
+      "system": "analog",
+      "res": "analog"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/how-to-build-fpv-drone-analog-install-vtx.jpg",
+    "url": "https://www.foxeer.com",
+    "officialUrl": "https://www.foxeer.com"
+  },
+  {
+    "id": 104,
+    "category": "rx",
+    "brand": "RadioMaster",
+    "name": "RP1 ELRS 2.4GHz",
+    "price": 16,
+    "weight": 1,
+    "tags": [
+      "tinywhoop",
+      "toothpick",
+      "freestyle35",
+      "freestyle5",
+      "racing5",
+      "cinewhoop",
+      "cinematic"
+    ],
+    "specs": {
+      "protocol": "ELRS 2.4"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2025/08/expresslrs-elrs-receiver-explained-guide.jpg",
+    "url": "https://www.radiomasterrc.com/products/rp1-expresslrs-2-4ghz-nano-receiver",
+    "officialUrl": "https://www.radiomasterrc.com/products/rp1-expresslrs-2-4ghz-nano-receiver"
+  },
+  {
+    "id": 105,
+    "category": "rx",
+    "brand": "RadioMaster",
+    "name": "RP2 ELRS 2.4GHz",
+    "price": 18,
+    "weight": 1,
+    "tags": [
+      "freestyle5",
+      "racing5",
+      "cinematic",
+      "longrange"
+    ],
+    "specs": {
+      "protocol": "ELRS 2.4"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/07/radiomaster-rp2-elrs-receiver.jpg",
+    "url": "https://www.radiomasterrc.com/products/rp2-expresslrs-2-4ghz-nano-receiver",
+    "officialUrl": "https://www.radiomasterrc.com/products/rp2-expresslrs-2-4ghz-nano-receiver"
+  },
+  {
+    "id": 106,
+    "category": "rx",
+    "brand": "Happymodel",
+    "name": "EP1 ELRS 2.4GHz",
+    "price": 13,
+    "weight": 0.8,
+    "tags": [
+      "tinywhoop",
+      "toothpick",
+      "freestyle35"
+    ],
+    "specs": {
+      "protocol": "ELRS 2.4"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/happymodel-ep1-elrs-receiver.jpg",
+    "url": "https://www.happymodel.cn",
+    "officialUrl": "https://www.happymodel.cn"
+  },
+  {
+    "id": 107,
+    "category": "rx",
+    "brand": "Happymodel",
+    "name": "EP2 ELRS 2.4GHz",
+    "price": 14,
+    "weight": 1,
+    "tags": [
+      "freestyle35",
+      "freestyle5",
+      "racing5"
+    ],
+    "specs": {
+      "protocol": "ELRS 2.4"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/happymodel-ep2-elrs-receiver.jpg",
+    "url": "https://www.happymodel.cn",
+    "officialUrl": "https://www.happymodel.cn"
+  },
+  {
+    "id": 108,
+    "category": "rx",
+    "brand": "BETAFPV",
+    "name": "SuperD ELRS Diversity",
+    "price": 28,
+    "weight": 1.6,
+    "tags": [
+      "freestyle5",
+      "racing5",
+      "cinematic"
+    ],
+    "specs": {
+      "protocol": "ELRS 2.4"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/12/betafpv-superd-elrs-diversity-receiver.jpg",
+    "url": "https://betafpv.com/products/superd-elrs-diversity-receiver",
+    "officialUrl": "https://betafpv.com/products/superd-elrs-diversity-receiver"
+  },
+  {
+    "id": 109,
+    "category": "rx",
+    "brand": "TBS",
+    "name": "Crossfire Nano RX",
+    "price": 30,
+    "weight": 1,
+    "tags": [
+      "longrange",
+      "heavylift"
+    ],
+    "specs": {
+      "protocol": "Crossfire"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/tbs-crossfire-nano-rx-receiver.jpg",
+    "url": "https://www.team-blacksheep.com/products/prod:crossfire_nano_rx",
+    "officialUrl": "https://www.team-blacksheep.com/products/prod:crossfire_nano_rx"
+  },
+  {
+    "id": 110,
+    "category": "rx",
+    "brand": "TBS",
+    "name": "Tracer Nano RX",
+    "price": 32,
+    "weight": 1,
+    "tags": [
+      "longrange",
+      "cinematic"
+    ],
+    "specs": {
+      "protocol": "TBS Tracer"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/tbs-tracer-nano-rx-receiver.jpg",
+    "url": "https://www.team-blacksheep.com",
+    "officialUrl": "https://www.team-blacksheep.com"
+  },
+  {
+    "id": 111,
+    "category": "rx",
+    "brand": "DJI",
+    "name": "Control Link",
+    "price": 0,
+    "weight": 0,
+    "tags": [
+      "freestyle5",
+      "cinematic",
+      "cinewhoop"
+    ],
+    "specs": {
+      "protocol": "DJI"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/dji-o3-air-unit-vtx-video-transmitter.jpg",
+    "url": "https://store.dji.com",
+    "officialUrl": "https://store.dji.com"
+  },
+  {
+    "id": 112,
+    "category": "rx",
+    "brand": "FrSky",
+    "name": "XM+ Micro",
+    "price": 14,
+    "weight": 2,
+    "tags": [
+      "freestyle35",
+      "freestyle5"
+    ],
+    "specs": {
+      "protocol": "FrSky D16"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/07/frsky-xm-plus-receiver.jpg",
+    "url": "https://www.frsky-rc.com",
+    "officialUrl": "https://www.frsky-rc.com"
+  },
+  {
+    "id": 113,
+    "category": "antenna",
+    "brand": "TrueRC",
+    "name": "Singularity Stubby 5.8",
+    "price": 20,
+    "weight": 5,
+    "tags": [
+      "tinywhoop",
+      "freestyle35",
+      "freestyle5",
+      "racing5",
+      "cinewhoop",
+      "cinematic"
+    ],
+    "specs": {
+      "freq": "5.8GHz",
+      "type": "stubby"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "url": "https://www.truerc.ca/product/singularity/",
+    "officialUrl": "https://www.truerc.ca/product/singularity/"
+  },
+  {
+    "id": 114,
+    "category": "antenna",
+    "brand": "Lumenier",
+    "name": "AXII 2 HD 5.8",
+    "price": 28,
+    "weight": 14,
+    "tags": [
+      "freestyle5",
+      "cinematic"
+    ],
+    "specs": {
+      "freq": "5.8GHz",
+      "type": "directional"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/05/lumenier-axii-2-antenna-fpv.jpg",
+    "url": "https://www.lumenier.com/products/antennas/axii-2",
+    "officialUrl": "https://www.lumenier.com/products/antennas/axii-2"
+  },
+  {
+    "id": 115,
+    "category": "antenna",
+    "brand": "Lumenier",
+    "name": "AXII 2 Long Range",
+    "price": 25,
+    "weight": 8,
+    "tags": [
+      "longrange"
+    ],
+    "specs": {
+      "freq": "5.8GHz",
+      "type": "patch"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/05/lumenier-axii-2-antenna-fpv.jpg",
+    "url": "https://www.lumenier.com",
+    "officialUrl": "https://www.lumenier.com"
+  },
+  {
+    "id": 116,
+    "category": "antenna",
+    "brand": "ImmersionRC",
+    "name": "SpiroNet 5.8 Mini",
+    "price": 12,
+    "weight": 4,
+    "tags": [
+      "tinywhoop",
+      "toothpick",
+      "racing5"
+    ],
+    "specs": {
+      "freq": "5.8GHz",
+      "type": "omni"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "url": "https://www.immersionrc.com",
+    "officialUrl": "https://www.immersionrc.com"
+  },
+  {
+    "id": 117,
+    "category": "antenna",
+    "brand": "TrueRC",
+    "name": "X²-Air 5.8 RHCP",
+    "price": 32,
+    "weight": 8,
+    "tags": [
+      "freestyle5",
+      "longrange"
+    ],
+    "specs": {
+      "freq": "5.8GHz",
+      "type": "omni"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "url": "https://www.truerc.ca",
+    "officialUrl": "https://www.truerc.ca"
+  },
+  {
+    "id": 118,
+    "category": "antenna",
+    "brand": "VAS",
+    "name": "Minion Pro Long Range",
+    "price": 27,
+    "weight": 9,
+    "tags": [
+      "heavylift",
+      "longrange"
+    ],
+    "specs": {
+      "freq": "5.8GHz",
+      "type": "omni"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "url": "https://www.fpvmodel.com",
+    "officialUrl": "https://www.fpvmodel.com"
+  },
+  {
+    "id": 119,
+    "category": "antenna",
+    "brand": "Foxeer",
+    "name": "Lollipop 4 5.8",
+    "price": 8,
+    "weight": 4,
+    "tags": [
+      "toothpick",
+      "freestyle35",
+      "freestyle5",
+      "cinewhoop"
+    ],
+    "specs": {
+      "freq": "5.8GHz",
+      "type": "omni"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/foxeer-lollipop-4-antenna.jpg",
+    "url": "https://www.foxeer.com",
+    "officialUrl": "https://www.foxeer.com"
+  },
+  {
+    "id": 120,
+    "category": "antenna",
+    "brand": "Walksnail",
+    "name": "Avatar Mini Antenna",
+    "price": 15,
+    "weight": 3,
+    "tags": [
+      "tinywhoop",
+      "freestyle35",
+      "cinewhoop"
+    ],
+    "specs": {
+      "freq": "5.8GHz",
+      "type": "omnidirectional"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "url": "https://www.caddxfpv.com",
+    "officialUrl": "https://www.caddxfpv.com"
+  },
+  {
+    "id": 121,
+    "category": "extras",
+    "brand": "VIFLY",
+    "name": "Finder 2 Buzzer",
+    "price": 15,
+    "weight": 5,
+    "tags": [
+      "freestyle35",
+      "freestyle5",
+      "racing5",
+      "cinewhoop",
+      "cinematic",
+      "longrange"
+    ],
+    "specs": {
+      "type": "buzzer"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/09/vifly-finder-2-buzzer-fpv-drone.jpg",
+    "url": "https://viflydrone.com/products/vifly-finder-2-drone-buzzer",
+    "officialUrl": "https://viflydrone.com/products/vifly-finder-2-drone-buzzer"
+  },
+  {
+    "id": 122,
+    "category": "extras",
+    "brand": "HGLRC",
+    "name": "M100 Mini GPS",
+    "price": 18,
+    "weight": 6,
+    "tags": [
+      "longrange",
+      "cinematic",
+      "heavylift"
+    ],
+    "specs": {
+      "type": "gps"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/hglrc-m100-mini-gps-module.jpg",
+    "url": "https://www.hglrc.com",
+    "officialUrl": "https://www.hglrc.com"
+  },
+  {
+    "id": 123,
+    "category": "extras",
+    "brand": "Matek",
+    "name": "M8Q-5883 GPS",
+    "price": 28,
+    "weight": 11,
+    "tags": [
+      "longrange",
+      "heavylift"
+    ],
+    "specs": {
+      "type": "gps"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/matek-m8q-gps-module-fpv.jpg",
+    "url": "https://www.mateksys.com",
+    "officialUrl": "https://www.mateksys.com"
+  },
+  {
+    "id": 124,
+    "category": "extras",
+    "brand": "Flywoo",
+    "name": "GOKU GM10 Mini GPS",
+    "price": 22,
+    "weight": 8,
+    "tags": [
+      "longrange",
+      "cinematic"
+    ],
+    "specs": {
+      "type": "gps"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/flywoo-goku-gm10-mini-gps.jpg",
+    "url": "https://flywoo.net",
+    "officialUrl": "https://flywoo.net"
+  },
+  {
+    "id": 125,
+    "category": "extras",
+    "brand": "Caddx",
+    "name": "Turtle V2 Camera",
+    "price": 28,
+    "weight": 6,
+    "tags": [
+      "freestyle5",
+      "cinematic",
+      "cinewhoop"
+    ],
+    "specs": {
+      "type": "camera"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/12/caddx-turtle-v2-fpv-camera.jpg",
+    "url": "https://www.caddxfpv.com",
+    "officialUrl": "https://www.caddxfpv.com"
+  },
+  {
+    "id": 126,
+    "category": "extras",
+    "brand": "Foxeer",
+    "name": "Razer Mini Camera",
+    "price": 22,
+    "weight": 2.7,
+    "tags": [
+      "tinywhoop",
+      "toothpick",
+      "racing5"
+    ],
+    "specs": {
+      "type": "camera"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/foxeer-razer-mini-fpv-camera.jpg",
+    "url": "https://www.foxeer.com",
+    "officialUrl": "https://www.foxeer.com"
+  },
+  {
+    "id": 127,
+    "category": "extras",
+    "brand": "GoPro",
+    "name": "Hero 13 Black",
+    "price": 400,
+    "weight": 154,
+    "tags": [
+      "cinematic",
+      "heavylift"
+    ],
+    "specs": {
+      "type": "action_cam"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/09/gopro-hero12-black-action-camera-fpv.jpg",
+    "url": "https://gopro.com/en/us/cameras/hero",
+    "officialUrl": "https://gopro.com/en/us/cameras/hero"
+  },
+  {
+    "id": 128,
+    "category": "extras",
+    "brand": "Insta360",
+    "name": "GO 3S (action cam)",
+    "price": 250,
+    "weight": 35,
+    "tags": [
+      "cinematic",
+      "cinewhoop"
+    ],
+    "specs": {
+      "type": "action_cam"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/07/insta360-go3-action-camera.jpg",
+    "url": "https://www.insta360.com/product/insta360-go3s",
+    "officialUrl": "https://www.insta360.com/product/insta360-go3s"
+  },
+  {
+    "id": 129,
+    "category": "extras",
+    "brand": "Panasonic",
+    "name": "1000uF Capacitor",
+    "price": 3,
+    "weight": 8,
+    "tags": [
+      "freestyle5",
+      "racing5",
+      "cinematic",
+      "longrange"
+    ],
+    "specs": {
+      "type": "capacitor"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/how-to-build-fpv-drone-2023-fc-stack-nuts.jpg",
+    "url": "https://industrial.panasonic.com",
+    "officialUrl": "https://industrial.panasonic.com"
+  },
+  {
+    "id": 130,
+    "category": "extras",
+    "brand": "HGLRC",
+    "name": "Flow 1250 mW VTX",
+    "price": 35,
+    "weight": 6,
+    "tags": [
+      "freestyle5",
+      "racing5"
+    ],
+    "specs": {
+      "type": "analog_vtx"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/how-to-build-fpv-drone-analog-install-vtx.jpg",
+    "url": "https://www.hglrc.com",
+    "officialUrl": "https://www.hglrc.com"
+  },
+  {
+    "id": 131,
+    "category": "extras",
+    "brand": "iFlight",
+    "name": "SucceX Micro 5V BEC",
+    "price": 8,
+    "weight": 2,
+    "tags": [
+      "freestyle35",
+      "freestyle5"
+    ],
+    "specs": {
+      "type": "bec"
+    },
+    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/how-to-build-fpv-drone-2023-fc-stack-nuts.jpg",
+    "url": "https://shop.iflight.com",
+    "officialUrl": "https://shop.iflight.com"
   }
 ]

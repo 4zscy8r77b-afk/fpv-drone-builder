@@ -1,18 +1,25 @@
 {
-  "name": "fpv-drone-builder-production",
-  "version": "1.0.1",
-  "description": "FPV Drone Builder fixed Render deployment",
-  "main": "server.js",
+  "name": "fpv-drone-builder-premium",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Premium FPV drone builder with a unified component catalog, compatibility engine and interactive 3D preview.",
+  "main": "server/index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test tests/*.test.js",
+    "check": "npm test && node -c server/index.js && node -c server/compatibility.js && node -c server/autobuild.js"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
   },
   "dependencies": {
+    "compression": "^1.7.5",
     "cors": "^2.8.5",
-    "express": "^4.19.2",
-    "helmet": "^7.1.0",
-    "compression": "^1.7.4"
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "three": "^0.176.0",
+    "zod": "^3.25.0"
   }
 }

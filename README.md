@@ -1,74 +1,52 @@
-# FPV Drone Builder — Production Package
+# Build Your Own FPV — Premium Foundation v2
 
-Это готовый пакет для публикации сайта FPV Drone Builder.
+This package is the first production-oriented rebuild of the original FPV Drone Builder.
 
-## Что уже сделано
+## What changed
 
-- Frontend сайта
-- Backend API на Node.js + Express
-- SQLite база компонентов
-- API компонентов
-- API анализа сборки
-- API сохранения билдов
-- SEO meta tags
-- robots.txt
-- sitemap.xml
-- Privacy Policy
-- Support page
-- render.yaml для деплоя на Render
+- One shared catalog of **131 components** for frontend and backend.
+- Motor price, weight and thrust are calculated for four motors.
+- New compatibility engine with structured PASS / WARNING / FAIL findings.
+- Smart auto-build endpoint that scores the complete configuration instead of choosing the cheapest item in every category.
+- Premium responsive interface for desktop and mobile.
+- Live 3D model that adapts to frame size, battery, video system, ducts and payload.
+- Persistent build storage in `data/builds.json`.
+- Request validation, API rate limiting, restricted CORS and Content Security Policy.
+- Installable PWA foundation.
+- Automated compatibility tests.
 
-## Локальный запуск
+## Run locally
 
 ```bash
 npm install
 npm start
 ```
 
-Открой:
+Open `http://localhost:3000`.
 
-```text
-http://localhost:3000
+## Test
+
+```bash
+npm test
+npm run check
 ```
 
-## Деплой на Render
+## Environment
 
-1. Создай аккаунт на GitHub.
-2. Создай новый репозиторий.
-3. Загрузи туда все файлы из этого проекта.
-4. Создай аккаунт на Render.
-5. Нажми New → Web Service.
-6. Подключи GitHub репозиторий.
-7. Render сам увидит `render.yaml`.
-8. Нажми Deploy.
-9. Получишь ссылку вида:
+Copy `.env.example` values into your hosting environment. On Render, update:
 
-```text
-https://fpv-drone-builder.onrender.com
-```
+- `SITE_URL`
+- `ALLOWED_ORIGINS`
+- Create or replace `support@buildyourownfpv.com` before public launch.
 
-## После деплоя
+## Important production limitation
 
-Открой:
+`data/builds.json` is intentionally a transitional storage layer. Render's ephemeral filesystem can be reset. Before public accounts and mobile apps, replace this store with PostgreSQL/Supabase and add user authentication.
 
-```text
-https://твоя-ссылка.onrender.com/robots.txt
-https://твоя-ссылка.onrender.com/sitemap.xml
-https://твоя-ссылка.onrender.com/privacy.html
-https://твоя-ссылка.onrender.com/support.html
-```
+## Recommended next phase
 
-## Чтобы Google начал находить сайт
-
-1. Купи домен или используй ссылку Render.
-2. Открой Google Search Console.
-3. Добавь сайт.
-4. Подтверди владение.
-5. Отправь sitemap:
-
-```text
-https://твой-домен/sitemap.xml
-```
-
-## Важно
-
-В бесплатном Render SQLite база может сбрасываться при redeploy/restart. Для настоящего production лучше позже заменить SQLite на PostgreSQL.
+1. PostgreSQL schema and authentication.
+2. Admin catalog panel with verified specifications and local licensed product images.
+3. Real GLB models for popular frames and components.
+4. User profiles, public builds and comments.
+5. React Native / Expo mobile app using the same API and compatibility engine.
