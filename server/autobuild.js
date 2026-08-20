@@ -12,6 +12,17 @@ const CATEGORY_BUDGET_SHARE = {
   extras: 0.06
 };
 
+const GOAL_FALLBACKS = {
+  cinematic: ["freestyle5"],
+  cinewhoop: ["freestyle35"],
+  toothpick: ["freestyle35"]
+};
+
+function matchesGoal(part, goal) {
+  const tags = part.tags || [];
+  return tags.includes(goal) || (GOAL_FALLBACKS[goal] || []).some(tag => tags.includes(tag));
+}
+
 function goalRelevance(part, goal) {
   const tags = part.tags || [];
   let score = tags.includes(goal) ? 42 : 0;
@@ -59,7 +70,7 @@ function autoBuild(components, options = {}) {
   const selected = {};
 
   for (const category of [...REQUIRED_CATEGORIES, "extras"]) {
-    const candidates = components.filter(part => part.category === category && (part.tags || []).includes(goal));
+    const candidates = components.filter(part => part.category === category && matchesGoal(part, goal));
     const fallback = candidates.length ? candidates : components.filter(part => part.category === category);
     const ranked = fallback
       .map(part => ({ part, score: candidateScore(part, selected, goal, budget) }))
@@ -70,7 +81,10 @@ function autoBuild(components, options = {}) {
 
   for (let pass = 0; pass < 2; pass += 1) {
     for (const category of REQUIRED_CATEGORIES) {
-      const candidates = components.filter(part => part.category === category && ((part.tags || []).includes(goal) || category === "antenna"));
+      const missionCandidates = components.filter(part => part.category === category && matchesGoal(part, goal));
+      const candidates = missionCandidates.length
+        ? missionCandidates
+        : components.filter(part => part.category === category);
       let best = selected[category];
       let bestScore = -Infinity;
       for (const candidate of candidates) {
