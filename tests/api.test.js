@@ -2,6 +2,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const { before, after } = require("node:test");
 const { app } = require("../server/index");
+const { version } = require("../package.json");
 
 let server;
 let baseUrl;
@@ -26,20 +27,20 @@ test("health reports the package version without caching", async () => {
   assert.equal(response.status, 200);
   assert.match(response.headers.get("cache-control"), /no-store/);
   const body = await response.json();
-  assert.equal(body.version, "2.1.1");
+  assert.equal(body.version, version);
   assert.equal(body.components, 131);
 });
 
 test("HTML and the service worker are served with revalidation", async () => {
   const page = await request("/");
   const worker = await request("/service-worker.js");
-  const appScript = await request("/assets/js/app.js?v=2.1.1");
+  const appScript = await request(`/assets/js/app.js?v=${version}`);
   assert.equal(page.status, 200);
   assert.equal(worker.status, 200);
   assert.match(page.headers.get("cache-control"), /no-cache/);
   assert.match(worker.headers.get("cache-control"), /no-cache/);
   assert.match(appScript.headers.get("cache-control"), /no-cache/);
-  assert.match(await page.text(), /app\.js\?v=2\.1\.1/);
+  assert.match(await page.text(), new RegExp(`app\\.js\\?v=${version.replaceAll(".", "\\.")}`));
 });
 
 test("unknown routes return real 404 responses", async () => {

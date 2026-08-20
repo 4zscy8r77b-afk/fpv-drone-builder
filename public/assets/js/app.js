@@ -80,6 +80,7 @@
   const STORAGE_KEY = "fpv-working-state-v3";
   const LEGACY_STORAGE_KEY = "fpv-working-build-v2";
   const DEFAULT_BUDGET = 650;
+  const UI_VERSION = "2.2.0";
   const storedState = loadStoredState();
   const state = {
     components: [],
@@ -295,7 +296,8 @@
     if (catalogResult.status === "rejected") {
       const error = catalogResult.reason;
       $("parts").setAttribute("aria-busy", "false");
-      $("parts").innerHTML = `<div class="empty-state"><div><strong>Catalog unavailable</strong><span>${escapeHtml(error.message)}</span></div></div>`;
+      $("parts").innerHTML = `<div class="empty-state"><div><strong>Catalog unavailable</strong><span>${escapeHtml(error.message)}</span><button class="button button-secondary retry-button" id="retryCatalogBtn" type="button">Try again</button></div></div>`;
+      $("retryCatalogBtn").addEventListener("click", () => window.location.reload());
       showToast("Catalog could not be loaded");
       return;
     }
@@ -311,7 +313,7 @@
     await analyze();
 
     if ("serviceWorker" in navigator && location.protocol === "https:") {
-      navigator.serviceWorker.register("/service-worker.js?v=2.1.1").catch(() => {});
+      navigator.serviceWorker.register(`/service-worker.js?v=${UI_VERSION}`).catch(() => {});
     }
   }
 
@@ -438,6 +440,7 @@
       button.addEventListener("click", () => {
         state.currentCategory = button.dataset.category;
         state.page = 1;
+        $("search").value = "";
         renderTabs();
         renderParts();
       });
@@ -450,6 +453,7 @@
           : (current + (event.key === 'ArrowRight' ? 1 : -1) + CATEGORIES.length) % CATEGORIES.length;
         state.currentCategory = CATEGORIES[next];
         state.page = 1;
+        $("search").value = "";
         renderTabs();
         renderParts();
         $(`tab-${state.currentCategory}`)?.focus();
@@ -512,6 +516,9 @@
         const priceLabel = part.category === "motor" ? `${money(effectivePrice(part))} / set` : quantity > 1 ? `${money(effectivePrice(part))} total` : money(part.price);
         const imageUrl = safeExternalUrl(part.imageUrl);
         const sourceUrl = safeExternalUrl(part.officialUrl || part.url);
+        const sourceAction = sourceUrl === "#"
+          ? '<span class="button button-secondary button-disabled" aria-disabled="true">No source</span>'
+          : `<a class="button button-secondary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">Source ↗</a>`;
         return `
           <article class="part-card ${isSelected ? "selected" : ""}" aria-label="${escapeHtml(`${part.brand} ${part.name}`)}">
             <div class="part-media">
@@ -524,8 +531,8 @@
             </div>
             <div class="chips">${specsChips(part)}</div>
             <div class="part-actions">
-              <a class="button button-secondary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">Source ↗</a>
-              <button class="button ${isSelected ? "button-primary" : "button-secondary"}" type="button" data-select-part="${part.id}">${isSelected ? "Selected" : "Select"}</button>
+              ${sourceAction}
+              <button class="button ${isSelected ? "button-primary" : "button-secondary"}" type="button" data-select-part="${part.id}" aria-pressed="${isSelected}">${isSelected ? "Remove" : "Select"}</button>
             </div>
           </article>
         `;
@@ -560,12 +567,14 @@
   function pickPart(id) {
     const part = byId(id);
     if (!part) return;
-    state.build[part.category] = id;
+    const isSelected = Number(state.build[part.category]) === Number(id);
+    if (isSelected) delete state.build[part.category];
+    else state.build[part.category] = id;
     state.analysis = null;
     persistState();
     renderAll();
     analyze();
-    showToast(`${part.brand} ${part.name} added`);
+    showToast(`${part.brand} ${part.name} ${isSelected ? "removed" : "added"}`);
   }
 
   async function autoBuild() {
@@ -683,10 +692,18 @@
           <div class="build-thumb">${part ? `<img src="${escapeHtml(safeExternalUrl(part.imageUrl))}" alt="" referrerpolicy="no-referrer" data-image-fallback><span>${fallback}</span>` : `<span class="is-visible">${fallback}</span>`}</div>
           <div><b>${escapeHtml(info.label)}${category === "extras" ? " (optional)" : ""}</b><small>${part ? escapeHtml(`${part.brand} ${part.name}`) : "Not selected"}</small></div>
           <strong>${part ? money(effectivePrice(part)) : "—"}</strong>
+          ${part ? `<button class="remove-part" type="button" data-remove-category="${category}" aria-label="Remove ${escapeHtml(info.label)}">×</button>` : ""}
         </div>
       `;
     }).join("");
     wireImageFallbacks($("buildList"));
+    $("buildList").querySelectorAll("[data-remove-category]").forEach(button => {
+      button.addEventListener("click", () => {
+        const category = button.dataset.removeCategory;
+        const part = selected(category);
+        if (part) pickPart(part.id);
+      });
+    });
   }
 
   function updateProfile() {
@@ -771,17 +788,19 @@
       return;
     }
 
-    const rows = [["Category", "Brand", "Component", "Purchase quantity", "Estimated unit price (USD)", "Line total (USD)", "Catalog weight (g)", "Source"]];
+    const rows = [["Category", "Brand", "Component", "Packages to buy", "Items per package", "Package price (USD)", "Line total (USD)", "Catalog weight (g)", "Source"]];
     for (const category of CATEGORIES) {
       const part = selected(category);
       if (!part) continue;
-      const quantity = purchaseQuantityFor(part);
+      const packageQuantity = quantityFor(part);
+      const itemsPerPackage = category === "motor" ? 4 : 1;
       rows.push([
         CATEGORY_INFO[category].label,
         part.brand,
         part.name,
-        quantity,
-        (effectivePrice(part) / Math.max(1, quantity)).toFixed(2),
+        packageQuantity,
+        itemsPerPackage,
+        Number(part.price || 0).toFixed(2),
         effectivePrice(part).toFixed(2),
         Number(part.weight || 0),
         part.officialUrl || part.url || ""
