@@ -8,6 +8,7 @@ const root = path.resolve(__dirname, "..");
 const appSource = fs.readFileSync(path.join(root, "public/assets/js/app.js"), "utf8");
 const indexSource = fs.readFileSync(path.join(root, "public/index.html"), "utf8");
 const workerSource = fs.readFileSync(path.join(root, "public/service-worker.js"), "utf8");
+const previewSource = fs.readFileSync(path.join(root, "public/assets/js/three-preview.js"), "utf8");
 
 test("browser assets use the current release cache key", () => {
   assert.match(indexSource, new RegExp(`app\\.js\\?v=${version.replaceAll(".", "\\.")}`));
@@ -30,4 +31,13 @@ test("CSV export describes motor sets without multiplying package cost", () => {
 test("catalog errors expose a retry action", () => {
   assert.match(appSource, /id="retryCatalogBtn"/);
   assert.match(appSource, /retryCatalogBtn.*window\.location\.reload/s);
+});
+
+test("3D preview uses shaped FPV geometry instead of placeholder blocks", () => {
+  assert.match(previewSource, /function carbonPlate\(/);
+  assert.match(previewSource, /new THREE\.ExtrudeGeometry\(plateShape/);
+  assert.match(previewSource, /function armMesh\(/);
+  assert.match(previewSource, /shape\.bezierCurveTo/);
+  assert.match(previewSource, /new THREE\.TubeGeometry\(powerLead/);
+  assert.match(previewSource, /const standoffPoints =/);
 });

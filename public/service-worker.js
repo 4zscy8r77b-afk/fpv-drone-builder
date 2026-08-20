@@ -1,13 +1,13 @@
-const CACHE = "fpv-builder-v5";
+const CACHE = "fpv-builder-v6";
 const CORE = [
   "/",
-  "/assets/css/app.css?v=2.2.0",
-  "/assets/js/app.js?v=2.2.0",
-  "/assets/js/three-preview.js?v=2.2.0",
-  "/assets/js/vendor/OrbitControls.js?v=2.2.0",
+  "/assets/css/app.css?v=2.3.0",
+  "/assets/js/app.js?v=2.3.0",
+  "/assets/js/three-preview.js?v=2.3.0",
+  "/assets/js/vendor/OrbitControls.js?v=2.3.0",
   "/assets/icon.svg",
-  "/manifest.webmanifest?v=2.2.0",
-  "/vendor/three.module.js?v=2.2.0"
+  "/manifest.webmanifest?v=2.3.0",
+  "/vendor/three.module.js?v=2.3.0"
 ];
 
 self.addEventListener("install", event => {

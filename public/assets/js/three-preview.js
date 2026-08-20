@@ -1,5 +1,5 @@
-import * as THREE from "/vendor/three.module.js?v=2.2.0";
-import { OrbitControls } from "/assets/js/vendor/OrbitControls.js?v=2.2.0";
+import * as THREE from "/vendor/three.module.js?v=2.3.0";
+import { OrbitControls } from "/assets/js/vendor/OrbitControls.js?v=2.3.0";
 
 const container = document.getElementById("three-preview");
 const previewBadge = document.querySelector(".preview-badge");
@@ -42,10 +42,10 @@ if (container && !webglSurface) {
 } else if (container) {
   try {
   const scene = new THREE.Scene();
-  scene.fog = new THREE.FogExp2(0x090d13, 0.045);
+  scene.fog = new THREE.FogExp2(0x070a0f, 0.032);
 
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
-  camera.position.set(5.7, 4.2, 7.4);
+  camera.position.set(6.4, 4.6, 7.8);
 
   const renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -60,7 +60,7 @@ if (container && !webglSurface) {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1.18;
   container.replaceChildren(renderer.domElement);
 
   const controls = new OrbitControls(camera, renderer.domElement);
@@ -74,16 +74,16 @@ if (container && !webglSurface) {
   controls.autoRotate = !reduceMotion;
   controls.autoRotateSpeed = 0.55;
 
-  scene.add(new THREE.HemisphereLight(0xbbe7ff, 0x182319, 2.1));
+  scene.add(new THREE.HemisphereLight(0xd8efff, 0x111915, 2.35));
   const key = new THREE.DirectionalLight(0xffffff, 4.2);
-  key.position.set(5, 9, 6);
+  key.position.set(5, 10, 7);
   key.castShadow = true;
   key.shadow.mapSize.set(2048, 2048);
   key.shadow.camera.near = 0.5;
   key.shadow.camera.far = 30;
   scene.add(key);
 
-  const rim = new THREE.DirectionalLight(0x72f3ca, 2.2);
+  const rim = new THREE.DirectionalLight(0x72f3ca, 2.8);
   rim.position.set(-6, 3, -5);
   scene.add(rim);
 
@@ -109,17 +109,21 @@ if (container && !webglSurface) {
   scene.add(floorRing);
 
   const materials = {
-    carbon: new THREE.MeshPhysicalMaterial({ color: 0x111820, metalness: 0.64, roughness: 0.32, clearcoat: 0.35, clearcoatRoughness: 0.45 }),
-    carbonEdge: new THREE.MeshStandardMaterial({ color: 0x26313d, metalness: 0.7, roughness: 0.26 }),
+    carbon: new THREE.MeshPhysicalMaterial({ color: 0x0c1117, metalness: 0.52, roughness: 0.38, clearcoat: 0.48, clearcoatRoughness: 0.32 }),
+    carbonEdge: new THREE.MeshStandardMaterial({ color: 0x27333e, metalness: 0.72, roughness: 0.24 }),
     accent: new THREE.MeshStandardMaterial({ color: 0x62e5b8, metalness: 0.35, roughness: 0.3, emissive: 0x0c3829, emissiveIntensity: 0.3 }),
     motor: new THREE.MeshStandardMaterial({ color: 0x202a35, metalness: 0.92, roughness: 0.18 }),
     copper: new THREE.MeshStandardMaterial({ color: 0xb96d27, metalness: 0.8, roughness: 0.25 }),
-    prop: new THREE.MeshPhysicalMaterial({ color: 0xc8fff0, transparent: true, opacity: 0.46, roughness: 0.16, metalness: 0.05, side: THREE.DoubleSide }),
+    prop: new THREE.MeshPhysicalMaterial({ color: 0x9effdc, transparent: true, opacity: 0.7, roughness: 0.2, metalness: 0.02, side: THREE.DoubleSide, depthWrite: false }),
     lens: new THREE.MeshPhysicalMaterial({ color: 0x020609, metalness: 0.78, roughness: 0.06, clearcoat: 1 }),
     battery: new THREE.MeshStandardMaterial({ color: 0x1c2632, metalness: 0.25, roughness: 0.46 }),
     strap: new THREE.MeshStandardMaterial({ color: 0x0b0f14, roughness: 0.9 }),
     red: new THREE.MeshStandardMaterial({ color: 0xe85e68, metalness: 0.2, roughness: 0.42 }),
-    duct: new THREE.MeshStandardMaterial({ color: 0x151e27, metalness: 0.25, roughness: 0.48 })
+    duct: new THREE.MeshStandardMaterial({ color: 0x151e27, metalness: 0.25, roughness: 0.48 }),
+    pcb: new THREE.MeshStandardMaterial({ color: 0x174c3b, metalness: 0.18, roughness: 0.52 }),
+    silver: new THREE.MeshStandardMaterial({ color: 0x9aa9b7, metalness: 0.92, roughness: 0.19 }),
+    yellow: new THREE.MeshStandardMaterial({ color: 0xf1b52d, metalness: 0.15, roughness: 0.42 }),
+    rubber: new THREE.MeshStandardMaterial({ color: 0x050608, roughness: 0.96 })
   };
 
   let drone = null;
@@ -130,6 +134,55 @@ if (container && !webglSurface) {
     const mesh = new THREE.Mesh(geometry, material);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
+    return mesh;
+  }
+
+  function plateShape(width, depth, cut = 0.22, waist = 0.12) {
+    const shape = new THREE.Shape();
+    const x = width / 2;
+    const z = depth / 2;
+    shape.moveTo(-x + cut, -z);
+    shape.lineTo(x - cut, -z);
+    shape.quadraticCurveTo(x, -z, x, -z + cut);
+    shape.lineTo(x - waist, z - cut);
+    shape.quadraticCurveTo(x - waist, z, x - waist - cut, z);
+    shape.lineTo(-x + waist + cut, z);
+    shape.quadraticCurveTo(-x + waist, z, -x + waist, z - cut);
+    shape.lineTo(-x, -z + cut);
+    shape.quadraticCurveTo(-x, -z, -x + cut, -z);
+    return shape;
+  }
+
+  function carbonPlate(width, depth, thickness, material = materials.carbon) {
+    const geometry = new THREE.ExtrudeGeometry(plateShape(width, depth), {
+      depth: thickness,
+      bevelEnabled: true,
+      bevelSegments: 2,
+      bevelSize: 0.025,
+      bevelThickness: 0.018,
+      curveSegments: 10
+    });
+    geometry.center();
+    geometry.rotateX(Math.PI / 2);
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    return mesh;
+  }
+
+  function bolt(radius = 0.045, height = 0.035) {
+    const mesh = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, height, 16), materials.silver);
+    mesh.castShadow = true;
+    return mesh;
+  }
+
+  function armMesh(start, end, width, thickness) {
+    const a = new THREE.Vector3(...start);
+    const b = new THREE.Vector3(...end);
+    const length = a.distanceTo(b);
+    const mesh = box(width, thickness, length, materials.carbon);
+    mesh.position.copy(a).add(b).multiplyScalar(0.5);
+    mesh.rotation.y = Math.atan2(b.x - a.x, b.z - a.z);
     return mesh;
   }
 
@@ -146,7 +199,11 @@ if (container && !webglSurface) {
 
   function makeMotor(scale) {
     const group = new THREE.Group();
-    const bell = new THREE.Mesh(new THREE.CylinderGeometry(0.19 * scale, 0.21 * scale, 0.28 * scale, 32), materials.motor);
+    const base = new THREE.Mesh(new THREE.CylinderGeometry(0.235 * scale, 0.235 * scale, 0.055 * scale, 32), materials.carbonEdge);
+    base.position.y = 0.025 * scale;
+    base.castShadow = true;
+    group.add(base);
+    const bell = new THREE.Mesh(new THREE.CylinderGeometry(0.185 * scale, 0.215 * scale, 0.27 * scale, 40), materials.motor);
     bell.castShadow = true;
     bell.position.y = 0.12 * scale;
     group.add(bell);
@@ -157,21 +214,36 @@ if (container && !webglSurface) {
     copper.rotation.x = Math.PI / 2;
     copper.position.y = 0.13 * scale;
     group.add(copper);
+    for (let index = 0; index < 6; index += 1) {
+      const vent = box(0.025 * scale, 0.13 * scale, 0.055 * scale, materials.carbon);
+      vent.position.set(Math.cos(index * Math.PI / 3) * 0.19 * scale, 0.15 * scale, Math.sin(index * Math.PI / 3) * 0.19 * scale);
+      vent.rotation.y = -index * Math.PI / 3;
+      group.add(vent);
+    }
+    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.027 * scale, 0.027 * scale, 0.15 * scale, 16), materials.silver);
+    shaft.position.y = 0.37 * scale;
+    group.add(shaft);
     return group;
   }
 
   function makeProp(radius, clockwise) {
     const group = new THREE.Group();
     for (let index = 0; index < 3; index += 1) {
-      const blade = new THREE.Mesh(new THREE.BoxGeometry(radius * 0.84, 0.018, radius * 0.13, 8, 1, 2), materials.prop);
-      blade.position.x = radius * 0.38;
-      blade.rotation.y = (clockwise ? 0.12 : -0.12);
+      const shape = new THREE.Shape();
+      shape.moveTo(radius * 0.08, -radius * 0.045);
+      shape.bezierCurveTo(radius * 0.28, -radius * 0.1, radius * 0.72, -radius * 0.12, radius * 0.92, -radius * 0.025);
+      shape.bezierCurveTo(radius * 0.73, radius * 0.09, radius * 0.28, radius * 0.075, radius * 0.08, radius * 0.035);
+      const geometry = new THREE.ExtrudeGeometry(shape, { depth: 0.018, bevelEnabled: true, bevelSize: 0.008, bevelThickness: 0.006, bevelSegments: 1, curveSegments: 12 });
+      geometry.rotateX(-Math.PI / 2);
+      const blade = new THREE.Mesh(geometry, materials.prop);
+      blade.rotation.x = clockwise ? 0.08 : -0.08;
+      blade.rotation.y = clockwise ? 0.09 : -0.09;
       const pivot = new THREE.Group();
       pivot.rotation.y = index * Math.PI * 2 / 3;
       pivot.add(blade);
       group.add(pivot);
     }
-    const hub = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.09, radius * 0.09, 0.055, 24), materials.motor);
+    const hub = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.095, radius * 0.11, 0.075, 24), materials.motor);
     group.add(hub);
     group.userData.spinDirection = clockwise ? 1 : -1;
     animatedProps.push(group);
@@ -221,22 +293,44 @@ if (container && !webglSurface) {
     ];
 
     for (const [x, y, z] of armPositions) {
-      drone.add(cylinderBetween([Math.sign(x) * 0.34, 0, Math.sign(z) * 0.28], [x, y, z], config.heavy ? 0.105 : 0.07, materials.carbon));
+      const start = [Math.sign(x) * config.body * 0.22, 0, Math.sign(z) * config.body * 0.2];
+      drone.add(armMesh(start, [x, y, z], config.heavy ? 0.28 : 0.2, config.heavy ? 0.105 : 0.075));
     }
 
-    const lower = box(config.body * 1.48, 0.11, config.body * 1.12, materials.carbon);
+    const lower = carbonPlate(config.body * 1.5, config.body * 1.16, 0.09);
     lower.position.y = 0.02;
     drone.add(lower);
-    const upper = box(config.body * 1.28, 0.1, config.body * 0.94, materials.carbonEdge);
+    const upper = carbonPlate(config.body * 1.28, config.body * 0.94, 0.075, materials.carbonEdge);
     upper.position.y = 0.48;
     drone.add(upper);
+
+    const standoffPoints = [
+      [-config.body * 0.48, -config.body * 0.32],
+      [config.body * 0.48, -config.body * 0.32],
+      [-config.body * 0.42, config.body * 0.31],
+      [config.body * 0.42, config.body * 0.31]
+    ];
+    standoffPoints.forEach(([x, z]) => {
+      const post = new THREE.Mesh(new THREE.CylinderGeometry(0.035, 0.035, 0.44, 16), materials.accent);
+      post.position.set(x, 0.25, z);
+      post.castShadow = true;
+      drone.add(post);
+      const topBolt = bolt();
+      topBolt.position.set(x, 0.54, z);
+      drone.add(topBolt);
+    });
 
     const stack = new THREE.Group();
     const boards = [0.15, 0.28, 0.4];
     boards.forEach((height, index) => {
-      const board = box(config.body * 0.72, 0.055, config.body * 0.67, index === 1 ? materials.accent : materials.carbonEdge);
+      const board = box(config.body * 0.72, 0.045, config.body * 0.67, index === 1 ? materials.pcb : materials.carbonEdge);
       board.position.y = height;
       stack.add(board);
+      [[-1, -1], [1, -1], [-1, 1], [1, 1]].forEach(([sx, sz]) => {
+        const pad = bolt(0.025, 0.018);
+        pad.position.set(sx * config.body * 0.28, height + 0.03, sz * config.body * 0.25);
+        stack.add(pad);
+      });
     });
     drone.add(stack);
 
@@ -244,11 +338,27 @@ if (container && !webglSurface) {
     const batteryPack = box(config.body * 0.98 * config.battery, 0.31 * config.battery, config.body * 0.55 * config.battery, materials.battery);
     batteryPack.position.y = 0.72 + 0.05 * config.battery;
     batteryGroup.add(batteryPack);
+    const batteryLabel = box(config.body * 0.55 * config.battery, 0.012, config.body * 0.27 * config.battery, materials.yellow);
+    batteryLabel.position.y = 0.17 * config.battery;
+    batteryGroup.add(batteryLabel);
     const strap = box(config.body * 1.08 * config.battery, 0.045, 0.14, materials.strap);
     strap.position.y = 0.9 + 0.08 * config.battery;
     batteryGroup.add(strap);
     batteryGroup.position.z = -config.body * 0.12;
     drone.add(batteryGroup);
+
+    const powerLead = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(config.body * 0.35, 0.42, -config.body * 0.28),
+      new THREE.Vector3(config.body * 0.62, 0.64, -config.body * 0.46),
+      new THREE.Vector3(config.body * 0.78, 0.75, -config.body * 0.25)
+    ]);
+    const leadMesh = new THREE.Mesh(new THREE.TubeGeometry(powerLead, 20, 0.025, 8, false), materials.red);
+    leadMesh.castShadow = true;
+    drone.add(leadMesh);
+    const connector = box(0.18, 0.12, 0.24, materials.yellow);
+    connector.position.set(config.body * 0.8, 0.75, -config.body * 0.2);
+    connector.rotation.z = -0.28;
+    drone.add(connector);
 
     const camera = new THREE.Group();
     const cameraBody = box(config.digital ? 0.62 : 0.48, config.digital ? 0.42 : 0.34, 0.4, materials.carbonEdge);
@@ -257,6 +367,15 @@ if (container && !webglSurface) {
     lens.rotation.x = Math.PI / 2;
     lens.position.z = 0.25;
     camera.add(lens);
+    const lensRing = new THREE.Mesh(new THREE.TorusGeometry(0.152, 0.018, 10, 32), materials.silver);
+    lensRing.position.z = 0.315;
+    camera.add(lensRing);
+    const cameraGuardLeft = box(0.07, 0.5, 0.48, materials.carbon);
+    cameraGuardLeft.position.x = -0.36;
+    camera.add(cameraGuardLeft);
+    const cameraGuardRight = cameraGuardLeft.clone();
+    cameraGuardRight.position.x = 0.36;
+    camera.add(cameraGuardRight);
     camera.position.set(0, 0.29, config.body * 0.66);
     camera.rotation.x = -0.12;
     drone.add(camera);
@@ -283,6 +402,19 @@ if (container && !webglSurface) {
       prop.position.set(x, 0.39 * config.motor, z);
       drone.add(prop);
 
+      const motorPad = new THREE.Mesh(new THREE.CylinderGeometry(config.motor * 0.29, config.motor * 0.29, 0.065, 32), materials.carbon);
+      motorPad.position.set(x, 0.015, z);
+      motorPad.castShadow = true;
+      drone.add(motorPad);
+
+      const wireEnd = new THREE.Vector3(x - Math.sign(x) * 0.26, 0.085, z - Math.sign(z) * 0.2);
+      [-0.026, 0, 0.026].forEach((offset, wireIndex) => {
+        const wireStart = new THREE.Vector3(Math.sign(x) * config.body * 0.28 + offset, 0.09, Math.sign(z) * config.body * 0.24);
+        const wireCurve = new THREE.LineCurve3(wireStart, wireEnd.clone().add(new THREE.Vector3(offset * 2, wireIndex * 0.008, 0)));
+        const wireMaterial = wireIndex === 0 ? materials.red : wireIndex === 1 ? materials.yellow : materials.rubber;
+        drone.add(new THREE.Mesh(new THREE.TubeGeometry(wireCurve, 8, 0.009, 6, false), wireMaterial));
+      });
+
       if (config.ducts) {
         const duct = new THREE.Mesh(new THREE.TorusGeometry(config.prop * 1.04, 0.075, 16, 72), materials.duct);
         duct.rotation.x = Math.PI / 2;
@@ -300,7 +432,7 @@ if (container && !webglSurface) {
     }
 
     drone.rotation.x = -0.12;
-    drone.rotation.z = -0.035;
+    drone.rotation.z = -0.025;
     drone.position.y = -0.1;
     scene.add(drone);
 
