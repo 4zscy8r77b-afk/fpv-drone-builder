@@ -31,6 +31,28 @@ test("autobuild returns all required categories", () => {
   assert.ok(result.analysis.compatibilityScore >= 0 && result.analysis.compatibilityScore <= 100);
 });
 
+test("autobuild avoids blocking incompatibilities for every mission", () => {
+  const goals = ["tinywhoop", "toothpick", "freestyle35", "freestyle5", "racing5", "cinewhoop", "cinematic", "longrange", "heavylift"];
+  const required = ["frame", "motor", "stack", "props", "battery", "vtx", "rx", "antenna"];
+
+  for (const goal of goals) {
+    const result = autoBuild(components, { goal, budget: 650 });
+    for (const category of required) {
+      assert.ok(result.build[category], `${goal} is missing ${category}`);
+    }
+    assert.equal(result.analysis.counts.bad, 0, `${goal} has a blocking incompatibility`);
+    assert.equal(result.analysis.counts.missing, 0, `${goal} is incomplete`);
+  }
+});
+
+test("an ESC matching estimated motor current is a warning, not a blocker", () => {
+  const motor = first("motor", "tinywhoop");
+  const stack = first("stack", "tinywhoop");
+  const analysis = analyzeBuild([motor, stack], { goal: "tinywhoop" });
+  const issue = analysis.issues.find(item => item.code === "esc_headroom");
+  assert.equal(issue.level, "warn");
+});
+
 test("unsupported battery voltage is detected", () => {
   const stack = components.find(part => part.category === "stack" && Array.isArray(part.specs.voltage) && part.specs.voltage.length === 1 && part.specs.voltage[0] === "1s");
   const battery = components.find(part => part.category === "battery" && part.specs.cells === "6s");

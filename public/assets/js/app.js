@@ -336,7 +336,7 @@
     const specs = part.specs || {};
     const values = [];
     if (part.category === "motor") values.push("4 required");
-    if (part.weight) values.push(`${part.weight}g${part.category === "motor" ? " each" : ""}`);
+    if (part.weight) values.push(`${part.weight}g${part.category === "motor" ? " / set" : ""}`);
     if (specs.esc) values.push(`${specs.esc}A ESC`);
     if (specs.kv) values.push(`${specs.kv}KV`);
     if (specs.cells) values.push(String(specs.cells).toUpperCase());

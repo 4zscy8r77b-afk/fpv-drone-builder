@@ -112,8 +112,10 @@ function analyzeBuild(parts, options = {}) {
     const esc = Number(stack.specs?.esc || 0);
     const motorAmp = Number(motor.specs?.amp || 0);
     const recommended = Math.ceil(motorAmp * 1.25);
-    if (esc && motorAmp && esc < recommended) {
-      addIssue(issues, "bad", "esc_headroom", "ESC current headroom is too low", `${stack.name} is rated at ${esc}A; these motors need about ${recommended}A of headroom.`, `Use an ESC rated for at least ${recommended}A.`);
+    if (esc && motorAmp && esc < motorAmp) {
+      addIssue(issues, "bad", "esc_headroom", "ESC current rating is too low", `${stack.name} is rated at ${esc}A, below the motor's estimated ${motorAmp}A demand.`, `Use an ESC rated for at least ${recommended}A when possible.`);
+    } else if (esc && motorAmp && esc < recommended) {
+      addIssue(issues, "warn", "esc_headroom", "ESC current headroom is limited", `${stack.name} covers the estimated ${motorAmp}A demand, but offers less than the preferred 25% margin.`, `Verify burst-current support or choose an ESC rated near ${recommended}A.`);
     } else if (esc && motorAmp) {
       addIssue(issues, "good", "esc_headroom", "ESC current headroom is sufficient", `${esc}A ESC rating provides suitable headroom.`);
     }
