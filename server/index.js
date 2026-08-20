@@ -59,7 +59,8 @@ app.use(express.json({ limit: "256kb" }));
 app.use("/api", rateLimit({ windowMs: 60_000, max: 120, standardHeaders: true, legacyHeaders: false }));
 function setPublicCacheHeaders(res, filePath) {
   const filename = path.basename(filePath);
-  if (path.extname(filePath) === ".html" || filename === "service-worker.js" || filename === "manifest.webmanifest") {
+  const extension = path.extname(filePath);
+  if ([".html", ".css", ".js", ".webmanifest"].includes(extension) || filename === "service-worker.js") {
     res.setHeader("Cache-Control", "no-cache");
     return;
   }

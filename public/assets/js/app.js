@@ -311,7 +311,7 @@
     await analyze();
 
     if ("serviceWorker" in navigator && location.protocol === "https:") {
-      navigator.serviceWorker.register("/service-worker.js").catch(() => {});
+      navigator.serviceWorker.register("/service-worker.js?v=2.1.1").catch(() => {});
     }
   }
 
