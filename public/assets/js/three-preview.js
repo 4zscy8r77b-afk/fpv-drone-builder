@@ -1,5 +1,5 @@
-import * as THREE from "/vendor/three.module.js?v=2.1.1";
-import { OrbitControls } from "/assets/js/vendor/OrbitControls.js?v=2.1.1";
+import * as THREE from "/vendor/three.module.js?v=2.2.0";
+import { OrbitControls } from "/assets/js/vendor/OrbitControls.js?v=2.2.0";
 
 const container = document.getElementById("three-preview");
 const previewBadge = document.querySelector(".preview-badge");
