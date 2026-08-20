@@ -6,9 +6,10 @@ const rateLimit = require("express-rate-limit");
 const path = require("path");
 const fs = require("fs");
 const { z } = require("zod");
-const { analyzeBuild } = require("./compatibility");
+const { ALL_CATEGORIES, GOALS, analyzeBuild, matchesGoal } = require("./compatibility");
 const { autoBuild } = require("./autobuild");
 const { JsonBuildStore } = require("./store");
+const { version } = require("../package.json");
 
 const ROOT = path.resolve(__dirname, "..");
 const PUBLIC_DIR = path.join(ROOT, "public");
@@ -19,7 +20,7 @@ const buildStore = new JsonBuildStore(path.join(DATA_DIR, "builds.json"));
 
 const app = express();
 const PORT = Number(process.env.PORT || 3000);
-const SITE_URL = process.env.SITE_URL || "https://buildyourownfpv.com";
+const SITE_URL = String(process.env.SITE_URL || "https://buildyourownfpv.com").replace(/\/$/, "");
 const allowedOrigins = String(process.env.ALLOWED_ORIGINS || SITE_URL)
   .split(",")
   .map(value => value.trim())
@@ -56,39 +57,74 @@ app.use(cors({
 }));
 app.use(express.json({ limit: "256kb" }));
 app.use("/api", rateLimit({ windowMs: 60_000, max: 120, standardHeaders: true, legacyHeaders: false }));
-app.use(express.static(PUBLIC_DIR, { maxAge: "1h", etag: true }));
-app.use("/vendor", express.static(path.join(ROOT, "node_modules", "three", "build"), { maxAge: "7d" }));
-app.use("/vendor/examples", express.static(path.join(ROOT, "node_modules", "three", "examples", "jsm"), { maxAge: "7d" }));
+function setPublicCacheHeaders(res, filePath) {
+  const filename = path.basename(filePath);
+  if (path.extname(filePath) === ".html" || filename === "service-worker.js" || filename === "manifest.webmanifest") {
+    res.setHeader("Cache-Control", "no-cache");
+    return;
+  }
+  res.setHeader("Cache-Control", "public, max-age=3600, stale-while-revalidate=86400");
+}
+
+app.use(express.static(PUBLIC_DIR, { etag: true, maxAge: 0, setHeaders: setPublicCacheHeaders }));
+app.use("/vendor", express.static(path.join(ROOT, "node_modules", "three", "build"), { maxAge: "1h", etag: true }));
+app.use("/vendor/examples", express.static(path.join(ROOT, "node_modules", "three", "examples", "jsm"), { maxAge: "1h", etag: true }));
+
+const goalSchema = z.enum(GOALS);
+const componentIdSchema = z.coerce.number().int().positive();
+const partsSchema = z.object(Object.fromEntries(ALL_CATEGORIES.map(category => [category, componentIdSchema.optional()]))).strict().default({});
 
 const buildPayloadSchema = z.object({
   name: z.string().trim().min(1).max(80).default("My FPV Build"),
-  goal: z.string().trim().min(1).max(40).default("freestyle35"),
+  goal: goalSchema.default("freestyle35"),
   budget: z.coerce.number().min(0).max(100000).default(0),
-  parts: z.record(z.union([z.coerce.number().int().positive(), z.array(z.coerce.number().int().positive()).max(10)])).default({})
-});
+  parts: partsSchema
+}).strict();
 
 const analyzeSchema = z.object({
-  goal: z.string().trim().max(40).default("freestyle35"),
+  goal: goalSchema.default("freestyle35"),
   budget: z.coerce.number().min(0).max(100000).default(0),
-  parts: z.record(z.union([z.coerce.number().int().positive(), z.array(z.coerce.number().int().positive()).max(10)])).default({})
-});
+  parts: partsSchema
+}).strict();
+
+const autoBuildSchema = z.object({
+  goal: goalSchema.default("freestyle35"),
+  budget: z.coerce.number().min(0).max(100000).default(650)
+}).strict();
+
+class RequestValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "RequestValidationError";
+  }
+}
 
 function resolveParts(partsObject) {
-  const ids = Object.values(partsObject || {}).flat().map(Number).filter(Number.isFinite);
-  return ids.map(id => componentsById.get(id)).filter(Boolean);
+  return Object.entries(partsObject || {}).map(([category, rawId]) => {
+    const id = Number(rawId);
+    const part = componentsById.get(id);
+    if (!part) throw new RequestValidationError(`Unknown component id ${id}`);
+    if (part.category !== category) {
+      throw new RequestValidationError(`Component ${id} belongs to ${part.category}, not ${category}`);
+    }
+    return part;
+  });
 }
 
 app.get("/api/health", (req, res) => {
-  res.json({ ok: true, app: "FPV Drone Builder", version: "2.0.0", components: components.length });
+  res.set("Cache-Control", "no-store");
+  res.json({ ok: true, app: "FPV Drone Builder", version, components: components.length });
 });
 
 app.get("/api/components", (req, res) => {
   const category = String(req.query.category || "").trim();
-  const search = String(req.query.search || "").trim().toLowerCase();
+  const search = String(req.query.search || "").trim().toLowerCase().slice(0, 120);
   const goal = String(req.query.goal || "").trim();
+  if (category && !ALL_CATEGORIES.includes(category)) return res.status(400).json({ error: "Unknown component category" });
+  if (goal && !GOALS.includes(goal)) return res.status(400).json({ error: "Unknown mission profile" });
   let result = components;
   if (category) result = result.filter(part => part.category === category);
-  if (goal) result = result.filter(part => (part.tags || []).includes(goal));
+  if (goal) result = result.filter(part => matchesGoal(part, goal));
   if (search) {
     result = result.filter(part => `${part.brand} ${part.name} ${(part.tags || []).join(" ")} ${JSON.stringify(part.specs || {})}`.toLowerCase().includes(search));
   }
@@ -108,10 +144,7 @@ app.post("/api/analyze", (req, res, next) => {
 
 app.post("/api/autobuild", (req, res, next) => {
   try {
-    const payload = z.object({
-      goal: z.string().trim().min(1).max(40).default("freestyle35"),
-      budget: z.coerce.number().min(0).max(100000).default(650)
-    }).parse(req.body);
+    const payload = autoBuildSchema.parse(req.body);
     res.json(autoBuild(components, payload));
   } catch (error) {
     next(error);
@@ -152,11 +185,21 @@ app.get("/sitemap.xml", (req, res) => {
 </urlset>`);
 });
 
-app.get("*", (req, res) => res.sendFile(path.join(PUBLIC_DIR, "index.html")));
+app.use("/api", (req, res) => res.status(404).json({ error: "API endpoint not found" }));
+app.use((req, res) => res.status(404).type("text/plain").send("Not found"));
 
 app.use((error, req, res, next) => {
   if (error instanceof z.ZodError) {
     return res.status(400).json({ error: "Invalid request", details: error.issues });
+  }
+  if (error instanceof RequestValidationError) {
+    return res.status(400).json({ error: error.message });
+  }
+  if (error?.type === "entity.too.large") {
+    return res.status(413).json({ error: "Request body is too large" });
+  }
+  if (error instanceof SyntaxError && error?.status === 400 && "body" in error) {
+    return res.status(400).json({ error: "Invalid JSON body" });
   }
   if (error?.message === "Origin is not allowed by CORS") {
     return res.status(403).json({ error: error.message });
@@ -166,7 +209,7 @@ app.use((error, req, res, next) => {
 });
 
 if (require.main === module) {
-  app.listen(PORT, () => console.log(`FPV Drone Builder 2.0 running on port ${PORT}`));
+  app.listen(PORT, () => console.log(`FPV Drone Builder ${version} running on port ${PORT}`));
 }
 
 module.exports = { app, components };

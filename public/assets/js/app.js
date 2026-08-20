@@ -72,30 +72,71 @@
 
   const CATEGORIES = ["frame", "motor", "stack", "props", "battery", "vtx", "rx", "antenna", "extras"];
   const REQUIRED_CATEGORIES = CATEGORIES.filter(category => category !== "extras");
+  const GOAL_FALLBACKS = {
+    cinematic: ["freestyle5"],
+    cinewhoop: ["freestyle35"],
+    toothpick: ["freestyle35"]
+  };
+  const STORAGE_KEY = "fpv-working-state-v3";
+  const LEGACY_STORAGE_KEY = "fpv-working-build-v2";
+  const DEFAULT_BUDGET = 650;
+  const storedState = loadStoredState();
   const state = {
     components: [],
     currentCategory: "frame",
-    activeGoal: "freestyle35",
+    activeGoal: storedState.goal,
+    budget: storedState.budget,
     page: 1,
     perPage: 6,
-    build: loadStoredBuild(),
+    build: storedState.build,
     analysis: null,
     analyzeSequence: 0
   };
 
   function $(id) { return document.getElementById(id); }
 
-  function loadStoredBuild() {
+  function normalizeBudget(value, fallback = DEFAULT_BUDGET) {
+    const number = Number(value);
+    if (!Number.isFinite(number)) return fallback;
+    return Math.min(100000, Math.max(0, Math.round(number)));
+  }
+
+  function normalizeBuild(value) {
+    if (!value || typeof value !== "object" || Array.isArray(value)) return {};
+    const build = {};
+    for (const category of CATEGORIES) {
+      const rawId = Array.isArray(value[category]) ? value[category][0] : value[category];
+      const id = Number(rawId);
+      if (Number.isInteger(id) && id > 0) build[category] = id;
+    }
+    return build;
+  }
+
+  function loadStoredState() {
     try {
-      const value = JSON.parse(localStorage.getItem("fpv-working-build-v2") || "{}");
-      return value && typeof value === "object" ? value : {};
+      const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      if (value && typeof value === "object") {
+        return {
+          goal: BUILD_INFO[value.goal] ? value.goal : "freestyle35",
+          budget: normalizeBudget(value.budget),
+          build: normalizeBuild(value.build)
+        };
+      }
+
+      const legacyBuild = JSON.parse(localStorage.getItem(LEGACY_STORAGE_KEY) || "{}");
+      return { goal: "freestyle35", budget: DEFAULT_BUDGET, build: normalizeBuild(legacyBuild) };
     } catch {
-      return {};
+      return { goal: "freestyle35", budget: DEFAULT_BUDGET, build: {} };
     }
   }
 
-  function persistBuild() {
-    localStorage.setItem("fpv-working-build-v2", JSON.stringify(state.build));
+  function persistState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ goal: state.activeGoal, budget: state.budget, build: state.build }));
+      localStorage.removeItem(LEGACY_STORAGE_KEY);
+    } catch {
+      // Storage can be unavailable in private or locked-down browsing modes.
+    }
   }
 
   function escapeHtml(value) {
@@ -138,13 +179,29 @@
     return Object.values(state.build).flat().map(byId).filter(Boolean);
   }
 
+  function matchesGoal(part, goal = state.activeGoal) {
+    const tags = part?.tags || [];
+    return tags.includes(goal) || (GOAL_FALLBACKS[goal] || []).some(tag => tags.includes(tag));
+  }
+
   function missionCompatible(part) {
     if (!$("compatibleOnly")?.checked) return true;
-    const tags = part.tags || [];
-    if (tags.includes(state.activeGoal)) return true;
-    if (state.activeGoal === "cinematic" && tags.includes("freestyle5")) return true;
-    if (state.activeGoal === "cinewhoop" && tags.includes("freestyle35")) return true;
-    return false;
+    return matchesGoal(part);
+  }
+
+  function currentBudget() {
+    return normalizeBudget($("budget")?.value, state.budget);
+  }
+
+  function safeExternalUrl(value) {
+    if (!value) return "#";
+    try {
+      const url = new URL(String(value), window.location.origin);
+      if (url.protocol === "http:" || url.protocol === "https:") return url.href;
+    } catch {
+      // Fall through to a non-navigating link.
+    }
+    return "#";
   }
 
   function recommendedScore(part) {
@@ -157,9 +214,11 @@
   }
 
   async function api(path, options = {}) {
+    const headers = { Accept: "application/json", ...(options.headers || {}) };
+    if (options.body) headers["Content-Type"] = "application/json";
     const response = await fetch(path, {
-      headers: { "Content-Type": "application/json", ...(options.headers || {}) },
-      ...options
+      ...options,
+      headers
     });
     const data = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(data.error || `Request failed with ${response.status}`);
@@ -175,6 +234,7 @@
   }
 
   function renderLoading() {
+    $("parts").setAttribute("aria-busy", "true");
     $("parts").innerHTML = Array.from({ length: 4 }, () => '<div class="loading-card"></div>').join("");
   }
 
@@ -182,32 +242,71 @@
     const params = new URLSearchParams(window.location.search);
     const goal = params.get("goal");
     if (goal && BUILD_INFO[goal]) state.activeGoal = goal;
-    try {
-      const parsed = JSON.parse(params.get("build") || "{}");
-      if (parsed && typeof parsed === "object") state.build = parsed;
-    } catch {
-      // Ignore malformed shared URLs.
+    if (params.has("build")) {
+      try {
+        state.build = normalizeBuild(JSON.parse(params.get("build") || "{}"));
+      } catch {
+        state.build = {};
+      }
+      state.budget = params.has("budget") ? normalizeBudget(params.get("budget")) : DEFAULT_BUDGET;
+    } else if (params.has("budget")) {
+      state.budget = normalizeBudget(params.get("budget"));
+    } else if (goal && !params.has("saved")) {
+      state.build = {};
     }
+    if (params.has("saved") && !params.has("build")) {
+      state.build = {};
+      if (!params.has("budget")) state.budget = DEFAULT_BUDGET;
+    }
+    return params.get("saved");
+  }
+
+  async function loadSavedState(id) {
+    if (!id || id.length > 100) throw new Error("Invalid saved build link");
+    const saved = await api(`/api/builds/${encodeURIComponent(id)}`);
+    if (BUILD_INFO[saved.goal]) state.activeGoal = saved.goal;
+    state.budget = normalizeBudget(saved.budget);
+    state.build = normalizeBuild(saved.parts);
   }
 
   async function init() {
-    applyUrlState();
+    const savedId = applyUrlState();
     renderLoading();
     wireStaticEvents();
     renderMissionCards();
     renderGoalOptions();
+    $("budget").value = String(state.budget);
 
-    try {
-      const catalog = await api("/api/components");
-      state.components = catalog.items || [];
-      $("componentMetric").textContent = String(catalog.total || state.components.length);
-    } catch (error) {
+    const [catalogResult, savedResult] = await Promise.allSettled([
+      api("/api/components"),
+      savedId ? loadSavedState(savedId) : Promise.resolve()
+    ]);
+
+    if (savedResult.status === "rejected" && !new URLSearchParams(window.location.search).has("build")) {
+      showToast(savedResult.reason?.message || "Saved build could not be loaded");
+    }
+
+    if (savedResult.status === "fulfilled" && savedId) {
+      renderMissionCards();
+      renderGoalOptions();
+      $("budget").value = String(state.budget);
+    }
+
+    if (catalogResult.status === "rejected") {
+      const error = catalogResult.reason;
+      $("parts").setAttribute("aria-busy", "false");
       $("parts").innerHTML = `<div class="empty-state"><div><strong>Catalog unavailable</strong><span>${escapeHtml(error.message)}</span></div></div>`;
       showToast("Catalog could not be loaded");
       return;
     }
 
+    const catalog = catalogResult.value;
+    state.components = catalog.items || [];
+    $("parts").setAttribute("aria-busy", "false");
+    $("componentMetric").textContent = String(catalog.total || state.components.length);
+
     pruneInvalidSelection();
+    persistState();
     renderAll();
     await analyze();
 
@@ -217,19 +316,44 @@
   }
 
   function pruneInvalidSelection() {
-    for (const [category, value] of Object.entries(state.build)) {
-      if (Array.isArray(value)) {
-        state.build[category] = value.filter(id => byId(id));
-      } else if (!byId(value)) {
+    const valid = {};
+    for (const category of CATEGORIES) {
+      const part = byId(state.build[category]);
+      if (part?.category === category) valid[category] = part.id;
+    }
+    state.build = valid;
+  }
+
+  function pruneMissionSelection(goal) {
+    if (!state.components.length) {
+      const removed = Object.keys(state.build).length;
+      state.build = {};
+      return removed;
+    }
+    let removed = 0;
+    for (const category of CATEGORIES) {
+      const part = selected(category);
+      if (part && !matchesGoal(part, goal)) {
         delete state.build[category];
+        removed += 1;
       }
     }
-    persistBuild();
+    return removed;
   }
 
   function wireStaticEvents() {
     $("goal").addEventListener("change", event => setGoal(event.target.value, false));
-    $("budget").addEventListener("input", debounce(analyze, 220));
+    const analyzeBudget = debounce(analyze, 220);
+    $("budget").addEventListener("input", () => {
+      state.budget = currentBudget();
+      persistState();
+      analyzeBudget();
+    });
+    $("budget").addEventListener("change", () => {
+      state.budget = currentBudget();
+      $("budget").value = String(state.budget);
+      persistState();
+    });
     $("sort").addEventListener("change", () => { state.page = 1; renderParts(); });
     $("compatibleOnly").addEventListener("change", () => { state.page = 1; renderParts(); });
     $("search").addEventListener("input", debounce(() => { state.page = 1; renderParts(); }, 120));
@@ -243,9 +367,9 @@
   function renderMissionCards() {
     const missions = Object.entries(BUILD_INFO);
     $("presetGrid").innerHTML = missions.map(([id, mission], index) => `
-      <button class="mission-card ${id === state.activeGoal ? "active" : ""}" type="button" data-mission="${id}" style="--mission-image:url('${mission.image}')">
+      <button class="mission-card ${id === state.activeGoal ? "active" : ""}" type="button" data-mission="${id}" aria-pressed="${id === state.activeGoal}" style="--mission-image:url('${mission.image}')">
         <span class="mission-top"><span class="mission-index">${String(index + 1).padStart(2, "0")}</span><span class="mission-skill">${escapeHtml(mission.skill)}</span></span>
-        <span><h3>${escapeHtml(mission.title)}</h3><p>${escapeHtml(mission.desc)}</p></span>
+        <span><span class="mission-title">${escapeHtml(mission.title)}</span><span class="mission-description">${escapeHtml(mission.desc)}</span></span>
       </button>
     `).join("");
 
@@ -261,12 +385,17 @@
 
   function setGoal(goal, scroll) {
     if (!BUILD_INFO[goal]) return;
+    const changed = goal !== state.activeGoal;
     state.activeGoal = goal;
+    const removed = changed ? pruneMissionSelection(goal) : 0;
+    state.analysis = null;
     state.page = 1;
     $("goal").value = goal;
+    persistState();
     renderMissionCards();
     renderAll();
     analyze();
+    if (removed) showToast(`${removed} incompatible ${removed === 1 ? "part was" : "parts were"} removed`);
     if (scroll) $("builder").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
@@ -276,8 +405,8 @@
     renderBuildList();
     renderProgress();
     updateMissionLabels();
-    updateProfile();
     updateThreePreview();
+    renderAnalysis(state.analysis);
   }
 
   function updateMissionLabels() {
@@ -285,6 +414,8 @@
     $("toolbarMission").textContent = mission.title;
     $("heroMission").textContent = mission.title;
     $("previewTitle").textContent = mission.title;
+    $("heroImage").src = mission.image;
+    $("heroImage").alt = `${mission.title} FPV drone in flight`;
   }
 
   function renderProgress() {
@@ -295,10 +426,12 @@
   }
 
   function renderTabs() {
+    $("parts").setAttribute("aria-labelledby", `tab-${state.currentCategory}`);
     $("tabs").innerHTML = CATEGORIES.map(category => {
       const info = CATEGORY_INFO[category];
       const isDone = Boolean(selected(category));
-      return `<button class="tab ${category === state.currentCategory ? "active" : ""}" type="button" role="tab" aria-selected="${category === state.currentCategory}" data-category="${category}">${isDone ? '<span class="tab-check">✓</span>' : ""}${escapeHtml(info.plural)}</button>`;
+      const active = category === state.currentCategory;
+      return `<button class="tab ${active ? "active" : ""}" id="tab-${category}" type="button" role="tab" aria-selected="${active}" aria-controls="parts" tabindex="${active ? "0" : "-1"}" data-category="${category}">${isDone ? '<span class="tab-check">✓</span>' : ""}${escapeHtml(info.plural)}</button>`;
     }).join("");
 
     $("tabs").querySelectorAll("[data-category]").forEach(button => {
@@ -307,6 +440,19 @@
         state.page = 1;
         renderTabs();
         renderParts();
+      });
+      button.addEventListener("keydown", event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const current = CATEGORIES.indexOf(button.dataset.category);
+        const next = event.key === 'Home' ? 0
+          : event.key === 'End' ? CATEGORIES.length - 1
+          : (current + (event.key === 'ArrowRight' ? 1 : -1) + CATEGORIES.length) % CATEGORIES.length;
+        state.currentCategory = CATEGORIES[next];
+        state.page = 1;
+        renderTabs();
+        renderParts();
+        $(`tab-${state.currentCategory}`)?.focus();
       });
     });
 
@@ -364,10 +510,12 @@
         const isSelected = Number(state.build[part.category]) === Number(part.id);
         const quantity = purchaseQuantityFor(part);
         const priceLabel = part.category === "motor" ? `${money(effectivePrice(part))} / set` : quantity > 1 ? `${money(effectivePrice(part))} total` : money(part.price);
+        const imageUrl = safeExternalUrl(part.imageUrl);
+        const sourceUrl = safeExternalUrl(part.officialUrl || part.url);
         return `
-          <article class="part-card ${isSelected ? "selected" : ""}">
+          <article class="part-card ${isSelected ? "selected" : ""}" aria-label="${escapeHtml(`${part.brand} ${part.name}`)}">
             <div class="part-media">
-              <img src="${escapeHtml(part.imageUrl)}" alt="${escapeHtml(`${part.brand} ${part.name}`)}" loading="lazy" referrerpolicy="no-referrer" data-image-fallback>
+              <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(`${part.brand} ${part.name}`)}" loading="lazy" referrerpolicy="no-referrer" data-image-fallback>
               <div class="part-fallback"><div><strong>${escapeHtml(CATEGORY_INFO[part.category].label)}</strong><span>${escapeHtml(part.brand)}</span></div></div>
             </div>
             <div class="part-head">
@@ -376,7 +524,7 @@
             </div>
             <div class="chips">${specsChips(part)}</div>
             <div class="part-actions">
-              <a class="button button-secondary" href="${escapeHtml(part.officialUrl || part.url || "#")}" target="_blank" rel="noopener noreferrer">Source ↗</a>
+              <a class="button button-secondary" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noopener noreferrer">Source ↗</a>
               <button class="button ${isSelected ? "button-primary" : "button-secondary"}" type="button" data-select-part="${part.id}">${isSelected ? "Selected" : "Select"}</button>
             </div>
           </article>
@@ -403,7 +551,9 @@
 
   function wireImageFallbacks(root) {
     root.querySelectorAll("[data-image-fallback]").forEach(image => {
-      image.addEventListener("error", () => image.classList.add("is-broken"), { once: true });
+      const markBroken = () => image.classList.add("is-broken");
+      image.addEventListener("error", markBroken, { once: true });
+      if (image.complete && image.naturalWidth === 0) markBroken();
     });
   }
 
@@ -411,7 +561,8 @@
     const part = byId(id);
     if (!part) return;
     state.build[part.category] = id;
-    persistBuild();
+    state.analysis = null;
+    persistState();
     renderAll();
     analyze();
     showToast(`${part.brand} ${part.name} added`);
@@ -420,19 +571,23 @@
   async function autoBuild() {
     const button = $("autoBuildBtn");
     const original = button.innerHTML;
+    const requestGoal = state.activeGoal;
+    const requestBudget = currentBudget();
+    const sequence = ++state.analyzeSequence;
     button.disabled = true;
     button.textContent = "Engineering build…";
     try {
       const result = await api("/api/autobuild", {
         method: "POST",
-        body: JSON.stringify({ goal: state.activeGoal, budget: Number($("budget").value || 0) })
+        body: JSON.stringify({ goal: requestGoal, budget: requestBudget })
       });
+      if (sequence !== state.analyzeSequence || requestGoal !== state.activeGoal) return;
       state.build = result.build || {};
       state.analysis = result.analysis;
-      persistBuild();
+      state.budget = requestBudget;
+      persistState();
       state.currentCategory = "frame";
       renderAll();
-      renderAnalysis(result.analysis);
       showToast("Smart build generated");
       $("preview").scrollIntoView({ behavior: "smooth", block: "start" });
     } catch (error) {
@@ -444,9 +599,10 @@
   }
 
   function clearBuild() {
+    state.analyzeSequence += 1;
     state.build = {};
     state.analysis = null;
-    persistBuild();
+    persistState();
     renderAll();
     analyze();
     showToast("Build cleared");
@@ -460,7 +616,7 @@
         method: "POST",
         body: JSON.stringify({
           goal: state.activeGoal,
-          budget: Number($("budget").value || 0),
+          budget: currentBudget(),
           parts: state.build
         })
       });
@@ -468,14 +624,34 @@
       state.analysis = analysis;
       renderAnalysis(analysis);
     } catch (error) {
-      if (sequence === state.analyzeSequence) showToast(error.message);
+      if (sequence === state.analyzeSequence) {
+        $("statusText").textContent = "Analysis unavailable";
+        $("issueCount").textContent = "Error";
+        $("issues").innerHTML = `<div class="issue bad"><div class="issue-head"><span class="issue-dot"></span><div><strong>Build could not be analyzed</strong><p>${escapeHtml(error.message)}</p></div></div></div>`;
+        showToast(error.message);
+      }
     }
   }
 
   function renderAnalysis(analysis) {
+    if (!analysis) {
+      $("scoreValue").textContent = "—";
+      $("scoreRing").style.setProperty("--score", 0);
+      $("scoreRing").setAttribute("aria-label", "Compatibility analysis pending");
+      $("statusText").textContent = "Analysis pending";
+      $("heroScore").textContent = "—";
+      $("heroPrice").textContent = selectedParts().length ? "Updating…" : money(0);
+      $("metrics").innerHTML = '<div class="metric"><span>Build analysis</span><strong>Updating…</strong></div>';
+      $("issueCount").textContent = "Pending";
+      $("issues").innerHTML = '<div class="issue pending"><div class="issue-head"><span class="issue-dot"></span><div><strong>Checking this configuration</strong><p>Results will appear after the selected parts are analyzed.</p></div></div></div>';
+      updateProfile();
+      return;
+    }
+
     const score = Number(analysis?.compatibilityScore || 0);
     $("scoreValue").textContent = String(score);
     $("scoreRing").style.setProperty("--score", score);
+    $("scoreRing").setAttribute("aria-label", `Compatibility score ${score} out of 100`);
     $("statusText").textContent = analysis?.status || "Select parts to begin";
     $("heroScore").textContent = `${score}/100`;
     $("heroPrice").textContent = money(analysis?.totals?.price || 0);
@@ -492,17 +668,19 @@
     const actionable = (analysis?.issues || []).filter(issue => issue.level !== "good");
     $("issueCount").textContent = `${actionable.length} ${actionable.length === 1 ? "issue" : "issues"}`;
     $("issues").innerHTML = actionable.length
-      ? actionable.slice(0, 7).map(issue => `<div class="issue ${escapeHtml(issue.level)}"><div class="issue-head"><span class="issue-dot"></span><div><strong>${escapeHtml(issue.title)}</strong><p>${escapeHtml(issue.detail)}</p></div></div></div>`).join("")
+      ? actionable.map(issue => `<div class="issue ${escapeHtml(issue.level)}"><div class="issue-head"><span class="issue-dot"></span><div><strong>${escapeHtml(issue.title)}</strong><p>${escapeHtml(issue.detail)}</p></div></div></div>`).join("")
       : '<div class="issue good"><div class="issue-head"><span class="issue-dot"></span><div><strong>No blocking issues found</strong><p>Verify manufacturer specifications before ordering and flying.</p></div></div></div>';
+    updateProfile();
   }
 
   function renderBuildList() {
     $("buildList").innerHTML = CATEGORIES.map(category => {
       const info = CATEGORY_INFO[category];
       const part = selected(category);
+      const fallback = escapeHtml(info.label.slice(0, 2).toUpperCase());
       return `
         <div class="build-item">
-          <div class="build-thumb">${part ? `<img src="${escapeHtml(part.imageUrl)}" alt="" referrerpolicy="no-referrer" data-image-fallback>` : escapeHtml(info.label.slice(0, 2).toUpperCase())}</div>
+          <div class="build-thumb">${part ? `<img src="${escapeHtml(safeExternalUrl(part.imageUrl))}" alt="" referrerpolicy="no-referrer" data-image-fallback><span>${fallback}</span>` : `<span class="is-visible">${fallback}</span>`}</div>
           <div><b>${escapeHtml(info.label)}${category === "extras" ? " (optional)" : ""}</b><small>${part ? escapeHtml(`${part.brand} ${part.name}`) : "Not selected"}</small></div>
           <strong>${part ? money(effectivePrice(part)) : "—"}</strong>
         </div>
@@ -535,23 +713,33 @@
     if (typeof window.updateDronePreview === "function") {
       window.updateDronePreview(state.activeGoal, parts);
     }
-    updateProfile();
   }
 
   async function copyShareLink() {
-    const params = new URLSearchParams({ goal: state.activeGoal, build: JSON.stringify(state.build) });
+    const params = new URLSearchParams({ goal: state.activeGoal, budget: String(currentBudget()), build: JSON.stringify(state.build) });
     const url = `${window.location.origin}${window.location.pathname}?${params}`;
+    showToast(await copyText(url) ? "Share link copied" : "Copy unavailable in this browser");
+  }
+
+  async function copyText(value) {
     try {
-      await navigator.clipboard.writeText(url);
-      showToast("Share link copied");
+      await navigator.clipboard.writeText(value);
+      return true;
     } catch {
       const input = document.createElement("textarea");
-      input.value = url;
+      input.value = value;
+      input.setAttribute("readonly", "");
+      input.style.position = "fixed";
+      input.style.opacity = "0";
       document.body.appendChild(input);
       input.select();
-      document.execCommand("copy");
-      input.remove();
-      showToast("Share link copied");
+      try {
+        return document.execCommand("copy");
+      } catch {
+        return false;
+      } finally {
+        input.remove();
+      }
     }
   }
 
@@ -566,11 +754,11 @@
     try {
       const saved = await api("/api/builds", {
         method: "POST",
-        body: JSON.stringify({ name, goal: state.activeGoal, budget: Number($("budget").value || 0), parts: state.build })
+        body: JSON.stringify({ name, goal: state.activeGoal, budget: currentBudget(), parts: state.build })
       });
-      const url = `${window.location.origin}/?saved=${encodeURIComponent(saved.id)}&goal=${encodeURIComponent(state.activeGoal)}&build=${encodeURIComponent(JSON.stringify(state.build))}`;
-      await navigator.clipboard?.writeText(url).catch(() => {});
-      showToast("Build saved; link copied when permitted");
+      const params = new URLSearchParams({ saved: saved.id, goal: state.activeGoal, budget: String(currentBudget()), build: JSON.stringify(state.build) });
+      const url = `${window.location.origin}/?${params}`;
+      showToast(await copyText(url) ? "Build saved and link copied" : "Build saved; use Copy share link to share it");
     } catch (error) {
       showToast(error.message);
     }
@@ -610,7 +798,7 @@
     anchor.href = URL.createObjectURL(blob);
     anchor.download = `fpv-${state.activeGoal}-build.csv`;
     anchor.click();
-    URL.revokeObjectURL(anchor.href);
+    window.setTimeout(() => URL.revokeObjectURL(anchor.href), 1000);
     showToast("Parts list exported");
   }
 

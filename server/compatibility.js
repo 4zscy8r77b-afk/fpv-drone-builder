@@ -1,10 +1,35 @@
 const REQUIRED_CATEGORIES = ["frame", "motor", "stack", "props", "battery", "vtx", "rx", "antenna"];
+const ALL_CATEGORIES = [...REQUIRED_CATEGORIES, "extras"];
+const GOALS = ["tinywhoop", "toothpick", "freestyle35", "freestyle5", "racing5", "cinewhoop", "cinematic", "longrange", "heavylift"];
+const GOAL_FALLBACKS = {
+  cinematic: ["freestyle5"],
+  cinewhoop: ["freestyle35"],
+  toothpick: ["freestyle35"]
+};
 
 function quantityFor(part) {
   if (!part) return 0;
-  if (Number.isFinite(Number(part.specs?.qty))) return Number(part.specs.qty);
+  const explicit = Number(part.specs?.qty);
+  if (Number.isFinite(explicit) && explicit > 0) return explicit;
   // The imported catalog stores motor-set price, weight and thrust at build level.
   return 1;
+}
+
+function matchesGoal(part, goal) {
+  if (!part || !goal) return true;
+  const tags = part.tags || [];
+  return tags.includes(goal) || (GOAL_FALLBACKS[goal] || []).some(tag => tags.includes(tag));
+}
+
+function uniqueParts(parts) {
+  const seen = new Set();
+  return (Array.isArray(parts) ? parts : []).filter(part => {
+    if (!part) return false;
+    const key = Number.isFinite(Number(part.id)) ? `id:${Number(part.id)}` : part;
+    if (seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
 }
 
 function cellsNumber(value) {
@@ -50,6 +75,7 @@ function estimateFlightMinutes({ battery, totalWeight, frame }) {
 }
 
 function analyzeBuild(parts, options = {}) {
+  parts = uniqueParts(parts);
   const budget = Number(options.budget || 0);
   const goal = String(options.goal || "");
   const map = categoryMap(parts);
@@ -87,6 +113,24 @@ function analyzeBuild(parts, options = {}) {
   const vtx = map.vtx;
   const antenna = map.antenna;
 
+  if (goal) {
+    const outsideMission = parts.filter(part => !matchesGoal(part, goal));
+    if (outsideMission.length) {
+      const names = outsideMission.slice(0, 4).map(part => `${part.category}: ${part.name}`).join(", ");
+      const remaining = outsideMission.length > 4 ? ` and ${outsideMission.length - 4} more` : "";
+      addIssue(
+        issues,
+        "warn",
+        "mission_fit",
+        "Parts fall outside the mission profile",
+        `${names}${remaining} ${outsideMission.length === 1 ? "is" : "are"} not recommended for this mission.`,
+        "Choose mission-matched parts or verify the custom combination manually."
+      );
+    } else if (parts.length) {
+      addIssue(issues, "good", "mission_fit", "Parts match the mission profile", "Selected parts are tagged for this mission or an approved fallback class.");
+    }
+  }
+
   if (frame && props) {
     const frameSize = String(frame.specs?.size || "");
     const propSize = String(props.specs?.propSize || "");
@@ -98,10 +142,9 @@ function analyzeBuild(parts, options = {}) {
   }
 
   if (frame && motor) {
-    const frameSize = String(frame.specs?.size || "");
-    const goalMatch = (motor.tags || []).includes(goal);
-    const sizeTagMatch = (motor.tags || []).some(tag => tag === frameSize || tag.includes(frameSize));
-    if (!goalMatch && !sizeTagMatch) {
+    const frameTags = new Set(frame.tags || []);
+    const classMatch = (motor.tags || []).some(tag => frameTags.has(tag));
+    if (!classMatch) {
       addIssue(issues, "warn", "motor_frame_class", "Motor class may be unsuitable", `${motor.name} is not tagged for the selected mission or frame class.`, "Choose a motor recommended for this mission.");
     } else {
       addIssue(issues, "good", "motor_frame_class", "Motor class is appropriate", "Motor size and intended use align with the selected mission.");
@@ -171,12 +214,15 @@ function analyzeBuild(parts, options = {}) {
 
   const thrustToWeight = totalWeight > 0 ? totalThrust / totalWeight : 0;
   if (totalThrust && totalWeight) {
-    if (thrustToWeight < 2.5) {
-      addIssue(issues, "bad", "thrust_weight", "Insufficient thrust reserve", `${thrustToWeight.toFixed(1)}:1 thrust-to-weight may produce poor control authority.`, "Use stronger motors, lighter parts, or a smaller battery.");
-    } else if (thrustToWeight < 4) {
-      addIssue(issues, "warn", "thrust_weight", "Moderate thrust reserve", `${thrustToWeight.toFixed(1)}:1 is flyable but not ideal for aggressive freestyle.`, "Reduce weight or use a higher-thrust motor for more performance.");
+    const highPerformanceGoal = ["freestyle35", "freestyle5", "racing5", "cinematic"].includes(goal);
+    const minimumReserve = highPerformanceGoal ? 2.5 : 2;
+    const preferredReserve = highPerformanceGoal ? 4 : 2.5;
+    if (thrustToWeight < minimumReserve) {
+      addIssue(issues, "bad", "thrust_weight", "Insufficient thrust reserve", `${thrustToWeight.toFixed(1)}:1 thrust-to-weight may produce poor control authority for this mission.`, "Use stronger motors, lighter parts, or a smaller battery.");
+    } else if (thrustToWeight < preferredReserve) {
+      addIssue(issues, "warn", "thrust_weight", "Moderate thrust reserve", `${thrustToWeight.toFixed(1)}:1 is flyable but leaves limited maneuvering reserve for this mission.`, "Reduce weight or use a higher-thrust motor for more performance.");
     } else {
-      addIssue(issues, "good", "thrust_weight", "Strong thrust reserve", `${thrustToWeight.toFixed(1)}:1 provides good control authority.`);
+      addIssue(issues, "good", "thrust_weight", "Suitable thrust reserve", `${thrustToWeight.toFixed(1)}:1 provides suitable control authority for the selected mission.`);
     }
   }
 
@@ -209,8 +255,12 @@ function analyzeBuild(parts, options = {}) {
 }
 
 module.exports = {
+  ALL_CATEGORIES,
+  GOALS,
+  GOAL_FALLBACKS,
   REQUIRED_CATEGORIES,
   analyzeBuild,
   categoryMap,
+  matchesGoal,
   quantityFor
 };

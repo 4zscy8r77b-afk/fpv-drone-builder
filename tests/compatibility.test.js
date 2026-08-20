@@ -59,3 +59,43 @@ test("unsupported battery voltage is detected", () => {
   const analysis = analyzeBuild([stack, battery]);
   assert.ok(analysis.issues.some(issue => issue.code === "battery_voltage" && issue.level === "bad"));
 });
+
+test("duplicate component ids are counted once", () => {
+  const motor = first("motor", "freestyle35");
+  const analysis = analyzeBuild([motor, motor], { goal: "freestyle35" });
+  assert.equal(analysis.totals.price, motor.price);
+  assert.equal(analysis.totals.thrust, motor.specs.thrust);
+});
+
+test("parts outside the selected mission are reported", () => {
+  const frame = first("frame", "tinywhoop");
+  const analysis = analyzeBuild([frame], { goal: "heavylift" });
+  assert.ok(analysis.issues.some(issue => issue.code === "mission_fit" && issue.level === "warn"));
+});
+
+test("approved mission fallbacks do not create a mission warning", () => {
+  const stack = first("stack", "freestyle35");
+  const analysis = analyzeBuild([stack], { goal: "cinewhoop" });
+  assert.ok(analysis.issues.some(issue => issue.code === "mission_fit" && issue.level === "good"));
+});
+
+test("two-prop heavy-lift packs are purchased twice", () => {
+  const props = first("props", "heavylift");
+  assert.equal(quantityFor(props), 2);
+  const analysis = analyzeBuild([props], { goal: "heavylift" });
+  assert.equal(analysis.totals.price, props.price * 2);
+  assert.equal(analysis.totals.weight, props.weight * 2);
+});
+
+test("autobuild omits optional extras when they do not fit the budget", () => {
+  const result = autoBuild(components, { goal: "heavylift", budget: 650 });
+  assert.equal(result.build.extras, undefined);
+  assert.equal(result.parts.some(part => part.category === "extras"), false);
+});
+
+test("thrust reserve guidance follows the selected mission", () => {
+  const result = autoBuild(components, { goal: "heavylift", budget: 0 });
+  const issue = result.analysis.issues.find(item => item.code === "thrust_weight");
+  assert.equal(issue.level, "good");
+  assert.match(issue.detail, /selected mission/);
+});
