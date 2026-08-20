@@ -80,7 +80,7 @@
   const STORAGE_KEY = "fpv-working-state-v3";
   const LEGACY_STORAGE_KEY = "fpv-working-build-v2";
   const DEFAULT_BUDGET = 650;
-  const UI_VERSION = "2.2.0";
+  const UI_VERSION = "2.3.0";
   const storedState = loadStoredState();
   const state = {
     components: [],
