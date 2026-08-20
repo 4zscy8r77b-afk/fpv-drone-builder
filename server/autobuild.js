@@ -1,4 +1,4 @@
-const { analyzeBuild, REQUIRED_CATEGORIES, quantityFor } = require("./compatibility");
+const { analyzeBuild, matchesGoal, REQUIRED_CATEGORIES, quantityFor } = require("./compatibility");
 
 const CATEGORY_BUDGET_SHARE = {
   frame: 0.12,
@@ -11,17 +11,6 @@ const CATEGORY_BUDGET_SHARE = {
   antenna: 0.04,
   extras: 0.06
 };
-
-const GOAL_FALLBACKS = {
-  cinematic: ["freestyle5"],
-  cinewhoop: ["freestyle35"],
-  toothpick: ["freestyle35"]
-};
-
-function matchesGoal(part, goal) {
-  const tags = part.tags || [];
-  return tags.includes(goal) || (GOAL_FALLBACKS[goal] || []).some(tag => tags.includes(tag));
-}
 
 function goalRelevance(part, goal) {
   const tags = part.tags || [];
@@ -48,7 +37,7 @@ function partQualityScore(part) {
   const name = `${part.brand} ${part.name}`.toLowerCase();
   let score = 0;
   if (/speedybee|t-motor|iflight|geprc|radiomaster|tattu|gemfan|hqprop|dji|walksnail/.test(name)) score += 4;
-  if (/premium|pro|v2|v3|v4/.test(name)) score += 2;
+  if (/\b(?:premium|pro|v2|v3|v4)\b/.test(name)) score += 2;
   return score;
 }
 
@@ -69,7 +58,7 @@ function autoBuild(components, options = {}) {
   const budget = Number(options.budget || 0);
   const selected = {};
 
-  for (const category of [...REQUIRED_CATEGORIES, "extras"]) {
+  for (const category of REQUIRED_CATEGORIES) {
     const candidates = components.filter(part => part.category === category && matchesGoal(part, goal));
     const fallback = candidates.length ? candidates : components.filter(part => part.category === category);
     const ranked = fallback
@@ -104,6 +93,18 @@ function autoBuild(components, options = {}) {
       if (best) selected[category] = best;
     }
   }
+
+  const optionalCandidates = components
+    .filter(part => part.category === "extras" && matchesGoal(part, goal))
+    .map(part => ({
+      part,
+      score: candidateScore(part, selected, goal, budget),
+      total: analyzeBuild([...Object.values(selected), part], { goal, budget }).totals.price
+    }))
+    .filter(candidate => !budget || candidate.total <= budget)
+    .sort((a, b) => b.score - a.score || Number(a.part.price) - Number(b.part.price));
+
+  if (optionalCandidates[0]) selected.extras = optionalCandidates[0].part;
 
   const parts = Object.values(selected).flat().filter(Boolean);
   const analysis = analyzeBuild(parts, { goal, budget });

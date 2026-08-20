@@ -2,15 +2,58 @@ import * as THREE from "/vendor/three.module.js";
 import { OrbitControls } from "/assets/js/vendor/OrbitControls.js";
 
 const container = document.getElementById("three-preview");
+const previewBadge = document.querySelector(".preview-badge");
 
-if (container) {
+function showUnavailable(message = "Interactive 3D is unavailable in this browser.") {
+  if (!container) return;
+  container.classList.add("is-unavailable");
+  container.replaceChildren();
+  const fallback = document.createElement("div");
+  fallback.className = "three-fallback";
+  fallback.innerHTML = '<span aria-hidden="true">3D</span><strong>Preview unavailable</strong><p></p>';
+  fallback.querySelector("p").textContent = `${message} The component list and compatibility analysis still work normally.`;
+  container.appendChild(fallback);
+  container.setAttribute("aria-label", "3D preview unavailable");
+  if (previewBadge) previewBadge.textContent = "3D unavailable";
+  window.updateDronePreview = () => {};
+}
+
+function createWebGLSurface() {
+  if (!window.WebGL2RenderingContext) return null;
+  try {
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("webgl2", {
+      alpha: true,
+      antialias: true,
+      depth: true,
+      failIfMajorPerformanceCaveat: true,
+      powerPreference: "high-performance"
+    });
+    return context ? { canvas, context } : null;
+  } catch {
+    return null;
+  }
+}
+
+const webglSurface = container ? createWebGLSurface() : null;
+
+if (container && !webglSurface) {
+  showUnavailable("WebGL 2 could not be started.");
+} else if (container) {
+  try {
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x090d13, 0.045);
 
   const camera = new THREE.PerspectiveCamera(38, 1, 0.1, 100);
   camera.position.set(5.7, 4.2, 7.4);
 
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+  const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true,
+    canvas: webglSurface.canvas,
+    context: webglSurface.context,
+    powerPreference: "high-performance"
+  });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
   renderer.setSize(container.clientWidth, container.clientHeight, false);
   renderer.shadowMap.enabled = true;
@@ -21,13 +64,14 @@ if (container) {
   container.replaceChildren(renderer.domElement);
 
   const controls = new OrbitControls(camera, renderer.domElement);
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   controls.enableDamping = true;
   controls.dampingFactor = 0.065;
   controls.minDistance = 4.4;
   controls.maxDistance = 13;
   controls.maxPolarAngle = Math.PI * 0.72;
   controls.target.set(0, 0.3, 0);
-  controls.autoRotate = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  controls.autoRotate = !reduceMotion;
   controls.autoRotateSpeed = 0.55;
 
   scene.add(new THREE.HemisphereLight(0xbbe7ff, 0x182319, 2.1));
@@ -266,29 +310,79 @@ if (container) {
     controls.update();
   }
 
-  window.updateDronePreview = (goal, parts = []) => buildDrone(goal, parts);
+  window.updateDronePreview = (goal, parts = []) => {
+    try {
+      buildDrone(goal, parts);
+    } catch {
+      showUnavailable("The 3D scene could not be updated.");
+    }
+  };
   buildDrone(window.activeGoal || "freestyle35", window.selectedFpvParts || []);
 
   const clock = new THREE.Clock();
-  function animate() {
-    const delta = Math.min(clock.getDelta(), 0.05);
-    animatedProps.forEach(prop => {
-      prop.rotation.y += delta * 5.5 * prop.userData.spinDirection;
-    });
-    controls.update();
-    renderer.render(scene, camera);
-    requestAnimationFrame(animate);
-  }
-  animate();
+  let animationFrame = null;
+  let previewIsVisible = true;
 
-  const resizeObserver = new ResizeObserver(entries => {
-    const entry = entries[0];
-    if (!entry) return;
-    const { width, height } = entry.contentRect;
+  function animate() {
+    animationFrame = null;
+    const delta = Math.min(clock.getDelta(), 0.05);
+    if (!reduceMotion) {
+      animatedProps.forEach(prop => {
+        prop.rotation.y += delta * 5.5 * prop.userData.spinDirection;
+      });
+    }
+    controls.update();
+    try {
+      renderer.render(scene, camera);
+    } catch {
+      showUnavailable("The 3D renderer stopped unexpectedly.");
+      return;
+    }
+    syncAnimation();
+  }
+
+  function syncAnimation() {
+    const shouldRun = previewIsVisible && !document.hidden && !container.classList.contains("is-unavailable");
+    if (shouldRun && animationFrame === null) {
+      clock.getDelta();
+      animationFrame = requestAnimationFrame(animate);
+    } else if (!shouldRun && animationFrame !== null) {
+      cancelAnimationFrame(animationFrame);
+      animationFrame = null;
+    }
+  }
+
+  if ("IntersectionObserver" in window) {
+    const visibilityObserver = new IntersectionObserver(entries => {
+      previewIsVisible = Boolean(entries[0]?.isIntersecting);
+      syncAnimation();
+    }, { rootMargin: "160px" });
+    visibilityObserver.observe(container);
+  }
+  document.addEventListener("visibilitychange", syncAnimation);
+  renderer.domElement.addEventListener("webglcontextlost", event => {
+    event.preventDefault();
+    showUnavailable("The WebGL context was lost.");
+  }, { once: true });
+  syncAnimation();
+
+  function resizePreview(width = container.clientWidth, height = container.clientHeight) {
     if (!width || !height) return;
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height, false);
-  });
-  resizeObserver.observe(container);
+  }
+
+  if ("ResizeObserver" in window) {
+    const resizeObserver = new ResizeObserver(entries => {
+      const entry = entries[0];
+      if (entry) resizePreview(entry.contentRect.width, entry.contentRect.height);
+    });
+    resizeObserver.observe(container);
+  } else {
+    window.addEventListener("resize", () => resizePreview(), { passive: true });
+  }
+  } catch {
+    showUnavailable("The 3D renderer could not be initialized.");
+  }
 }

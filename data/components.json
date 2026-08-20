@@ -1415,7 +1415,8 @@
       "heavylift"
     ],
     "specs": {
-      "propSize": "10"
+      "propSize": "10",
+      "qty": 2
     },
     "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/t-motor-carbon-fiber-propeller.jpg",
     "url": "https://store.tmotor.com",

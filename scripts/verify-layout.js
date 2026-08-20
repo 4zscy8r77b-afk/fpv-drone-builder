@@ -9,6 +9,7 @@ const requiredPaths = [
   "server/store.js",
   "data/components.json",
   "data/builds.json",
+  "tests/api.test.js",
   "tests/compatibility.test.js",
   "public/index.html",
   "public/assets/css/app.css",

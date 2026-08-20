@@ -8,7 +8,9 @@
   <meta property="og:title" content="Build Your Own FPV">
   <meta property="og:description" content="A guided FPV drone builder with compatibility scoring and live 3D preview.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://buildyourownfpv.com/">
   <title>Build Your Own FPV — Intelligent drone builder</title>
+  <link rel="canonical" href="https://buildyourownfpv.com/">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="icon" href="/assets/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/css/app.css">
@@ -52,7 +54,7 @@
           <strong id="heroMission">3.5&quot; Freestyle</strong>
         </div>
         <div class="hero-image-wrap">
-          <img src="/assets/builds/freestyle35.jpg" alt="FPV freestyle drone in flight">
+          <img id="heroImage" src="/assets/builds/freestyle35.jpg" alt="3.5-inch freestyle FPV drone in flight">
           <div class="hero-grid-overlay"></div>
         </div>
         <div class="hero-card hero-card-bottom">
@@ -110,7 +112,7 @@
           <select id="goal"></select>
 
           <label for="budget">Parts budget (USD)</label>
-          <div class="input-prefix"><span>$</span><input id="budget" type="number" inputmode="numeric" min="0" max="100000" value="650"></div>
+          <div class="input-prefix"><span>$</span><input id="budget" type="number" inputmode="numeric" min="0" max="100000" step="1" value="650" autocomplete="off"></div>
 
           <label for="sort">Sort catalog</label>
           <select id="sort">
@@ -138,9 +140,9 @@
           <div class="tabs" id="tabs" role="tablist" aria-label="Component categories"></div>
           <div class="category-note" id="catInfo"></div>
           <div class="catalog-controls">
-            <label class="search-field" for="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search brand, component or specification"></label>
+            <label class="search-field" for="search"><span aria-hidden="true">⌕</span><input id="search" type="search" aria-label="Search components" placeholder="Search brand, component or specification" autocomplete="off"></label>
           </div>
-          <div class="parts-grid" id="parts" aria-live="polite"></div>
+          <div class="parts-grid" id="parts" role="tabpanel" aria-labelledby="tab-frame" aria-live="polite"></div>
           <div class="pagination" id="pagination"></div>
         </section>
 
@@ -151,8 +153,8 @@
           </div>
 
           <div class="score-card">
-            <div class="score-ring" id="scoreRing"><strong id="scoreValue">—</strong><span>/ 100</span></div>
-            <div><span class="status-kicker">Compatibility</span><strong id="statusText">Select parts to begin</strong></div>
+            <div class="score-ring" id="scoreRing" role="img" aria-label="Compatibility analysis pending"><strong id="scoreValue">—</strong><span>/ 100</span></div>
+            <div><span class="status-kicker">Compatibility</span><strong id="statusText" aria-live="polite">Select parts to begin</strong></div>
           </div>
 
           <div class="build-list" id="buildList"></div>
@@ -190,7 +192,13 @@
             <div><span class="status-kicker">Live assembly</span><strong id="previewTitle">3.5&quot; Freestyle</strong></div>
             <span class="preview-badge">Interactive 3D</span>
           </div>
-          <div id="three-preview" class="three-preview" aria-label="Interactive 3D drone preview"></div>
+          <div id="three-preview" class="three-preview" aria-label="Interactive 3D drone preview" aria-live="polite">
+            <div class="three-fallback" data-three-fallback>
+              <span aria-hidden="true">3D</span>
+              <strong>Loading interactive preview…</strong>
+              <p>The component list and compatibility analysis remain available if 3D cannot start.</p>
+            </div>
+          </div>
         </div>
         <aside class="panel profile-panel">
           <div class="panel-heading">
