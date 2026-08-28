@@ -80,7 +80,7 @@
   const STORAGE_KEY = "fpv-working-state-v3";
   const LEGACY_STORAGE_KEY = "fpv-working-build-v2";
   const DEFAULT_BUDGET = 650;
-  const UI_VERSION = "2.3.0";
+  const UI_VERSION = "2.4.0";
   const storedState = loadStoredState();
   const state = {
     components: [],
@@ -515,6 +515,9 @@
         const quantity = purchaseQuantityFor(part);
         const priceLabel = part.category === "motor" ? `${money(effectivePrice(part))} / set` : quantity > 1 ? `${money(effectivePrice(part))} total` : money(part.price);
         const imageUrl = safeExternalUrl(part.imageUrl);
+        const photo = imageUrl === "#"
+          ? ""
+          : `<img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(`${part.brand} ${part.name}`)}" loading="lazy" referrerpolicy="no-referrer" data-image-fallback>`;
         const sourceUrl = safeExternalUrl(part.officialUrl || part.url);
         const sourceAction = sourceUrl === "#"
           ? '<span class="button button-secondary button-disabled" aria-disabled="true">No source</span>'
@@ -522,8 +525,8 @@
         return `
           <article class="part-card ${isSelected ? "selected" : ""}" aria-label="${escapeHtml(`${part.brand} ${part.name}`)}">
             <div class="part-media">
-              <img src="${escapeHtml(imageUrl)}" alt="${escapeHtml(`${part.brand} ${part.name}`)}" loading="lazy" referrerpolicy="no-referrer" data-image-fallback>
-              <div class="part-fallback"><div><strong>${escapeHtml(CATEGORY_INFO[part.category].label)}</strong><span>${escapeHtml(part.brand)}</span></div></div>
+              ${photo}
+              <div class="part-fallback ${photo ? "" : "is-visible"} part-fallback-${escapeHtml(part.category)}"><div class="fallback-art" aria-hidden="true"><span></span><i></i></div><div><strong>${escapeHtml(CATEGORY_INFO[part.category].label)}</strong><span>${escapeHtml(part.brand)} · preview illustration</span></div></div>
             </div>
             <div class="part-head">
               <div><div class="part-name">${escapeHtml(part.name)}</div><div class="part-brand">${escapeHtml(part.brand)}</div></div>
@@ -687,9 +690,10 @@
       const info = CATEGORY_INFO[category];
       const part = selected(category);
       const fallback = escapeHtml(info.label.slice(0, 2).toUpperCase());
+      const imageUrl = part ? safeExternalUrl(part.imageUrl) : "#";
       return `
         <div class="build-item">
-          <div class="build-thumb">${part ? `<img src="${escapeHtml(safeExternalUrl(part.imageUrl))}" alt="" referrerpolicy="no-referrer" data-image-fallback><span>${fallback}</span>` : `<span class="is-visible">${fallback}</span>`}</div>
+          <div class="build-thumb">${part && imageUrl !== "#" ? `<img src="${escapeHtml(imageUrl)}" alt="" referrerpolicy="no-referrer" data-image-fallback><span>${fallback}</span>` : `<span class="is-visible">${fallback}</span>`}</div>
           <div><b>${escapeHtml(info.label)}${category === "extras" ? " (optional)" : ""}</b><small>${part ? escapeHtml(`${part.brand} ${part.name}`) : "Not selected"}</small></div>
           <strong>${part ? money(effectivePrice(part)) : "—"}</strong>
           ${part ? `<button class="remove-part" type="button" data-remove-category="${category}" aria-label="Remove ${escapeHtml(info.label)}">×</button>` : ""}

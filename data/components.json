@@ -12,9 +12,10 @@
     "specs": {
       "size": "whoop"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/06/betafpv-meteor65-brushless-whoop-fpv-drone-frame.jpg",
+    "imageUrl": "/assets/component-images/1.webp",
     "url": "https://newbeedrone.com/products/cockroach-65mm-frame",
-    "officialUrl": "https://newbeedrone.com/products/cockroach-65mm-frame"
+    "officialUrl": "https://newbeedrone.com/products/cockroach-65mm-frame",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/1126/9610/files/NewBeeDrone-Cockroach-V3-65mm-Brushless-Ultra-Light-Frame-NewBeeDrone-52726897.jpg?v=1729813177"
   },
   {
     "id": 2,
@@ -29,7 +30,7 @@
     "specs": {
       "size": "whoop"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/01/happymodel-mobula6-hd-whoop-drone-frame.jpg",
+    "imageUrl": null,
     "url": "https://www.happymodel.cn",
     "officialUrl": "https://www.happymodel.cn"
   },
@@ -46,9 +47,10 @@
     "specs": {
       "size": "whoop"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/04/betafpv-meteor75-pro-brushless-whoop-frame.jpg",
+    "imageUrl": "/assets/component-images/3.webp",
     "url": "https://betafpv.com/products/meteor65-brushless-whoop-frame",
-    "officialUrl": "https://betafpv.com/products/meteor65-brushless-whoop-frame"
+    "officialUrl": "https://betafpv.com/products/meteor65-brushless-whoop-frame",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/1778/6615/products/fc5c15b0efaca7433a404b65da841a73_8fa87a72-be3d-4f6f-b734-d61a7ad49bf4.jpg?v=1676356562"
   },
   {
     "id": 4,
@@ -63,7 +65,7 @@
     "specs": {
       "size": "3"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/04/flywoo-firefly-baby-nano-frame.jpg",
+    "imageUrl": null,
     "url": "https://flywoo.net",
     "officialUrl": "https://flywoo.net"
   },
@@ -80,7 +82,7 @@
     "specs": {
       "size": "3"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/geprc-mark4-hd-frame.jpg",
+    "imageUrl": null,
     "url": "https://geprc.com",
     "officialUrl": "https://geprc.com"
   },
@@ -97,7 +99,7 @@
     "specs": {
       "size": "3"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/iflight-turbobee-120rs-toothpick-frame.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com",
     "officialUrl": "https://shop.iflight.com"
   },
@@ -114,9 +116,10 @@
     "specs": {
       "size": "3.5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/05/geprc-cinelog35-frame-hd-cinewhoop.jpg",
+    "imageUrl": "/assets/component-images/7.webp",
     "url": "https://geprc.com/product/gep-cl35-v2-frame/",
-    "officialUrl": "https://geprc.com/product/gep-cl35-v2-frame/"
+    "officialUrl": "https://geprc.com/product/gep-cl35-v2-frame/",
+    "imageSourceUrl": "https://geprc.com/wp-content/uploads/2023/04/GEP-CL35-V2-Frame-1.jpg"
   },
   {
     "id": 8,
@@ -131,7 +134,7 @@
     "specs": {
       "size": "3.5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/10/iflight-cidora-sl5-e-frame.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com",
     "officialUrl": "https://shop.iflight.com"
   },
@@ -148,7 +151,7 @@
     "specs": {
       "size": "3.5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/diatone-roma-f35-frame.jpg",
+    "imageUrl": null,
     "url": "https://www.diatone.us",
     "officialUrl": "https://www.diatone.us"
   },
@@ -166,9 +169,10 @@
     "specs": {
       "size": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/10/tbs-source-one-v5-fpv-drone-frame.jpg",
+    "imageUrl": "/assets/component-images/10.webp",
     "url": "https://www.team-blacksheep.com/products/prod:source_one_v5",
-    "officialUrl": "https://www.team-blacksheep.com/products/prod:source_one_v5"
+    "officialUrl": "https://www.team-blacksheep.com/products/prod:source_one_v5",
+    "imageSourceUrl": "https://oscarliang.com/wp-content/uploads/2022/10/tbs-source-one-v5-fpv-drone-frame.jpg"
   },
   {
     "id": 11,
@@ -183,7 +187,7 @@
     "specs": {
       "size": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/10/iflight-cidora-sl5-fpv-drone-frame.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com/cidora-sl5-v21-freestyle-frame-kit-pro1963",
     "officialUrl": "https://shop.iflight.com/cidora-sl5-v21-freestyle-frame-kit-pro1963"
   },
@@ -200,9 +204,10 @@
     "specs": {
       "size": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/04/diatone-roma-f5-v2-frame.jpg",
+    "imageUrl": "/assets/component-images/12.webp",
     "url": "https://www.diatone.us",
-    "officialUrl": "https://www.diatone.us"
+    "officialUrl": "https://www.diatone.us",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0027/2708/4144/products/Roma-F5-V2-Frame-Kit.jpg?v=1621405063"
   },
   {
     "id": 13,
@@ -218,7 +223,7 @@
     "specs": {
       "size": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/geprc-mark5-hd-o3-freestyle-frame.jpg",
+    "imageUrl": null,
     "url": "https://geprc.com",
     "officialUrl": "https://geprc.com"
   },
@@ -235,7 +240,7 @@
     "specs": {
       "size": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/12/impulserc-apex-dc-5-frame.jpg",
+    "imageUrl": null,
     "url": "https://impulserc.com",
     "officialUrl": "https://impulserc.com"
   },
@@ -252,7 +257,7 @@
     "specs": {
       "size": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/09/five33-switchback-pro-racing-frame.jpg",
+    "imageUrl": null,
     "url": "https://five33.com",
     "officialUrl": "https://five33.com"
   },
@@ -269,7 +274,7 @@
     "specs": {
       "size": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/06/armattan-chameleon-ti-frame.jpg",
+    "imageUrl": null,
     "url": "https://armattanproductions.com",
     "officialUrl": "https://armattanproductions.com"
   },
@@ -286,7 +291,7 @@
     "specs": {
       "size": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/04/hyperlite-floss-3-racing-frame.jpg",
+    "imageUrl": null,
     "url": "https://www.hyperliteflightco.com",
     "officialUrl": "https://www.hyperliteflightco.com"
   },
@@ -303,7 +308,7 @@
     "specs": {
       "size": "3.5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/05/geprc-cinelog35-cinewhoop-frame-build.jpg",
+    "imageUrl": null,
     "url": "https://geprc.com/product/cineseries-cinelog35-frame/",
     "officialUrl": "https://geprc.com/product/cineseries-cinelog35-frame/"
   },
@@ -320,7 +325,7 @@
     "specs": {
       "size": "4"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/08/iflight-nazgul-evoque-f4x-cinewhoop-frame.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com",
     "officialUrl": "https://shop.iflight.com"
   },
@@ -337,7 +342,7 @@
     "specs": {
       "size": "2"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/flywoo-cinerace20-frame.jpg",
+    "imageUrl": null,
     "url": "https://flywoo.net",
     "officialUrl": "https://flywoo.net"
   },
@@ -354,7 +359,7 @@
     "specs": {
       "size": "7"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/06/iflight-chimera7-pro-frame-7inch.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com/chimera7-pro-frame-kit-pro2004",
     "officialUrl": "https://shop.iflight.com/chimera7-pro-frame-kit-pro2004"
   },
@@ -371,7 +376,7 @@
     "specs": {
       "size": "7"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/10/tbs-source-one-v5-fpv-drone-frame.jpg",
+    "imageUrl": null,
     "url": "https://www.team-blacksheep.com",
     "officialUrl": "https://www.team-blacksheep.com"
   },
@@ -388,7 +393,7 @@
     "specs": {
       "size": "7"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/geprc-mark5-hd-o3-freestyle-frame.jpg",
+    "imageUrl": null,
     "url": "https://geprc.com",
     "officialUrl": "https://geprc.com"
   },
@@ -405,7 +410,7 @@
     "specs": {
       "size": "10"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/large-fpv-drone-frame-heavy-lift.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -422,7 +427,7 @@
     "specs": {
       "size": "10"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/large-fpv-drone-frame-heavy-lift.jpg",
+    "imageUrl": null,
     "url": "https://www.tarotrc.com",
     "officialUrl": "https://www.tarotrc.com"
   },
@@ -441,7 +446,7 @@
       "thrust": 140,
       "kv": 19000
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/06/happymodel-se0802-motor-tiny-whoop.jpg",
+    "imageUrl": null,
     "url": "https://www.happymodel.cn",
     "officialUrl": "https://www.happymodel.cn"
   },
@@ -460,9 +465,10 @@
       "thrust": 130,
       "kv": 18000
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/06/betafpv-1102-motor-brushless-micro.jpg",
+    "imageUrl": "/assets/component-images/27.webp",
     "url": "https://betafpv.com/products/1102-brushless-motors",
-    "officialUrl": "https://betafpv.com/products/1102-brushless-motors"
+    "officialUrl": "https://betafpv.com/products/1102-brushless-motors",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/1778/6615/products/a1a1a1.jpg?v=1683857639"
   },
   {
     "id": 28,
@@ -480,7 +486,7 @@
       "thrust": 280,
       "kv": 3800
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/09/flywoo-recon-toothpick-motor.jpg",
+    "imageUrl": null,
     "url": "https://flywoo.net",
     "officialUrl": "https://flywoo.net"
   },
@@ -499,7 +505,7 @@
       "thrust": 1440,
       "kv": 4600
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/iflight-xing-1404-motor-toothpick.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com",
     "officialUrl": "https://shop.iflight.com"
   },
@@ -518,7 +524,7 @@
       "thrust": 1350,
       "kv": 3700
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/t-motor-f1404-brushless-motor.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -537,7 +543,7 @@
       "thrust": 1320,
       "kv": 3700
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/08/emax-eco-ii-motor.jpg",
+    "imageUrl": null,
     "url": "https://emaxmodel.com",
     "officialUrl": "https://emaxmodel.com"
   },
@@ -556,7 +562,7 @@
       "thrust": 2240,
       "kv": 3800
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/04/t-motor-f1604-motor.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -575,7 +581,7 @@
       "thrust": 2100,
       "kv": 2450
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/iflight-xing2-1805-motor.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com",
     "officialUrl": "https://shop.iflight.com"
   },
@@ -594,7 +600,7 @@
       "thrust": 2200,
       "kv": 3750
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/geprc-gr1408-motor-3-5inch.jpg",
+    "imageUrl": null,
     "url": "https://geprc.com",
     "officialUrl": "https://geprc.com"
   },
@@ -613,7 +619,7 @@
       "thrust": 6200,
       "kv": 1750
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/06/iflight-xing2-2207-motor-fpv.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com/xing2-2207-fpv-motor-unibell-pro1799",
     "officialUrl": "https://shop.iflight.com/xing2-2207-fpv-motor-unibell-pro1799"
   },
@@ -632,7 +638,7 @@
       "thrust": 5900,
       "kv": 2400
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/03/t-motor-f40-pro-iv-motor.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -651,7 +657,7 @@
       "thrust": 5600,
       "kv": 2400
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/08/emax-eco-ii-2306-motor.jpg",
+    "imageUrl": null,
     "url": "https://emaxmodel.com",
     "officialUrl": "https://emaxmodel.com"
   },
@@ -670,7 +676,7 @@
       "thrust": 5900,
       "kv": 2400
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/12/brotherhobby-returner-r5-2306-motor.jpg",
+    "imageUrl": null,
     "url": "https://brotherhobbystore.com",
     "officialUrl": "https://brotherhobbystore.com"
   },
@@ -689,7 +695,7 @@
       "thrust": 5800,
       "kv": 2450
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/diatone-mamba-motor-2306.jpg",
+    "imageUrl": null,
     "url": "https://www.diatone.us",
     "officialUrl": "https://www.diatone.us"
   },
@@ -708,7 +714,7 @@
       "thrust": 6600,
       "kv": 1950
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/03/t-motor-f60-pro-motor.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -727,7 +733,7 @@
       "thrust": 6400,
       "kv": 2450
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/06/iflight-xing2-2207-motor-fpv.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com",
     "officialUrl": "https://shop.iflight.com"
   },
@@ -746,7 +752,7 @@
       "thrust": 6000,
       "kv": 2350
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/05/hyperlite-team-edition-motor-2205.jpg",
+    "imageUrl": null,
     "url": "https://www.hyperliteflightco.com",
     "officialUrl": "https://www.hyperliteflightco.com"
   },
@@ -766,7 +772,7 @@
       "thrust": 7000,
       "kv": 1500
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/brotherhobby-avenger-2507-motor.jpg",
+    "imageUrl": null,
     "url": "https://brotherhobbystore.com",
     "officialUrl": "https://brotherhobbystore.com"
   },
@@ -785,7 +791,7 @@
       "thrust": 6800,
       "kv": 2550
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/03/t-motor-f2207-motor.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -804,7 +810,7 @@
       "thrust": 8800,
       "kv": 1300
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/iflight-xing2-2806-motor-7inch.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com",
     "officialUrl": "https://shop.iflight.com"
   },
@@ -823,7 +829,7 @@
       "thrust": 7800,
       "kv": 760
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/t-motor-mn2806-motor.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -842,7 +848,7 @@
       "thrust": 8200,
       "kv": 1300
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/iflight-xing2-2806-motor-7inch.jpg",
+    "imageUrl": null,
     "url": "https://geprc.com",
     "officialUrl": "https://geprc.com"
   },
@@ -861,7 +867,7 @@
       "thrust": 12000,
       "kv": 380
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/large-fpv-drone-motor-heavy-lift.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -880,7 +886,7 @@
       "thrust": 15000,
       "kv": 85
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/large-fpv-drone-motor-heavy-lift.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -900,9 +906,10 @@
         "1s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/04/betafpv-f4-1s-5a-aio-fc-whoop.jpg",
+    "imageUrl": "/assets/component-images/50.webp",
     "url": "https://betafpv.com/products/betafpv-f4-1s-5a-aio-brushless-flight-controller",
-    "officialUrl": "https://betafpv.com/products/betafpv-f4-1s-5a-aio-brushless-flight-controller"
+    "officialUrl": "https://betafpv.com/products/betafpv-f4-1s-5a-aio-brushless-flight-controller",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/1778/6615/files/567042f830a15bcefdc659371169a57e_c3a729eb-80b1-4c32-a3f6-01c8ecf745cb.jpg?v=1691996777"
   },
   {
     "id": 51,
@@ -920,7 +927,7 @@
         "1s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/05/happymodel-crazybee-f4-pro-aio-fc-whoop.jpg",
+    "imageUrl": null,
     "url": "https://www.happymodel.cn",
     "officialUrl": "https://www.happymodel.cn"
   },
@@ -943,9 +950,10 @@
         "6s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/08/SpeedyBee-F405-Mini-Stack-flight-controller-esc.jpg",
+    "imageUrl": "/assets/component-images/52.webp",
     "url": "https://www.speedybee.com/speedybee-f405-mini-bls-35a-20x20-stack/",
-    "officialUrl": "https://www.speedybee.com/speedybee-f405-mini-bls-35a-20x20-stack/"
+    "officialUrl": "https://www.speedybee.com/speedybee-f405-mini-bls-35a-20x20-stack/",
+    "imageSourceUrl": "https://cdn11.bigcommerce.com/s-fhxxhuiq8q/products/223/images/1153/f405mini-1__13231.1692323009.386.513.jpg?c=2"
   },
   {
     "id": 53,
@@ -966,7 +974,7 @@
         "6s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/geprc-taker-f405-mini-stack.jpg",
+    "imageUrl": null,
     "url": "https://geprc.com",
     "officialUrl": "https://geprc.com"
   },
@@ -988,9 +996,10 @@
         "6s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/diatone-mamba-f405-mk3-stack.jpg",
+    "imageUrl": "/assets/component-images/54.webp",
     "url": "https://www.diatone.us",
-    "officialUrl": "https://www.diatone.us"
+    "officialUrl": "https://www.diatone.us",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0027/2708/4144/products/S_2_56185cbf-0a1f-47e0-bbbb-324b519e695b.jpg?v=1679468506"
   },
   {
     "id": 55,
@@ -1010,9 +1019,10 @@
         "6s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/09/SpeedyBee-F405-V4-FC-ESC-stack.jpg",
+    "imageUrl": "/assets/component-images/55.webp",
     "url": "https://www.speedybee.com/speedybee-f405-v4-bls-55a-30x30-fc-esc-stack/",
-    "officialUrl": "https://www.speedybee.com/speedybee-f405-v4-bls-55a-30x30-fc-esc-stack/"
+    "officialUrl": "https://www.speedybee.com/speedybee-f405-v4-bls-55a-30x30-fc-esc-stack/",
+    "imageSourceUrl": "https://cdn11.bigcommerce.com/s-fhxxhuiq8q/products/226/images/1244/SB_f405mini-12__87958.1696500182.386.513.jpg?c=2"
   },
   {
     "id": 56,
@@ -1032,7 +1042,7 @@
         "6s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/10/speedybee-f7-45a-stack.jpg",
+    "imageUrl": null,
     "url": "https://www.speedybee.com",
     "officialUrl": "https://www.speedybee.com"
   },
@@ -1054,9 +1064,10 @@
         "6s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/06/holybro-kakute-h7-mini-stack.jpg",
+    "imageUrl": "/assets/component-images/57.webp",
     "url": "https://holybro.com",
-    "officialUrl": "https://holybro.com"
+    "officialUrl": "https://holybro.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0604/5905/7341/files/SKU11082_1.jpg?v=1731647213"
   },
   {
     "id": 58,
@@ -1075,7 +1086,7 @@
         "6s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/05/foxeer-f722-v4-60a-stack-fc.jpg",
+    "imageUrl": null,
     "url": "https://www.foxeer.com",
     "officialUrl": "https://www.foxeer.com"
   },
@@ -1096,9 +1107,10 @@
         "6s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/06/holybro-kakute-h7-mini-stack.jpg",
+    "imageUrl": "/assets/component-images/59.webp",
     "url": "https://holybro.com/products/kakute-h7-wing",
-    "officialUrl": "https://holybro.com/products/kakute-h7-wing"
+    "officialUrl": "https://holybro.com/products/kakute-h7-wing",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0604/5905/7341/files/20354-3.jpg?v=1752198198"
   },
   {
     "id": 60,
@@ -1118,9 +1130,10 @@
         "6s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/diatone-mamba-h743-stack.jpg",
+    "imageUrl": "/assets/component-images/60.webp",
     "url": "https://www.diatone.us",
-    "officialUrl": "https://www.diatone.us"
+    "officialUrl": "https://www.diatone.us",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0027/2708/4144/products/MK4-H743-V2.jpg?v=1677554155"
   },
   {
     "id": 61,
@@ -1139,7 +1152,7 @@
         "12s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/how-to-build-fpv-drone-2023-fc-stack-nuts.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -1160,9 +1173,10 @@
         "12s"
       ]
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/06/holybro-kakute-h7-mini-stack.jpg",
+    "imageUrl": "/assets/component-images/62.webp",
     "url": "https://holybro.com",
-    "officialUrl": "https://holybro.com"
+    "officialUrl": "https://holybro.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0604/5905/7341/products/20195_2.jpg?v=1684565958"
   },
   {
     "id": 63,
@@ -1177,7 +1191,7 @@
     "specs": {
       "propSize": "whoop"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/best-tiny-whoop-propellers-shoot-out-comparison-testing-thrust-response-efficiency-micro-fpv-drone-.jpg",
+    "imageUrl": null,
     "url": "https://www.gemfanhobby.com",
     "officialUrl": "https://www.gemfanhobby.com"
   },
@@ -1194,7 +1208,7 @@
     "specs": {
       "propSize": "whoop"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/best-tiny-whoop-propellers-shoot-out-comparison-testing-thrust-response-efficiency-micro-fpv-drone-.jpg",
+    "imageUrl": null,
     "url": "https://www.hqprop.com",
     "officialUrl": "https://www.hqprop.com"
   },
@@ -1211,7 +1225,7 @@
     "specs": {
       "propSize": "3"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/09/gemfan-hurricane-3028-propeller-toothpick.jpg",
+    "imageUrl": null,
     "url": "https://www.gemfanhobby.com",
     "officialUrl": "https://www.gemfanhobby.com"
   },
@@ -1228,7 +1242,7 @@
     "specs": {
       "propSize": "3"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/09/hqprop-3-inch-propeller.jpg",
+    "imageUrl": null,
     "url": "https://www.hqprop.com",
     "officialUrl": "https://www.hqprop.com"
   },
@@ -1245,7 +1259,7 @@
     "specs": {
       "propSize": "3.5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/03/gemfan-hurricane-3520-propeller.jpg",
+    "imageUrl": null,
     "url": "https://www.gemfanhobby.com",
     "officialUrl": "https://www.gemfanhobby.com"
   },
@@ -1262,7 +1276,7 @@
     "specs": {
       "propSize": "3.5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/03/hqprop-3-5-inch-propeller.jpg",
+    "imageUrl": null,
     "url": "https://www.hqprop.com",
     "officialUrl": "https://www.hqprop.com"
   },
@@ -1280,9 +1294,10 @@
     "specs": {
       "propSize": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/09/gemfan-hurricane-5inch-propeller-drone.jpg",
+    "imageUrl": "/assets/component-images/69.webp",
     "url": "https://www.gemfanhobby.com",
-    "officialUrl": "https://www.gemfanhobby.com"
+    "officialUrl": "https://www.gemfanhobby.com",
+    "imageSourceUrl": "https://oscarliang.com/wp-content/uploads/2019/09/gemfan-hurricane-5inch-propeller-drone.jpg"
   },
   {
     "id": 70,
@@ -1297,9 +1312,10 @@
     "specs": {
       "propSize": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/hq-props-5x4.3x3.jpg",
+    "imageUrl": "/assets/component-images/70.webp",
     "url": "https://www.hqprop.com",
-    "officialUrl": "https://www.hqprop.com"
+    "officialUrl": "https://www.hqprop.com",
+    "imageSourceUrl": "https://oscarliang.com/wp-content/uploads/2018/12/hq-props-5x4.3x3.jpg"
   },
   {
     "id": 71,
@@ -1314,7 +1330,7 @@
     "specs": {
       "propSize": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/ethix-s4-watermelon-props-5inch.jpg",
+    "imageUrl": null,
     "url": "https://www.ethix-fpv.com",
     "officialUrl": "https://www.ethix-fpv.com"
   },
@@ -1332,7 +1348,7 @@
     "specs": {
       "propSize": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/07/gemfan-5152s-props-5inch.jpg",
+    "imageUrl": null,
     "url": "https://www.gemfanhobby.com",
     "officialUrl": "https://www.gemfanhobby.com"
   },
@@ -1349,7 +1365,7 @@
     "specs": {
       "propSize": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/09/hqprop-r38-racing-propeller.jpg",
+    "imageUrl": null,
     "url": "https://www.hqprop.com",
     "officialUrl": "https://www.hqprop.com"
   },
@@ -1366,7 +1382,7 @@
     "specs": {
       "propSize": "5"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/ethix-p3-pineapple-props.jpg",
+    "imageUrl": null,
     "url": "https://www.ethix-fpv.com",
     "officialUrl": "https://www.ethix-fpv.com"
   },
@@ -1383,7 +1399,7 @@
     "specs": {
       "propSize": "7"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/05/hqprop-7-inch-propeller-long-range.jpg",
+    "imageUrl": null,
     "url": "https://www.hqprop.com",
     "officialUrl": "https://www.hqprop.com"
   },
@@ -1400,7 +1416,7 @@
     "specs": {
       "propSize": "7"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/06/gemfan-7042-props-7inch.jpg",
+    "imageUrl": null,
     "url": "https://www.gemfanhobby.com",
     "officialUrl": "https://www.gemfanhobby.com"
   },
@@ -1418,7 +1434,7 @@
       "propSize": "10",
       "qty": 2
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/t-motor-carbon-fiber-propeller.jpg",
+    "imageUrl": null,
     "url": "https://store.tmotor.com",
     "officialUrl": "https://store.tmotor.com"
   },
@@ -1436,9 +1452,10 @@
       "cells": "1s",
       "capacity": 300
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/02/betafpv-1s-300mah-bt2-lipo-battery-whoop.jpg",
+    "imageUrl": "/assets/component-images/78.webp",
     "url": "https://betafpv.com/products/bt2-0-1s-300mah-lipo-battery",
-    "officialUrl": "https://betafpv.com/products/bt2-0-1s-300mah-lipo-battery"
+    "officialUrl": "https://betafpv.com/products/bt2-0-1s-300mah-lipo-battery",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/1778/6615/files/6391ace427ade714b70fb966024ae804_ff685427-f801-4e75-b30f-292ba4ecb98f.jpg?v=1689652092"
   },
   {
     "id": 79,
@@ -1454,7 +1471,7 @@
       "cells": "1s",
       "capacity": 450
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/02/tattu-1s-450mah-lipo-battery-whoop.jpg",
+    "imageUrl": null,
     "url": "https://genstattu.com",
     "officialUrl": "https://genstattu.com"
   },
@@ -1472,7 +1489,7 @@
       "cells": "3s",
       "capacity": 450
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/gnb-3s-450mah-lipo-battery.jpg",
+    "imageUrl": null,
     "url": "https://www.grepow.com",
     "officialUrl": "https://www.grepow.com"
   },
@@ -1490,9 +1507,10 @@
       "cells": "4s",
       "capacity": 550
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/01/cnhl-4s-550mah-lipo-battery.jpg",
+    "imageUrl": "/assets/component-images/81.webp",
     "url": "https://chinahobbyline.com",
-    "officialUrl": "https://chinahobbyline.com"
+    "officialUrl": "https://chinahobbyline.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0633/0617/0582/products/202004211730.jpg?v=1653913761"
   },
   {
     "id": 82,
@@ -1508,7 +1526,7 @@
       "cells": "4s",
       "capacity": 850
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/tattu-rline-850mah-4s-lipo-battery.jpg",
+    "imageUrl": null,
     "url": "https://genstattu.com",
     "officialUrl": "https://genstattu.com"
   },
@@ -1526,9 +1544,10 @@
       "cells": "4s",
       "capacity": 1100
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/cnhl-black-1100mah-4s-lipo-battery.jpg",
+    "imageUrl": "/assets/component-images/83.webp",
     "url": "https://chinahobbyline.com",
-    "officialUrl": "https://chinahobbyline.com"
+    "officialUrl": "https://chinahobbyline.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0633/0617/0582/files/1_2cf3754e-b7b8-4cb6-aa34-3a179f95fe9b.jpg?v=1758167647"
   },
   {
     "id": 84,
@@ -1546,7 +1565,7 @@
       "cells": "6s",
       "capacity": 1300
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/tattu-r-line-1300mah-6s-lipo-battery.jpg",
+    "imageUrl": null,
     "url": "https://genstattu.com",
     "officialUrl": "https://genstattu.com"
   },
@@ -1566,9 +1585,10 @@
       "cells": "6s",
       "capacity": 1500
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/cnhl-black-1500mah-6s-lipo-battery.jpg",
+    "imageUrl": "/assets/component-images/85.webp",
     "url": "https://chinahobbyline.com",
-    "officialUrl": "https://chinahobbyline.com"
+    "officialUrl": "https://chinahobbyline.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0633/0617/0582/files/1_c04d7487-86ad-42bc-96bc-d25ff562b395.jpg?v=1728643032"
   },
   {
     "id": 86,
@@ -1585,7 +1605,7 @@
       "cells": "6s",
       "capacity": 1800
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/gnb-6s-1800mah-lipo-battery.jpg",
+    "imageUrl": null,
     "url": "https://www.grepow.com",
     "officialUrl": "https://www.grepow.com"
   },
@@ -1603,7 +1623,7 @@
       "cells": "6s",
       "capacity": 1550
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/tattu-r-line-6s-racing-lipo-battery.jpg",
+    "imageUrl": null,
     "url": "https://genstattu.com",
     "officialUrl": "https://genstattu.com"
   },
@@ -1621,7 +1641,7 @@
       "cells": "6s",
       "capacity": 4000
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/09/auline-liion-6s-4000mah-long-range.jpg",
+    "imageUrl": null,
     "url": "https://www.aulinefpv.com",
     "officialUrl": "https://www.aulinefpv.com"
   },
@@ -1639,9 +1659,10 @@
       "cells": "6s",
       "capacity": 3300
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/09/cnhl-liion-6s-3300mah-long-range.jpg",
+    "imageUrl": "/assets/component-images/89.webp",
     "url": "https://chinahobbyline.com",
-    "officialUrl": "https://chinahobbyline.com"
+    "officialUrl": "https://chinahobbyline.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0633/0617/0582/files/201911261420.jpg?v=1705997577"
   },
   {
     "id": 90,
@@ -1657,7 +1678,7 @@
       "cells": "6s",
       "capacity": 22000
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/lipo-battery-guide-fpv-racing-drone-mini-quad-quadcopter-rc.jpg",
+    "imageUrl": null,
     "url": "https://genstattu.com",
     "officialUrl": "https://genstattu.com"
   },
@@ -1676,9 +1697,10 @@
       "system": "walksnail",
       "res": "1080p"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/02/Walksnail-Avatar-hd-mini-1s-lite-vtx-top.jpg",
+    "imageUrl": "/assets/component-images/91.webp",
     "url": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-1s-kit",
-    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-1s-kit"
+    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-1s-kit",
+    "imageSourceUrl": "http://www.caddxfpv.com/cdn/shop/files/Avatar_Mini_1s_kit.webp?v=1776418100&width=2048"
   },
   {
     "id": 92,
@@ -1695,9 +1717,10 @@
       "system": "walksnail",
       "res": "1080p"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/02/Walksnail-Avatar-hd-mini-1s-lite-vtx-top.jpg",
+    "imageUrl": "/assets/component-images/92.webp",
     "url": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-kit",
-    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-kit"
+    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-hd-mini-kit",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0036/3921/4169/files/Avatar_Mini_1s_Lite_Kit.webp?v=1776418135"
   },
   {
     "id": 93,
@@ -1715,9 +1738,10 @@
       "system": "walksnail",
       "res": "1080p"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/03/Walksnail-Avatar-HD-Pro-V2-Kit-vtx-solder-pads-connector.jpg",
+    "imageUrl": "/assets/component-images/93.webp",
     "url": "https://www.caddxfpv.com/products/walksnail-avatar-hd-pro-kit",
-    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-hd-pro-kit"
+    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-hd-pro-kit",
+    "imageSourceUrl": "http://www.caddxfpv.com/cdn/shop/files/Avatar_Pro_Kit_Single.webp?v=1776418212&width=2048"
   },
   {
     "id": 94,
@@ -1734,9 +1758,10 @@
       "system": "walksnail",
       "res": "4K"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2024/01/Walksnail-Moonlight-VTX-Camera-Kit-heatsink-25x25mm-mounting.jpg",
+    "imageUrl": "/assets/component-images/94.webp",
     "url": "https://www.caddxfpv.com/products/walksnail-avatar-moonlight-kit",
-    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-moonlight-kit"
+    "officialUrl": "https://www.caddxfpv.com/products/walksnail-avatar-moonlight-kit",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0036/3921/4169/files/Avatar_Moonlight.webp?v=1776417845"
   },
   {
     "id": 95,
@@ -1754,9 +1779,10 @@
       "system": "dji",
       "res": "4K"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/dji-o3-air-unit-vtx-video-transmitter.jpg",
+    "imageUrl": "/assets/component-images/95.webp",
     "url": "https://store.dji.com/product/dji-o3-air-unit",
-    "officialUrl": "https://store.dji.com/product/dji-o3-air-unit"
+    "officialUrl": "https://store.dji.com/product/dji-o3-air-unit",
+    "imageSourceUrl": "https://se-cdn.djiits.com/tpc/uploads/spu/cover/ab3dc2b84c1fc9f7542f21030d7b5c17@ultra.png"
   },
   {
     "id": 96,
@@ -1774,9 +1800,10 @@
       "system": "dji",
       "res": "1080p"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/09/dji-o4-air-unit-vtx-fpv.jpg",
+    "imageUrl": "/assets/component-images/96.webp",
     "url": "https://store.dji.com/product/dji-o4-air-unit",
-    "officialUrl": "https://store.dji.com/product/dji-o4-air-unit"
+    "officialUrl": "https://store.dji.com/product/dji-o4-air-unit",
+    "imageSourceUrl": "https://se-cdn.djiits.com/tpc/uploads/spu/cover/46d6ae0d3fd11d0f5d06751336ed022c@ultra.png?format=webp"
   },
   {
     "id": 97,
@@ -1793,7 +1820,7 @@
       "system": "hdzero",
       "res": "720p"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/10/hdzero-freestyle-v2-video-transmitter-vtx-connectors.jpg",
+    "imageUrl": null,
     "url": "https://www.hd-zero.com/shop/race-v3",
     "officialUrl": "https://www.hd-zero.com/shop/race-v3"
   },
@@ -1812,9 +1839,10 @@
       "system": "hdzero",
       "res": "720p"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/10/hdzero-freestyle-v2-video-transmitter-vtx-connectors.jpg",
+    "imageUrl": "/assets/component-images/98.webp",
     "url": "https://www.hd-zero.com",
-    "officialUrl": "https://www.hd-zero.com"
+    "officialUrl": "https://www.hd-zero.com",
+    "imageSourceUrl": "https://oscarliang.com/wp-content/uploads/2023/10/hdzero-freestyle-v2-video-transmitter-vtx-connectors.jpg"
   },
   {
     "id": 99,
@@ -1831,9 +1859,10 @@
       "system": "dji",
       "res": "1080p"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/08/Replace-Camera-Cable-DJI-caddx-vista-lift-connector.jpg",
+    "imageUrl": "/assets/component-images/99.webp",
     "url": "https://www.caddxfpv.com/products/caddx-polar-nano-starlight-digital-hd-fpv-camera",
-    "officialUrl": "https://www.caddxfpv.com/products/caddx-polar-nano-starlight-digital-hd-fpv-camera"
+    "officialUrl": "https://www.caddxfpv.com/products/caddx-polar-nano-starlight-digital-hd-fpv-camera",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0036/3921/4169/files/CADDXFPVCoaxialCableForVista.png?v=1725962034"
   },
   {
     "id": 100,
@@ -1850,7 +1879,7 @@
       "system": "analog",
       "res": "analog"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/how-to-build-fpv-drone-analog-install-vtx.jpg",
+    "imageUrl": null,
     "url": "https://www.akktek.com",
     "officialUrl": "https://www.akktek.com"
   },
@@ -1870,9 +1899,10 @@
       "system": "analog",
       "res": "analog"
     },
-    "imageUrl": "https://www.racedayquads.com/cdn/shop/products/rushfpv-rushfpv-tank-solo-25-1000mw-5-8ghz-vtx-mmcx-vtx-16637972840561.jpg",
+    "imageUrl": "/assets/component-images/101.webp",
     "url": "https://rushfpv.net",
-    "officialUrl": "https://rushfpv.net"
+    "officialUrl": "https://rushfpv.net",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0628/1320/8746/products/a36faadb-9803-46e6-9adf-d92498dfd929.png?v=1659590920"
   },
   {
     "id": 102,
@@ -1889,7 +1919,7 @@
       "system": "analog",
       "res": "analog"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2018/12/tbs-unify-pro32-vtx.jpg",
+    "imageUrl": null,
     "url": "https://www.team-blacksheep.com/products/prod:tbs_unify_pro32_hv",
     "officialUrl": "https://www.team-blacksheep.com/products/prod:tbs_unify_pro32_hv"
   },
@@ -1908,7 +1938,7 @@
       "system": "analog",
       "res": "analog"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/how-to-build-fpv-drone-analog-install-vtx.jpg",
+    "imageUrl": null,
     "url": "https://www.foxeer.com",
     "officialUrl": "https://www.foxeer.com"
   },
@@ -1931,9 +1961,10 @@
     "specs": {
       "protocol": "ELRS 2.4"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2025/08/expresslrs-elrs-receiver-explained-guide.jpg",
+    "imageUrl": "/assets/component-images/104.webp",
     "url": "https://www.radiomasterrc.com/products/rp1-expresslrs-2-4ghz-nano-receiver",
-    "officialUrl": "https://www.radiomasterrc.com/products/rp1-expresslrs-2-4ghz-nano-receiver"
+    "officialUrl": "https://www.radiomasterrc.com/products/rp1-expresslrs-2-4ghz-nano-receiver",
+    "imageSourceUrl": "http://radiomasterrc.com/cdn/shop/files/RP1-V240123.jpg?v=1750061953"
   },
   {
     "id": 105,
@@ -1951,9 +1982,10 @@
     "specs": {
       "protocol": "ELRS 2.4"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/07/radiomaster-rp2-elrs-receiver.jpg",
+    "imageUrl": "/assets/component-images/105.webp",
     "url": "https://www.radiomasterrc.com/products/rp2-expresslrs-2-4ghz-nano-receiver",
-    "officialUrl": "https://www.radiomasterrc.com/products/rp2-expresslrs-2-4ghz-nano-receiver"
+    "officialUrl": "https://www.radiomasterrc.com/products/rp2-expresslrs-2-4ghz-nano-receiver",
+    "imageSourceUrl": "http://radiomasterrc.com/cdn/shop/files/RP2-V2-8.jpg?v=1750061939"
   },
   {
     "id": 106,
@@ -1970,7 +2002,7 @@
     "specs": {
       "protocol": "ELRS 2.4"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/happymodel-ep1-elrs-receiver.jpg",
+    "imageUrl": null,
     "url": "https://www.happymodel.cn",
     "officialUrl": "https://www.happymodel.cn"
   },
@@ -1989,7 +2021,7 @@
     "specs": {
       "protocol": "ELRS 2.4"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/happymodel-ep2-elrs-receiver.jpg",
+    "imageUrl": null,
     "url": "https://www.happymodel.cn",
     "officialUrl": "https://www.happymodel.cn"
   },
@@ -2008,9 +2040,10 @@
     "specs": {
       "protocol": "ELRS 2.4"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/12/betafpv-superd-elrs-diversity-receiver.jpg",
+    "imageUrl": "/assets/component-images/108.webp",
     "url": "https://betafpv.com/products/superd-elrs-diversity-receiver",
-    "officialUrl": "https://betafpv.com/products/superd-elrs-diversity-receiver"
+    "officialUrl": "https://betafpv.com/products/superd-elrs-diversity-receiver",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/1778/6615/products/c2831abc7349d543adb0b881462785d1_55219278-b67c-466c-945b-327fa39d4cf1.jpg?v=1685412531"
   },
   {
     "id": 109,
@@ -2026,9 +2059,10 @@
     "specs": {
       "protocol": "Crossfire"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/tbs-crossfire-nano-rx-receiver.jpg",
+    "imageUrl": "/assets/component-images/109.webp",
     "url": "https://www.team-blacksheep.com/products/prod:crossfire_nano_rx",
-    "officialUrl": "https://www.team-blacksheep.com/products/prod:crossfire_nano_rx"
+    "officialUrl": "https://www.team-blacksheep.com/products/prod:crossfire_nano_rx",
+    "imageSourceUrl": "https://www.team-blacksheep.com/img/gallery/A7302323.JPG"
   },
   {
     "id": 110,
@@ -2044,7 +2078,7 @@
     "specs": {
       "protocol": "TBS Tracer"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/07/tbs-tracer-nano-rx-receiver.jpg",
+    "imageUrl": null,
     "url": "https://www.team-blacksheep.com",
     "officialUrl": "https://www.team-blacksheep.com"
   },
@@ -2063,9 +2097,10 @@
     "specs": {
       "protocol": "DJI"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/dji-o3-air-unit-vtx-video-transmitter.jpg",
+    "imageUrl": "/assets/component-images/111.webp",
     "url": "https://store.dji.com",
-    "officialUrl": "https://store.dji.com"
+    "officialUrl": "https://store.dji.com",
+    "imageSourceUrl": "https://oscarliang.com/wp-content/uploads/2022/11/dji-o3-air-unit-vtx-video-transmitter.jpg"
   },
   {
     "id": 112,
@@ -2081,7 +2116,7 @@
     "specs": {
       "protocol": "FrSky D16"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/07/frsky-xm-plus-receiver.jpg",
+    "imageUrl": null,
     "url": "https://www.frsky-rc.com",
     "officialUrl": "https://www.frsky-rc.com"
   },
@@ -2104,7 +2139,7 @@
       "freq": "5.8GHz",
       "type": "stubby"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "imageUrl": null,
     "url": "https://www.truerc.ca/product/singularity/",
     "officialUrl": "https://www.truerc.ca/product/singularity/"
   },
@@ -2123,7 +2158,7 @@
       "freq": "5.8GHz",
       "type": "directional"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/05/lumenier-axii-2-antenna-fpv.jpg",
+    "imageUrl": null,
     "url": "https://www.lumenier.com/products/antennas/axii-2",
     "officialUrl": "https://www.lumenier.com/products/antennas/axii-2"
   },
@@ -2141,7 +2176,7 @@
       "freq": "5.8GHz",
       "type": "patch"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/05/lumenier-axii-2-antenna-fpv.jpg",
+    "imageUrl": null,
     "url": "https://www.lumenier.com",
     "officialUrl": "https://www.lumenier.com"
   },
@@ -2161,7 +2196,7 @@
       "freq": "5.8GHz",
       "type": "omni"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "imageUrl": null,
     "url": "https://www.immersionrc.com",
     "officialUrl": "https://www.immersionrc.com"
   },
@@ -2180,7 +2215,7 @@
       "freq": "5.8GHz",
       "type": "omni"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "imageUrl": null,
     "url": "https://www.truerc.ca",
     "officialUrl": "https://www.truerc.ca"
   },
@@ -2199,7 +2234,7 @@
       "freq": "5.8GHz",
       "type": "omni"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "imageUrl": null,
     "url": "https://www.fpvmodel.com",
     "officialUrl": "https://www.fpvmodel.com"
   },
@@ -2220,7 +2255,7 @@
       "freq": "5.8GHz",
       "type": "omni"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/08/foxeer-lollipop-4-antenna.jpg",
+    "imageUrl": null,
     "url": "https://www.foxeer.com",
     "officialUrl": "https://www.foxeer.com"
   },
@@ -2240,9 +2275,10 @@
       "freq": "5.8GHz",
       "type": "omnidirectional"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2017/05/fpv-antenna-feature.jpg",
+    "imageUrl": "/assets/component-images/120.webp",
     "url": "https://www.caddxfpv.com",
-    "officialUrl": "https://www.caddxfpv.com"
+    "officialUrl": "https://www.caddxfpv.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0036/3921/4169/files/WalksnailPatchAntennaV2ForAvatarHDGogglesX.png?v=1725964132"
   },
   {
     "id": 121,
@@ -2262,9 +2298,10 @@
     "specs": {
       "type": "buzzer"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/09/vifly-finder-2-buzzer-fpv-drone.jpg",
+    "imageUrl": "/assets/component-images/121.webp",
     "url": "https://viflydrone.com/products/vifly-finder-2-drone-buzzer",
-    "officialUrl": "https://viflydrone.com/products/vifly-finder-2-drone-buzzer"
+    "officialUrl": "https://viflydrone.com/products/vifly-finder-2-drone-buzzer",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0690/1035/8568/products/VIFLY-Finder-2-drone-buzzer-01.jpg?v=1672647144"
   },
   {
     "id": 122,
@@ -2281,9 +2318,10 @@
     "specs": {
       "type": "gps"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/hglrc-m100-mini-gps-module.jpg",
+    "imageUrl": "/assets/component-images/122.webp",
     "url": "https://www.hglrc.com",
-    "officialUrl": "https://www.hglrc.com"
+    "officialUrl": "https://www.hglrc.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/2672/8290/files/hglrc-m100-mini-gps-454293.jpg?v=1713225162"
   },
   {
     "id": 123,
@@ -2299,7 +2337,7 @@
     "specs": {
       "type": "gps"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/matek-m8q-gps-module-fpv.jpg",
+    "imageUrl": null,
     "url": "https://www.mateksys.com",
     "officialUrl": "https://www.mateksys.com"
   },
@@ -2317,7 +2355,7 @@
     "specs": {
       "type": "gps"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/03/flywoo-goku-gm10-mini-gps.jpg",
+    "imageUrl": null,
     "url": "https://flywoo.net",
     "officialUrl": "https://flywoo.net"
   },
@@ -2336,9 +2374,10 @@
     "specs": {
       "type": "camera"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2019/12/caddx-turtle-v2-fpv-camera.jpg",
+    "imageUrl": "/assets/component-images/125.webp",
     "url": "https://www.caddxfpv.com",
-    "officialUrl": "https://www.caddxfpv.com"
+    "officialUrl": "https://www.caddxfpv.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/0036/3921/4169/files/Infra_V2_Camera.webp?v=1776418250"
   },
   {
     "id": 126,
@@ -2355,7 +2394,7 @@
     "specs": {
       "type": "camera"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2020/07/foxeer-razer-mini-fpv-camera.jpg",
+    "imageUrl": null,
     "url": "https://www.foxeer.com",
     "officialUrl": "https://www.foxeer.com"
   },
@@ -2373,7 +2412,7 @@
     "specs": {
       "type": "action_cam"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/09/gopro-hero12-black-action-camera-fpv.jpg",
+    "imageUrl": null,
     "url": "https://gopro.com/en/us/cameras/hero",
     "officialUrl": "https://gopro.com/en/us/cameras/hero"
   },
@@ -2391,7 +2430,7 @@
     "specs": {
       "type": "action_cam"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2023/07/insta360-go3-action-camera.jpg",
+    "imageUrl": null,
     "url": "https://www.insta360.com/product/insta360-go3s",
     "officialUrl": "https://www.insta360.com/product/insta360-go3s"
   },
@@ -2411,7 +2450,7 @@
     "specs": {
       "type": "capacitor"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/how-to-build-fpv-drone-2023-fc-stack-nuts.jpg",
+    "imageUrl": null,
     "url": "https://industrial.panasonic.com",
     "officialUrl": "https://industrial.panasonic.com"
   },
@@ -2429,9 +2468,10 @@
     "specs": {
       "type": "analog_vtx"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2021/04/how-to-build-fpv-drone-analog-install-vtx.jpg",
+    "imageUrl": "/assets/component-images/130.webp",
     "url": "https://www.hglrc.com",
-    "officialUrl": "https://www.hglrc.com"
+    "officialUrl": "https://www.hglrc.com",
+    "imageSourceUrl": "https://cdn.shopify.com/s/files/1/2672/8290/files/13816024b4d152bba5532e8d791bc3d1_0738c8cb-f280-4e17-9e89-6263083c319b.jpg?v=1787822109"
   },
   {
     "id": 131,
@@ -2447,7 +2487,7 @@
     "specs": {
       "type": "bec"
     },
-    "imageUrl": "https://oscarliang.com/wp-content/uploads/2022/11/how-to-build-fpv-drone-2023-fc-stack-nuts.jpg",
+    "imageUrl": null,
     "url": "https://shop.iflight.com",
     "officialUrl": "https://shop.iflight.com"
   }

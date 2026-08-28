@@ -264,9 +264,24 @@ select:focus, input:focus { border-color: rgba(157,249,216,.5); background: rgba
 .part-media img { width: 100%; height: 100%; object-fit: contain; padding: 9px; background: #edf1f4; transition: transform .25s ease; }
 .part-card:hover .part-media img { transform: scale(1.03); }
 .part-media img.is-broken { display: none; }
-.part-fallback { position: absolute; inset: 0; display: none; place-items: center; text-align: center; color: var(--muted); padding: 20px; }
+.part-fallback { position: absolute; inset: 0; display: none; grid-template-columns: 92px 1fr; align-items: center; gap: 15px; text-align: left; color: var(--muted); padding: 20px; background: radial-gradient(circle at 25% 50%, rgba(157,249,216,.12), transparent 42%), linear-gradient(145deg, #15202b, #0b1118); }
 .part-media img.is-broken + .part-fallback { display: grid; }
-.part-fallback strong { display: block; font-size: 22px; color: var(--text); }
+.part-fallback.is-visible { display: grid; }
+.part-fallback strong { display: block; font-size: 18px; color: var(--text); }
+.part-fallback span { display: block; margin-top: 4px; font-size: 10px; }
+.fallback-art { position: relative; width: 84px; height: 64px; filter: drop-shadow(0 12px 12px rgba(0,0,0,.35)); }
+.fallback-art::before, .fallback-art::after, .fallback-art span::before, .fallback-art span::after { content: ""; position: absolute; width: 42px; height: 8px; left: 21px; top: 28px; border-radius: 999px; background: linear-gradient(90deg, #2c3946, #8ca199); transform: rotate(36deg); }
+.fallback-art::after, .fallback-art span::after { transform: rotate(-36deg); }
+.fallback-art i { position: absolute; width: 34px; height: 25px; left: 25px; top: 20px; border: 2px solid #8ff0cf; border-radius: 7px; background: #111922; box-shadow: inset 0 0 12px rgba(143,240,207,.16); }
+.fallback-art span::before { transform: rotate(144deg); }
+.fallback-art span::after { transform: rotate(-144deg); }
+.part-fallback-motor .fallback-art::before, .part-fallback-motor .fallback-art::after { width: 46px; height: 46px; left: 19px; top: 9px; border: 7px solid #455360; border-radius: 50%; background: #171f28; transform: none; }
+.part-fallback-motor .fallback-art::after { width: 16px; height: 16px; left: 34px; top: 24px; border: 0; background: #8ff0cf; }
+.part-fallback-motor .fallback-art span, .part-fallback-motor .fallback-art i { display: none; }
+.part-fallback-battery .fallback-art::before { width: 66px; height: 34px; left: 7px; top: 15px; border-radius: 8px; background: linear-gradient(135deg, #252f3b, #111820); transform: none; box-shadow: inset 0 0 0 2px #465462; }
+.part-fallback-battery .fallback-art::after { width: 12px; height: 16px; left: 72px; top: 24px; border-radius: 3px; background: #e4ad31; transform: none; }
+.part-fallback-battery .fallback-art span, .part-fallback-battery .fallback-art i { display: none; }
+.part-fallback-props .fallback-art i { width: 14px; height: 14px; left: 35px; top: 25px; border-radius: 50%; }
 .part-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .part-name { min-height: 43px; font-size: 15px; font-weight: 830; line-height: 1.35; letter-spacing: -.03em; }
 .part-brand { margin-top: 3px; color: var(--muted-2); font-size: 11px; }

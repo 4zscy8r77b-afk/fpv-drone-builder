@@ -9,6 +9,7 @@ const appSource = fs.readFileSync(path.join(root, "public/assets/js/app.js"), "u
 const indexSource = fs.readFileSync(path.join(root, "public/index.html"), "utf8");
 const workerSource = fs.readFileSync(path.join(root, "public/service-worker.js"), "utf8");
 const previewSource = fs.readFileSync(path.join(root, "public/assets/js/three-preview.js"), "utf8");
+const catalog = JSON.parse(fs.readFileSync(path.join(root, "data/components.json"), "utf8"));
 
 test("browser assets use the current release cache key", () => {
   assert.match(indexSource, new RegExp(`app\\.js\\?v=${version.replaceAll(".", "\\.")}`));
@@ -40,4 +41,17 @@ test("3D preview uses shaped FPV geometry instead of placeholder blocks", () => 
   assert.match(previewSource, /shape\.bezierCurveTo/);
   assert.match(previewSource, /new THREE\.TubeGeometry\(powerLead/);
   assert.match(previewSource, /const standoffPoints =/);
+  assert.match(previewSource, /function makeCarbonTexture\(/);
+  assert.match(previewSource, /map: carbonTexture/);
+  assert.match(previewSource, /new THREE\.ExtrudeGeometry\(shape/);
+});
+
+test("component photos are local, optimized and never depend on broken hotlinks", () => {
+  const photographed = catalog.filter(part => /^\/assets\/component-images\/\d+\.webp$/.test(part.imageUrl || ""));
+  assert.ok(photographed.length >= 40);
+  assert.ok(catalog.every(part => !/^https?:/i.test(part.imageUrl || "")));
+  photographed.forEach(part => {
+    assert.ok(fs.existsSync(path.join(root, "public", part.imageUrl)), `missing image for component ${part.id}`);
+  });
+  assert.match(appSource, /part-fallback.*is-visible/s);
 });
