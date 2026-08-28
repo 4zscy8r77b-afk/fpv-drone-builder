@@ -1,5 +1,5 @@
-import * as THREE from "/vendor/three.module.js?v=2.3.0";
-import { OrbitControls } from "/assets/js/vendor/OrbitControls.js?v=2.3.0";
+import * as THREE from "/vendor/three.module.js?v=2.4.0";
+import { OrbitControls } from "/assets/js/vendor/OrbitControls.js?v=2.4.0";
 
 const container = document.getElementById("three-preview");
 const previewBadge = document.querySelector(".preview-badge");
@@ -108,9 +108,42 @@ if (container && !webglSurface) {
   floorRing.position.y = -1.32;
   scene.add(floorRing);
 
+  function makeCarbonTexture() {
+    const canvas = document.createElement("canvas");
+    canvas.width = 128;
+    canvas.height = 128;
+    const context = canvas.getContext("2d");
+    context.fillStyle = "#090d12";
+    context.fillRect(0, 0, 128, 128);
+    for (let y = -16; y < 144; y += 8) {
+      for (let x = -16; x < 144; x += 8) {
+        const bright = ((x + y) / 8) % 2 === 0;
+        context.save();
+        context.translate(x + 4, y + 4);
+        context.rotate(bright ? -Math.PI / 4 : Math.PI / 4);
+        const gradient = context.createLinearGradient(-5, 0, 5, 0);
+        gradient.addColorStop(0, bright ? "#111922" : "#06090d");
+        gradient.addColorStop(0.5, bright ? "#34404b" : "#171e25");
+        gradient.addColorStop(1, bright ? "#0c1218" : "#030507");
+        context.fillStyle = gradient;
+        context.fillRect(-6, -2.2, 12, 4.4);
+        context.restore();
+      }
+    }
+    const texture = new THREE.CanvasTexture(canvas);
+    texture.wrapS = THREE.RepeatWrapping;
+    texture.wrapT = THREE.RepeatWrapping;
+    texture.repeat.set(7, 7);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    texture.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
+    return texture;
+  }
+
+  const carbonTexture = makeCarbonTexture();
+
   const materials = {
-    carbon: new THREE.MeshPhysicalMaterial({ color: 0x0c1117, metalness: 0.52, roughness: 0.38, clearcoat: 0.48, clearcoatRoughness: 0.32 }),
-    carbonEdge: new THREE.MeshStandardMaterial({ color: 0x27333e, metalness: 0.72, roughness: 0.24 }),
+    carbon: new THREE.MeshPhysicalMaterial({ color: 0xb8c0c8, map: carbonTexture, bumpMap: carbonTexture, bumpScale: 0.018, metalness: 0.38, roughness: 0.34, clearcoat: 0.62, clearcoatRoughness: 0.24 }),
+    carbonEdge: new THREE.MeshPhysicalMaterial({ color: 0x76828d, map: carbonTexture, bumpMap: carbonTexture, bumpScale: 0.012, metalness: 0.56, roughness: 0.28, clearcoat: 0.42 }),
     accent: new THREE.MeshStandardMaterial({ color: 0x62e5b8, metalness: 0.35, roughness: 0.3, emissive: 0x0c3829, emissiveIntensity: 0.3 }),
     motor: new THREE.MeshStandardMaterial({ color: 0x202a35, metalness: 0.92, roughness: 0.18 }),
     copper: new THREE.MeshStandardMaterial({ color: 0xb96d27, metalness: 0.8, roughness: 0.25 }),
@@ -130,7 +163,30 @@ if (container && !webglSurface) {
   let animatedProps = [];
 
   function box(width, height, depth, material, radius = 0) {
-    const geometry = new THREE.BoxGeometry(width, height, depth, 2, 1, 2);
+    const edge = Math.min(width, height, depth);
+    const corner = Math.max(0.004, Math.min(radius || edge * 0.16, width * 0.22, height * 0.22));
+    const shape = new THREE.Shape();
+    const x = width / 2;
+    const y = height / 2;
+    shape.moveTo(-x + corner, -y);
+    shape.lineTo(x - corner, -y);
+    shape.quadraticCurveTo(x, -y, x, -y + corner);
+    shape.lineTo(x, y - corner);
+    shape.quadraticCurveTo(x, y, x - corner, y);
+    shape.lineTo(-x + corner, y);
+    shape.quadraticCurveTo(-x, y, -x, y - corner);
+    shape.lineTo(-x, -y + corner);
+    shape.quadraticCurveTo(-x, -y, -x + corner, -y);
+    const bevel = Math.max(0.002, Math.min(edge * 0.12, depth * 0.08));
+    const geometry = new THREE.ExtrudeGeometry(shape, {
+      depth,
+      bevelEnabled: true,
+      bevelSegments: 2,
+      bevelSize: bevel,
+      bevelThickness: bevel,
+      curveSegments: 6
+    });
+    geometry.center();
     const mesh = new THREE.Mesh(geometry, material);
     mesh.castShadow = true;
     mesh.receiveShadow = true;
